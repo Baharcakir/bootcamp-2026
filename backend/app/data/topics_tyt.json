@@ -1,0 +1,54 @@
+{
+  "exam": "TYT",
+  "note": "v1 koçluk kapsamı yalnızca TYT Matematik'tir (tutor_scope). Diğer dersler deneme neti takibi için listelenir. Konu listesi A1 kapsamında güncel ÖSYM/MEB kaynaklarıyla doğrulanacak. Konu ağırlıkları v0'da ders içinde eşit varsayılır; T4 setinden konu frekansları çıkarılınca ağırlıklar güncellenecek (A4).",
+  "tutor_scope": ["Matematik"],
+  "subjects": [
+    {
+      "name": "Türkçe",
+      "question_count": 40,
+      "topics": []
+    },
+    {
+      "name": "Matematik",
+      "question_count": 40,
+      "topics": [
+        "Temel Kavramlar",
+        "Sayı Basamakları",
+        "Bölme ve Bölünebilme",
+        "EBOB-EKOK",
+        "Rasyonel Sayılar",
+        "Basit Eşitsizlikler",
+        "Mutlak Değer",
+        "Üslü Sayılar",
+        "Köklü Sayılar",
+        "Çarpanlara Ayırma",
+        "Oran-Orantı",
+        "Denklem Çözme",
+        "Problemler",
+        "Kümeler",
+        "Mantık",
+        "Fonksiyonlar",
+        "Permütasyon-Kombinasyon",
+        "Olasılık",
+        "Veri ve İstatistik",
+        "Doğruda ve Üçgende Açılar",
+        "Özel Üçgenler ve Dik Üçgen",
+        "Üçgende Alan ve Benzerlik",
+        "Çokgenler ve Dörtgenler",
+        "Çember ve Daire",
+        "Katı Cisimler",
+        "Analitik Geometri"
+      ]
+    },
+    {
+      "name": "Fen Bilimleri",
+      "question_count": 20,
+      "topics": []
+    },
+    {
+      "name": "Sosyal Bilimler",
+      "question_count": 20,
+      "topics": []
+    }
+  ]
+}
