@@ -53,18 +53,19 @@ Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözük
 - **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılmaktadır: [Sprint 1 Daily Scrum Chats](https://github.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/blob/main/ProjectManagement/Sprint1Documents/DailyScrumMeetingNotesSprint1.docx?raw=true)
 
 - **Sprint board update**: Sprint board screenshotları: 
-![Backlog 1](https://raw.githubusercontent.com/Baharcakir/bootcamp-2026/main/ProjectManagement/Sprint1/backlog1.png) 
-![Backlog 2](https://raw.githubusercontent.com/OyunveUygulamaAkademisi/BootcampScrumTemplate/main/ProjectManagement/Sprint1/backlog2.png) 
-![Backlog 3](https://raw.githubusercontent.com/Baharcakir/bootcamp-2026/main/ProjectManagement/Sprint1/backlog3.png)
-![Backlog 4](https://raw.githubusercontent.com/Baharcakir/bootcamp-2026/main/ProjectManagement/Sprint1/backlog4.png)
+![Backlog 1](backlog1.png)
+![Backlog 2](backlog2.png)
+![Backlog 3](backlog3.png)
+![Backlog 4](backlog4.png)
 
 - **Ürün Durumu**: Ekran görüntüleri:
-  ![Screenshot 1](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss1.png?raw=true)
-  ![Screenshot 2](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss2.png?raw=true)
-  ![Screenshot 3](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss3.png?raw=true)  
-  ![Screenshot 4](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss4.png?raw=true) 
-  ![Screenshot 5](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss5.png?raw=true)  
-  ![Screenshot 6](https://github.com/Baharcakir/bootcamp-2026/ProjectManagement/Sprint1/productss6.png?raw=true)
+  
+  <img src="products1.png" alt="Sprint 1 Products" width="300">
+  <img src="products2.png" alt="Sprint 1 Products" width="300">
+  <img src="products3.png" alt="Sprint 1 Products" width="300">
+  <img src="products4.png" alt="Sprint 1 Products" width="300">
+  <img src="products5.png" alt="Sprint 1 Products" width="300">
+  <img src="products6.png" alt="Sprint 1 Products" width="300">
 
 - **Sprint Review**: 
 Alınan kararlar: Veritabanı için gerekli olan TYT örnek sorularının toplanması gerekmektedir. Kişiselleştirilmiş öğrenme asistanı için fine-tuning işlemine gerek olmadığına ve aynı sonucun Gemini API ve RAG yöntemiyle ulaşılabileceğine karar verilmiştir.
