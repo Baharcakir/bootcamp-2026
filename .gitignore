@@ -15,6 +15,9 @@ venv/
 *.sqlite3
 chroma_db/
 
+# ÖSYM kitapçıkları ve görüntüleri yerel kalır (telif) — yalnızca etiket CSV'si paylaşılır
+data/osym/raw/
+
 # IDE / OS
 .vscode/
 .idea/
