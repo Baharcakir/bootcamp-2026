@@ -10,7 +10,6 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from app.services.mastery import (
     estimate_mastery,
     TopicObservation,
-    HALF_LIFE_DAYS,
     GUESS_RATE
 )
 
@@ -97,7 +96,7 @@ def generate_student_data():
     print("SENTETİK VERİ KALİBRASYON RAPORU ÖZETİ")
     print("="*40)
     print(f"Toplam Simüle Edilen Öğrenci: {NUM_STUDENTS}")
-    print(f"Konu Başına Toplam Deneme Sayısı: 8 deneme/öğrenci")
+    print("Konu Başına Toplam Deneme Sayısı: 8 deneme/öğrenci")
     print(f"Ortalama Mutlak Hata (MAE): {mae:.4f}")
     print(f"Kök Ortalama Kare Hata (RMSE): {rmse:.4f}")
     print("="*40)
