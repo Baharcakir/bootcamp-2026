@@ -32,7 +32,7 @@ MAT_RE = re.compile(r"MATEMAT[İI]K\s*TEST", re.IGNORECASE)
 FEN_RE = re.compile(r"FEN\s*B[İI]L[İI]MLER[İI]\s*TEST", re.IGNORECASE)
 YEAR_RE = re.compile(r"(20\d{2})")
 
-CSV_FIELDS = ["kitapcik", "soru_no", "etiketci1_konu", "etiketci2_konu", "nihai_konu", "not"]
+CSV_FIELDS = ["kitapcik", "soru_no", "konu", "nihai_konu", "not"]
 
 
 def page_texts(pdf: Path) -> list[str]:
@@ -91,8 +91,7 @@ def append_rows(booklet: str) -> None:
             writer.writeheader()
         for q in range(1, QUESTIONS_PER_BOOKLET + 1):
             writer.writerow({"kitapcik": booklet, "soru_no": q,
-                             "etiketci1_konu": "", "etiketci2_konu": "",
-                             "nihai_konu": "", "not": ""})
+                             "konu": "", "nihai_konu": "", "not": ""})
 
 
 def main() -> None:
