@@ -23,7 +23,7 @@ plan çıkarır.
 |---|---|---|
 | [AD SOYAD] | Product Owner | [profil] |
 | [AD SOYAD] | Scrum Master | [profil] |
-| [AD SOYAD] | Developer | [profil] |
+| [Doğa Alışkan] | Developer | [profil] |
 | [AD SOYAD] | Developer | [profil] |
 | [AD SOYAD] | Developer | [profil] |
 
