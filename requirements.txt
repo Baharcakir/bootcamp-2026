@@ -25,3 +25,7 @@ ruff>=0.6
 
 # Sprint 2'de RAG icin eklenecek (backlog B4):
 # chromadb>=0.5
+
+#python
+numpy
+scipy
