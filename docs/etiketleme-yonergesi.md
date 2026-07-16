@@ -1,8 +1,11 @@
 # T4 Etiketleme Yönergesi — ÖSYM Değerlendirme Seti
 
-**Amaç:** Otomatik konu etiketlemenin doğruluğunu gerçek ÖSYM sorularında ölçmek. Bunun için
-iki kişi, aynı soruları **birbirinden bağımsız** olarak elle etiketler; sistemin etiketleri
-bu "insan mutabakatıyla" karşılaştırılır.
+**Amaç:** Otomatik konu etiketlemenin doğruluğunu gerçek ÖSYM sorularında ölçmek.
+
+**Yöntem:** Tek etiketçi + kararsızlık işaretleme + uyuşmazlık denetimi. Sorular elle
+etiketlenir; otomatik ölçüm koşulduktan sonra sistemle uyuşmayan ve "kararsızım" diye
+işaretlenmiş sorulara ikinci kez bakılarak nihai etiketler kesinleşir. Doğruluk raporuna
+yöntem bu şekilde yazılır.
 
 ## Dosyalar
 
@@ -14,16 +17,17 @@ bu "insan mutabakatıyla" karşılaştırılır.
 
 ## Kurallar
 
-1. **Bağımsızlık şart:** Etiketçi 1 (Görkem) yalnızca `etiketci1_konu`, Etiketçi 2 (Doğa)
-   yalnızca `etiketci2_konu` sütununu doldurur. Doldururken birbirinizin sütununa BAKMAYIN —
-   ölçümün güvenilirliği buna bağlı.
+1. Etiketçi yalnızca `etiketci1_konu` sütununu doldurur. (`etiketci2_konu` boş kalır;
+   ileride ikinci bir göz katılırsa kullanılır.)
 2. **Konu adını listeden aynen yazın** (aşağıda; kopyala-yapıştır en güvenlisi).
-3. Kararsız kaldığında en yakın konuyu seç, `not` sütununa kısa gerekçe yaz.
+3. **Kararsız kaldığın soruda** en yakın konuyu seç ve `not` sütununa kısa bir işaret bırak
+   (örn. "Denklem Çözme de olabilir") — işaretli sorular denetim listesini oluşturur.
 4. Bir soru iki konuya da uyuyorsa çözümün *ağırlıklı* adımı hangi konudansa onu seç, nota belirt.
 5. **Öncelik sırası:** önce 2026, 2025, 2024 kitapçıkları (120 soru → değerlendirme setimiz).
    Kalan yıllar sınıflandırıcı eğitimi (T6) ve RAG için sonra etiketlenir.
-6. İkiniz de bitirince uyuşmazlıklar üçüncü bir ekip üyesiyle konuşulup `nihai_konu` doldurulur.
-   Uyuşma oranı (inter-annotator agreement) doğruluk raporuna yazılır.
+6. **Uyuşmazlık denetimi:** Otomatik ölçüm koşulduktan sonra, sistemin etiketiyle uyuşmayan
+   sorular + `not` işaretli sorular ikinci kez incelenir (istersen bir ekip arkadaşıyla,
+   ~15 dk) ve `nihai_konu` o zaman kesinleşir.
 7. Tahmini süre: kitapçık başına ~30-45 dk.
 
 ## Konu Listesi (TYT Matematik — 26 konu)
