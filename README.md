@@ -36,13 +36,13 @@ ama pahalıdır. "Analiz" araçları ise öğrenciden ödev gibi veri girişi is
 
 Çarpan'ın çekirdek döngüsü bu üç problemi birden çözer: öğrenci **takıldığı matematik sorusunun
 fotoğrafını atar**, eğitmen yapay zeka **adım adım anlatır** (değer anında verilir) ve aynı anda
-soruyu 26 konuluk TYT Matematik taksonomisine göre **otomatik konu etiketleyip** zayıflık sinyali
+soruyu 27 konuluk TYT Matematik taksonomisine göre **otomatik konu etiketleyip** zayıflık sinyali
 olarak kaydeder. Sinyaller biriktikçe Bayesçi ustalık haritası, konu öncelikleri ve haftalık plan
 kendiliğinden oluşur. Denemelerden yalnızca ders bazında toplam net girilir (4-5 satır, ~10 saniye).
 
 **Anlatım aynı zamanda teşhistir** — analitik, kullanımın yan ürünüdür.
 
-**v1 kapsamı bilinçli olarak TYT Matematik'tir** (en acı nokta, ölçülebilir kalite, 26 konuluk
+**v1 kapsamı bilinçli olarak TYT Matematik'tir** (en acı nokta, ölçülebilir kalite, 27 konuluk
 anlamlı harita); mimari ders-bağımsızdır, taksonomi + korpus ekleyerek genişler. Model eğitim
 stratejisi (ÖSYM çıkmış soruları, AI üretimi sorular, sentetik kohortlar): [docs/mimari.md](docs/mimari.md)
 

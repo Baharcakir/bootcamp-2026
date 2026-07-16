@@ -30,14 +30,17 @@ yöntem bu şekilde yazılır.
    ~15 dk) ve `nihai_konu` o zaman kesinleşir.
 7. Tahmini süre: kitapçık başına ~30-45 dk.
 
-## Konu Listesi (TYT Matematik — 26 konu)
+## Konu Listesi (TYT Matematik — 27 konu, TTKB 2026 YKS belgesiyle doğrulandı)
 
 Temel Kavramlar · Sayı Basamakları · Bölme ve Bölünebilme · EBOB-EKOK · Rasyonel Sayılar ·
 Basit Eşitsizlikler · Mutlak Değer · Üslü Sayılar · Köklü Sayılar · Çarpanlara Ayırma ·
-Oran-Orantı · Denklem Çözme · Problemler · Kümeler · Mantık · Fonksiyonlar ·
-Permütasyon-Kombinasyon · Olasılık · Veri ve İstatistik · Doğruda ve Üçgende Açılar ·
-Özel Üçgenler ve Dik Üçgen · Üçgende Alan ve Benzerlik · Çokgenler ve Dörtgenler ·
-Çember ve Daire · Katı Cisimler · Analitik Geometri
+Oran-Orantı · Denklem Çözme · Problemler · Kümeler · Mantık · Fonksiyonlar · Polinomlar ·
+İkinci Dereceden Denklemler · Permütasyon-Kombinasyon · Olasılık · Veri ve İstatistik ·
+Doğruda ve Üçgende Açılar · Üçgenin Yardımcı Elemanları · Dik Üçgen ve Trigonometri ·
+Üçgende Alan ve Benzerlik · Çokgenler ve Dörtgenler · Katı Cisimler
+
+Not: Analitik Geometri ve Çember 11. sınıf konusudur, 2026 TYT kapsamı dışındadır — kitapçıkta
+böyle bir soruya rastlarsan `not` sütununa yaz, birlikte karar veririz.
 
 ## Telif Notu
 

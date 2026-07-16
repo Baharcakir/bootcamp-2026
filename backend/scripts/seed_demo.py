@@ -21,7 +21,7 @@ from app.db import engine, init_db  # noqa: E402
 from app.models import MockExam, QuestionEvent, Student, SubjectResult  # noqa: E402
 
 TODAY = date.today()
-WEAK_TOPICS = ["Problemler", "Çember ve Daire", "Olasılık"]
+WEAK_TOPICS = ["Problemler", "İkinci Dereceden Denklemler", "Olasılık"]
 MID_TOPICS = ["Fonksiyonlar", "Üslü Sayılar", "Denklem Çözme"]
 STRONG_TOPICS = ["Kümeler", "Temel Kavramlar"]
 # (kaç gün önce, matematik doğru, matematik yanlış) — yükselen bir hikaye

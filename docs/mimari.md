@@ -141,7 +141,7 @@ Bu, rubrikteki "model seçimi, kullanımı, geliştirmesi" kaleminin tam karşı
    değerlendirme seti elle kalır — yoksa "Gemini'nin etiketlerine göre Gemini'yi ölçme"
    döngüselliğine düşülür ve karşılaştırma anlamını yitirir.
 4. **Veri bütçesi (gerçekçi):** ÖSYM ~8 yılda ~320 gerçek TYT matematik sorusu yayımladı →
-   ~100 değerlendirme (dokunulmaz) + ~220 eğitim; 26 konuda az örnekli sınıflar AI üretimi
+   ~100 değerlendirme (dokunulmaz) + ~220 eğitim; 27 konuda az örnekli sınıflar AI üretimi
    sorularla dengelenir. Kendi modelimiz Gemini'yi geçemeyebilir — sonuç yine de geçerlidir:
    "ölçtük, veriye dayanarak seçtik" raporu deliverable'dır, kazanan üretime girer.
 
