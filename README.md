@@ -119,6 +119,6 @@ pytest backend/tests && ruff check backend frontend
 
 | Sprint | Tarih | Klasör |
 |---|---|---|
-| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1Documents](ProjectManagement/Sprint1Documents/) |
+| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1](ProjectManagement/Sprint1/) |
 | Sprint 2 | 6 – 19 Temmuz | [Sprint2Documents](ProjectManagement/Sprint2Documents/) |
 | Sprint 3 | 20 Temmuz – 2 Ağustos | [Sprint3Documents](ProjectManagement/Sprint3Documents/) |
