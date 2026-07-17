@@ -135,8 +135,9 @@ Bu, rubrikteki "model seçimi, kullanımı, geliştirmesi" kaleminin tam karşı
 1. **Değerlendirme seti dokunulmazdır ve %100 gerçek ÖSYM sorusudur.** AI üretimi soru
    değerlendirme setine ASLA girmez (kendi ödevini kendine puanlatmak olur); yalnızca eğitim
    setine ve quiz bankasına girer. Umursadığımız dağılım gerçek sınav dağılımıdır.
-2. **Değerlendirme seti elle ve çift etiketlenir.** İki kişi bağımsız etiketler, anlaşmazlığı
-   üçüncü kişi çözer; anlaşma oranı (inter-annotator agreement) raporlanır.
+2. **Değerlendirme seti elle etiketlenir** (tek etiketçi + kararsızlık işaretleme yöntemi).
+   Otomatik ölçümle uyuşmayan sorular ve işaretli sorular ikinci kez incelenerek nihai etiket
+   kesinleşir (uyuşmazlık denetimi); kullanılan yöntem doğruluk raporunda açıkça belirtilir.
 3. **Eğitim etiketleri yarı otomatik olabilir:** Gemini önerir, insan hızlıca onaylar. Ama
    değerlendirme seti elle kalır — yoksa "Gemini'nin etiketlerine göre Gemini'yi ölçme"
    döngüselliğine düşülür ve karşılaştırma anlamını yitirir.
