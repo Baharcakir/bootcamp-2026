@@ -1,29 +1,29 @@
-kitapcik,soru_no,insan_konu,model_konu,insan_notu
-2024,3,Üslü Sayılar,Problemler,Problemler de olabilir; ağırlıklı adım mandal sayısının üstel artışıdır.
-2024,6,Mutlak Değer,Problemler,Problemler de olabilir; ağırlıklı adım tahmin ile gerçek değer arasındaki mutlak uzaklıktır.
-2024,7,Temel Kavramlar,Problemler,
-2024,9,Rasyonel Sayılar,Temel Kavramlar,Oran-Orantı da olabilir; ağırlıklı adım eşit aralıklı sayı doğrusu/ölçek okumadır.
-2024,14,Bölme ve Bölünebilme,Sayı Basamakları,
-2024,18,Oran-Orantı,Katı Cisimler,Problemler de olabilir; ağırlıklı adım basamak yükseklikleri arasındaki orandır.
-2024,21,Kümeler,Problemler,Problemler de olabilir; ağırlıklı adım doğru cevap kümelerinin kesişimidir.
-2024,26,Problemler,Mantık,Permütasyon-Kombinasyon da olabilir; ağırlıklı adım iki sıralamayı eşitlemek için en az silme problemidir.
-2024,27,EBOB-EKOK,Problemler,Oran-Orantı da olabilir; ağırlıklı adım özdeş dikdörtgen fayanslarla kaplamadaki ortak kat yapısıdır.
-2024,28,Temel Kavramlar,Problemler,Bölme ve Bölünebilme de olabilir; ağırlıklı adım çarpan çiftleri ile toplam koşuludur.
-2024,35,Üçgende Alan ve Benzerlik,Dik Üçgen ve Trigonometri,Dik Üçgen ve Trigonometri de olabilir; ağırlıklı adım benzer üçgenlerden uzunluk ilişkisidir.
-2025,1,Rasyonel Sayılar,Problemler,Oran-Orantı da olabilir; ağırlıklı adım dolu bölme sayısının toplam bölme sayısına oranıdır.
-2025,4,Rasyonel Sayılar,Sayı Basamakları,Sayı Basamakları da olabilir; ağırlıklı adım kesrin ondalık gösterimidir.
-2025,5,İkinci Dereceden Denklemler,Problemler,Denklem Çözme de olabilir; tanımlı işlem sonucunda ikinci dereceden denklem oluşur.
-2025,12,Temel Kavramlar,Problemler,Sayı Basamakları da olabilir; ağırlıklı adım asal sayı koşuludur.
-2025,15,Sayı Basamakları,Problemler,
-2025,16,Kümeler,Veri ve İstatistik,Veri ve İstatistik de olabilir; ağırlıklı adım küme eleman sayısı bağıntılarıdır.
-2025,18,Rasyonel Sayılar,Problemler,Problemler de olabilir; ağırlıklı adım kümülatif isabet oranlarının karşılaştırılmasıdır.
-2025,23,Veri ve İstatistik,Problemler,
-2025,24,Basit Eşitsizlikler,Problemler,Problemler de olabilir; ağırlıklı adım iki zaman aralığının kesişimidir.
-2025,36,Dik Üçgen ve Trigonometri,Çokgenler ve Dörtgenler,Üçgende Alan ve Benzerlik de olabilir; ağırlıklı adım dik üçgende Pisagor bağıntısıdır.
-2026,5,Denklem Çözme,Problemler,
-2026,6,Bölme ve Bölünebilme,Temel Kavramlar,Problemler de olabilir; ağırlıklı adım tam sayı çarpan çiftleri.
-2026,14,Çokgenler ve Dörtgenler,Problemler,Problemler de olabilir; ağırlıklı adım çokgenlerin kenar sayımı.
-2026,23,Veri ve İstatistik,Problemler,Problemler de olabilir; ağırlıklı adım dairesel grafik okuma.
-2026,26,Bölme ve Bölünebilme,Problemler,Problemler de olabilir; ağırlıklı adım bölüm-kalan.
-2026,32,Doğruda ve Üçgende Açılar,Problemler,Üçgen eşitsizliği; listede ayrı konu başlığı yok.
-2026,33,Üçgende Alan ve Benzerlik,Problemler,Dik Üçgen ve Trigonometri de olabilir; ağırlıklı adım üçgen alanı.
+kitapcik,soru_no,insan_konu,model_konu,nihai_konu,insan_notu
+2024,3,Üslü Sayılar,Problemler,Üslü Sayılar,Problemler de olabilir; ağırlıklı adım mandal sayısının üstel artışıdır.
+2024,6,Mutlak Değer,Problemler,Mutlak Değer,Problemler de olabilir; ağırlıklı adım tahmin ile gerçek değer arasındaki mutlak uzaklıktır.
+2024,7,Temel Kavramlar,Problemler,Temel Kavramlar,
+2024,9,Rasyonel Sayılar,Temel Kavramlar,Rasyonel Sayılar,Oran-Orantı da olabilir; ağırlıklı adım eşit aralıklı sayı doğrusu/ölçek okumadır.
+2024,14,Bölme ve Bölünebilme,Sayı Basamakları,Bölme ve Bölünebilme,
+2024,18,Oran-Orantı,Katı Cisimler,Problemler,Problemler de olabilir; ağırlıklı adım basamak yükseklikleri arasındaki orandır.
+2024,21,Kümeler,Problemler,Problemler,Problemler de olabilir; ağırlıklı adım doğru cevap kümelerinin kesişimidir.
+2024,26,Problemler,Mantık,Problemler,Permütasyon-Kombinasyon da olabilir; ağırlıklı adım iki sıralamayı eşitlemek için en az silme problemidir.
+2024,27,EBOB-EKOK,Problemler,EBOB-EKOK,Oran-Orantı da olabilir; ağırlıklı adım özdeş dikdörtgen fayanslarla kaplamadaki ortak kat yapısıdır.
+2024,28,Temel Kavramlar,Problemler,Temel Kavramlar,Bölme ve Bölünebilme de olabilir; ağırlıklı adım çarpan çiftleri ile toplam koşuludur.
+2024,35,Üçgende Alan ve Benzerlik,Dik Üçgen ve Trigonometri,Üçgende Alan ve Benzerlik,Dik Üçgen ve Trigonometri de olabilir; ağırlıklı adım benzer üçgenlerden uzunluk ilişkisidir.
+2025,1,Rasyonel Sayılar,Problemler,Problemler,Oran-Orantı da olabilir; ağırlıklı adım dolu bölme sayısının toplam bölme sayısına oranıdır.
+2025,4,Rasyonel Sayılar,Sayı Basamakları,Rasyonel Sayılar,Sayı Basamakları da olabilir; ağırlıklı adım kesrin ondalık gösterimidir.
+2025,5,İkinci Dereceden Denklemler,Problemler,Denklem Çözme,Denklem Çözme de olabilir; tanımlı işlem sonucunda ikinci dereceden denklem oluşur.
+2025,12,Temel Kavramlar,Problemler,Temel Kavramlar,Sayı Basamakları da olabilir; ağırlıklı adım asal sayı koşuludur.
+2025,15,Sayı Basamakları,Problemler,Sayı Basamakları,
+2025,16,Kümeler,Veri ve İstatistik,Kümeler,Veri ve İstatistik de olabilir; ağırlıklı adım küme eleman sayısı bağıntılarıdır.
+2025,18,Rasyonel Sayılar,Problemler,Problemler,Problemler de olabilir; ağırlıklı adım kümülatif isabet oranlarının karşılaştırılmasıdır.
+2025,23,Veri ve İstatistik,Problemler,Veri ve İstatistik,
+2025,24,Basit Eşitsizlikler,Problemler,Problemler,Problemler de olabilir; ağırlıklı adım iki zaman aralığının kesişimidir.
+2025,36,Dik Üçgen ve Trigonometri,Çokgenler ve Dörtgenler,Dik Üçgen ve Trigonometri,Üçgende Alan ve Benzerlik de olabilir; ağırlıklı adım dik üçgende Pisagor bağıntısıdır.
+2026,5,Denklem Çözme,Problemler,Denklem Çözme,
+2026,6,Bölme ve Bölünebilme,Temel Kavramlar,Bölme ve Bölünebilme,Problemler de olabilir; ağırlıklı adım tam sayı çarpan çiftleri.
+2026,14,Çokgenler ve Dörtgenler,Problemler,Problemler,Problemler de olabilir; ağırlıklı adım çokgenlerin kenar sayımı.
+2026,23,Veri ve İstatistik,Problemler,Veri ve İstatistik,Problemler de olabilir; ağırlıklı adım dairesel grafik okuma.
+2026,26,Bölme ve Bölünebilme,Problemler,Bölme ve Bölünebilme,Problemler de olabilir; ağırlıklı adım bölüm-kalan.
+2026,32,Doğruda ve Üçgende Açılar,Problemler,Doğruda ve Üçgende Açılar,Üçgen eşitsizliği; listede ayrı konu başlığı yok.
+2026,33,Üçgende Alan ve Benzerlik,Problemler,Dik Üçgen ve Trigonometri,Dik Üçgen ve Trigonometri de olabilir; ağırlıklı adım üçgen alanı.

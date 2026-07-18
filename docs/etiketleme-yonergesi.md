@@ -40,7 +40,9 @@ Doğruda ve Üçgende Açılar · Üçgenin Yardımcı Elemanları · Dik Üçge
 Üçgende Alan ve Benzerlik · Çokgenler ve Dörtgenler · Katı Cisimler
 
 Not: Analitik Geometri ve Çember 11. sınıf konusudur, 2026 TYT kapsamı dışındadır — kitapçıkta
-böyle bir soruya rastlarsan `not` sütununa yaz, birlikte karar veririz.
+böyle bir soruya rastlarsan `not` sütununa yaz, birlikte karar veririz. Üçgen eşitsizliği ve
+açı-kenar ilişkileri "Doğruda ve Üçgende Açılar" başlığına dahildir (MEB 9.4.1). Sınır
+durumlarında doğruluk raporundaki tutarlılık kuralları uygulanır.
 
 ## Telif Notu
 
