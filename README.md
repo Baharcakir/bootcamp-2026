@@ -22,9 +22,9 @@ plan çıkarır.
 | Bahar Çakır | Scrum Master · Süreç & Arayüz | [Baharcakir](https://github.com/Baharcakir) |
 | Görkem Çetinkaya | Developer · Eğitmen hattı (RAG, quiz, ölçüm) | [gorkem-cetinkaya](https://github.com/gorkem-cetinkaya) |
 | Doğa Alışkan | Developer · Modeller & Sentetik Veri | [dogalskn](https://github.com/dogalskn) |
-| Emir Arda Tomaç | Developer · Agent Mimarisi & Plan | [profil eklenecek] |
+| Emir Arda Tomaç | Product Owner · Agent Mimarisi & Plan | [emirardatomac](https://github.com/emirardatomac) |
 
-**Takım:** Takım 76 · *Not: Product Owner rolü sprint 3 planlamasında netleştirilecektir.*
+**Takım:** Takım 76
 
 ## 🧠 Ürün Açıklaması
 

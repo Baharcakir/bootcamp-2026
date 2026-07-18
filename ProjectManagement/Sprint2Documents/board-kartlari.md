@@ -21,10 +21,13 @@ GitHub Projects ile 15 dakikada kurulum (repoya sekme olarak yapışır, ayrı a
 - [D3-4p] Test kapsamı 12 → 30
 - [E2-2p] Sprint 2 teslim seti
 
+## In Progress kolonuna (Bahar — sprint kapanışına kadar)
+
+- [C2-3p] Soru sorma mobil UX turu
+- [C3-5p] Pano cilası: matematik neti ayrı seri
+
 ## Backlog kolonuna (Sprint 3 adayları)
 
-- [C2-3p] Soru sorma mobil UX turu (Sprint 2'den taşındı)
-- [C3-5p] Pano cilası: matematik neti ayrı seri (Sprint 2'den taşındı)
 - [A5-8p] Net tahmin modeli (sentetik kohortla eğitim)
 - [T6-8p] Kendi konu sınıflandırıcımız + Gemini karşılaştırması
 - [T5-5p] Karne fotoğrafından net okuma
