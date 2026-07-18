@@ -17,17 +17,14 @@ plan çıkarır.
 
 ## 👥 Takım
 
-<!-- TODO: İsimleri, rolleri ve profilleri doldurun (5 kişi: 1 PO, 1 SM, 3 Developer) -->
-
 | İsim | Rol | GitHub |
 |---|---|---|
-| [AD SOYAD] | Product Owner | [profil] |
-| [AD SOYAD] | Scrum Master | [profil] |
-| [Doğa Alışkan] | Developer | [profil] |
-| [AD SOYAD] | Developer | [profil] |
-| [AD SOYAD] | Developer | [profil] |
+| Bahar Çakır | Scrum Master · Süreç & Arayüz | [Baharcakir](https://github.com/Baharcakir) |
+| Görkem Çetinkaya | Developer · Eğitmen hattı (RAG, quiz, ölçüm) | [gorkem-cetinkaya](https://github.com/gorkem-cetinkaya) |
+| Doğa Alışkan | Developer · Modeller & Sentetik Veri | [dogalskn](https://github.com/dogalskn) |
+| Emir Arda Tomaç | Developer · Agent Mimarisi & Plan | [profil eklenecek] |
 
-**Takım ismi:** [TAKIM İSMİ]
+**Takım:** Takım 76 · *Not: Product Owner rolü sprint 3 planlamasında netleştirilecektir.*
 
 ## 🧠 Ürün Açıklaması
 

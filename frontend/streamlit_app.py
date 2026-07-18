@@ -46,9 +46,11 @@ def api_post(path: str, payload: dict | None = None, files: dict | None = None, 
 
 # --- Kenar çubuğu: sayfa ve öğrenci seçimi ---
 st.sidebar.title("🎯 Çarpan")
-page = st.sidebar.radio(
-    "Sayfa", ["📸 Soru Sor", "Deneme Netleri", "Analiz Panosu", "Haftalık Plan", "Koç Sohbeti"]
-)
+PAGES = ["📸 Soru Sor", "Deneme Netleri", "Analiz Panosu", "Haftalık Plan", "Koç Sohbeti"]
+# Derin bağlantı: ?page=2 gibi bir adresle doğrudan ilgili sayfa açılır
+_page_param = st.query_params.get("page", "")
+_default_page = int(_page_param) if _page_param.isdigit() and int(_page_param) < len(PAGES) else 0
+page = st.sidebar.radio("Sayfa", PAGES, index=_default_page)
 
 students = api_get("/students")
 student = None
