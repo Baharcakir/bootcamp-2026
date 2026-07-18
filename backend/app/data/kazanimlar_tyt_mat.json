@@ -1,0 +1,33 @@
+{
+  "kaynak": "MEB Ortaöğretim Matematik Dersi (9-12) Öğretim Programı (2018) — TTKB 2026 YKS kapsam belgesindeki 9-10. sınıf kazanımları",
+  "not": "Her konu, çözümde işleyen MEB kazanım koduna eşlenmiştir. 'Sayı Basamakları' ve 'Temel Kavramlar' ortaokul temel becerisi olarak sınavda sorulmaya devam eder; en yakın kazanıma bağlanmıştır.",
+  "konular": {
+    "Temel Kavramlar": {"kod": "9.3.1.1", "kazanim": "Sayı kümelerini (doğal, tam, rasyonel, irrasyonel, gerçek) birbiriyle ilişkilendirir; tam sayılarda işlem ve asallık temelleri."},
+    "Sayı Basamakları": {"kod": "9.3.1", "kazanim": "Doğal sayıların basamak yapısı ve çözümlemesi (ortaokul temeli; sayı kümeleri kapsamında kullanılır)."},
+    "Bölme ve Bölünebilme": {"kod": "9.3.2.1", "kazanim": "Tam sayılarda bölünebilme kurallarıyla ilgili problemler çözer; periyodik olarak tekrar eden durum problemleri (9.3.2.3)."},
+    "EBOB-EKOK": {"kod": "9.3.2.2", "kazanim": "Tam sayılarda EBOB ve EKOK ile ilgili uygulamalar yapar; gerçek hayat problemlerine uygular."},
+    "Rasyonel Sayılar": {"kod": "9.3.1.1", "kazanim": "Rasyonel sayılar, kesirler ve ondalık gösterimler arasındaki ilişkiyle işlemler yapar."},
+    "Basit Eşitsizlikler": {"kod": "9.3.3.2", "kazanim": "Birinci dereceden bir bilinmeyenli eşitsizliklerin çözüm kümelerini bulur; gerçek sayı aralıklarını kullanır (9.3.3.1)."},
+    "Mutlak Değer": {"kod": "9.3.3.3", "kazanim": "Mutlak değer içeren birinci dereceden bir bilinmeyenli denklem ve eşitsizliklerin çözüm kümelerini bulur."},
+    "Üslü Sayılar": {"kod": "9.3.4.1", "kazanim": "Üslü ifadeleri içeren denklemleri çözer; üslü ifadelerin özelliklerini kullanır."},
+    "Köklü Sayılar": {"kod": "9.3.4.2", "kazanim": "Köklü ifadeleri içeren denklemleri çözer; köklü ve üslü ifadeler arasındaki ilişkiyi kullanır."},
+    "Çarpanlara Ayırma": {"kod": "10.3.2.1", "kazanim": "Bir polinomu/cebirsel ifadeyi çarpanlarına ayırır (ortak çarpan, özdeşlikler, ax²+bx+c)."},
+    "Oran-Orantı": {"kod": "9.3.5.1", "kazanim": "Oran ve orantı kavramlarını (doğru/ters orantı, yüzde) kullanarak problemler çözer."},
+    "Denklem Çözme": {"kod": "9.3.3.2", "kazanim": "Birinci dereceden denklemlerin ve iki bilinmeyenli denklem sistemlerinin (9.3.3.4) çözüm kümelerini bulur."},
+    "Problemler": {"kod": "9.3.5.2", "kazanim": "Denklem ve eşitsizlikleri gerçek hayat durumlarına uygular: sayı, kesir, yaş, işçi, alım-satım, yüzde, kâr-zarar, karışım, hız-hareket problemleri (faiz, havuz ve saat problemleri kapsam dışıdır)."},
+    "Kümeler": {"kod": "9.2.2.1", "kazanim": "Kümelerde birleşim, kesişim, fark ve tümleme işlemleri yardımıyla problemler çözer; alt küme ve eleman sayısı ilişkilerini kullanır."},
+    "Mantık": {"kod": "9.1.1", "kazanim": "Önermeler, bileşik önermeler, De Morgan kuralları, koşullu önerme ve niceleyicilerle doğruluk analizi yapar."},
+    "Fonksiyonlar": {"kod": "10.2.1.1", "kazanim": "Fonksiyon kavramı ve gösterimiyle problemler çözer; grafikleri yorumlar; bileşke ve ters fonksiyon işlemleri yapar (10.2.2)."},
+    "Polinomlar": {"kod": "10.3.1.2", "kazanim": "Polinomlarla toplama, çıkarma, çarpma ve bölme işlemleri yapar; P(x)'in x−a ile bölümünden kalanın P(a) olduğunu kullanır."},
+    "İkinci Dereceden Denklemler": {"kod": "10.4.1.2", "kazanim": "İkinci dereceden bir bilinmeyenli denklemleri çözer; kökler ile katsayılar arasındaki ilişkileri kullanır (10.4.1.4)."},
+    "Permütasyon-Kombinasyon": {"kod": "10.1.1", "kazanim": "Sıralama ve seçme durumlarını toplama-çarpma yöntemleri, faktöriyel, permütasyon ve kombinasyonla hesaplar; Pascal üçgeni ve binom açılımını kullanır."},
+    "Olasılık": {"kod": "10.1.2.2", "kazanim": "Örnek uzay, olay ve tümleyen kavramlarıyla eş olası/olmayan olayların olasılıklarını hesaplar."},
+    "Veri ve İstatistik": {"kod": "9.5.1.1", "kazanim": "Verileri merkezî eğilim ve yayılım ölçüleriyle yorumlar; veri gruplarını uygun grafik türleriyle (histogram dahil) temsil eder (9.5.2)."},
+    "Doğruda ve Üçgende Açılar": {"kod": "9.4.1.1", "kazanim": "Üçgende açı özellikleriyle işlemler yapar; kenar-açı ilişkileri ve üçgen eşitsizliğini kullanır (9.4.1.2, 9.4.1.3)."},
+    "Üçgenin Yardımcı Elemanları": {"kod": "9.4.3", "kazanim": "Açıortay, kenarortay, kenar orta dikme ve yüksekliğin özelliklerini kullanarak işlemler yapar."},
+    "Dik Üçgen ve Trigonometri": {"kod": "9.4.4", "kazanim": "Pisagor ve Öklid teoremlerini elde ederek problemler çözer; dik üçgende dar açıların trigonometrik oranlarını (30°-45°-60°) hesaplar."},
+    "Üçgende Alan ve Benzerlik": {"kod": "9.4.2.2", "kazanim": "Üçgenlerde eşlik ve benzerlik koşullarını (Thales dahil) kullanarak problemler çözer; üçgenin alanını hesaplar (9.4.5.1)."},
+    "Çokgenler ve Dörtgenler": {"kod": "10.5.3.1", "kazanim": "Çokgen kavramıyla işlemler yapar; özel dörtgenlerin (yamuk, paralelkenar, eşkenar dörtgen, dikdörtgen, kare, deltoid) açı, kenar, köşegen ve alan özelliklerini kullanır."},
+    "Katı Cisimler": {"kod": "10.6.1.1", "kazanim": "Dik prizma ve dik piramitlerin uzunluk, alan ve hacim bağıntılarını oluşturur ve problemlere uygular."}
+  }
+}

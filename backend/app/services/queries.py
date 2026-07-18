@@ -19,10 +19,45 @@ from .mastery import TopicObservation
 from .trajectory import ExamNet, compute_net
 
 TOPICS_PATH = Path(__file__).resolve().parents[1] / "data" / "topics_tyt.json"
+KAZANIM_PATH = Path(__file__).resolve().parents[1] / "data" / "kazanimlar_tyt_mat.json"
+ETIKET_CSV = Path(__file__).resolve().parents[3] / "data" / "osym" / "etiketleme.csv"
 
 
 def load_topics() -> dict:
     return json.loads(TOPICS_PATH.read_text(encoding="utf-8"))
+
+
+def kazanim_for_topic(topic: str) -> str | None:
+    """Konunun MEB kazanım referansını döndürür (T2 — kaynaklı anlatım).
+
+    Konu etiketimiz kesin bir anahtar olduğundan getirme konu-indekslidir; embedding
+    aramasına gerek yoktur (bkz. docs/etiketleme-dogruluk-raporu.md, tutarlılık kuralları).
+    """
+    data = json.loads(KAZANIM_PATH.read_text(encoding="utf-8"))
+    entry = data["konular"].get(topic)
+    if not entry:
+        return None
+    return f"MEB {entry['kod']} — {entry['kazanim']}"
+
+
+def benzer_cikmis_sorular(topic: str, limit: int = 3) -> list[str]:
+    """Aynı konudan çıkmış gerçek ÖSYM sorularını (yıl + soru no) döndürür.
+
+    Kaynak: T4 değerlendirme setinin denetimden geçmiş nihai etiketleri — üretilen
+    öneri %100 gerçektir, halüsinasyon içeremez. Set yerelde yoksa boş liste döner.
+    """
+    import csv
+
+    if not ETIKET_CSV.exists():
+        return []
+    with ETIKET_CSV.open(encoding="utf-8-sig") as f:
+        rows = list(csv.DictReader(f))
+    eslesen = [
+        f"{r['kitapcik']} TYT s.{r['soru_no']}"
+        for r in rows
+        if (r.get("nihai_konu") or r.get("konu") or "").strip() == topic
+    ]
+    return eslesen[-limit:]
 
 
 def tutor_topic_index() -> dict[str, set[str]]:

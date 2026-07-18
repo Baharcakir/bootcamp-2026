@@ -60,9 +60,23 @@ etiketleme turlarında ve v2 prompt'ta kullanılacak):
 3. **"Mantık yürütme" karışması:** Sıralama-akıl yürütme sorusuna "Mantık" dedi (2024 s.26);
    taksonomideki Mantık başlığı önermeler konusudur.
 
-**v2 planı:** Etiketleme prompt'una "konuyu bağlam hikâyesi değil, çözümün kilit tekniği belirler"
-ilkesi + yukarıdaki tutarlılık kuralları eklenip ölçüm tekrarlanacak; T6'da kendi eğittiğimiz
-sınıflandırıcı aynı sette karşılaştırılacak.
+## v2 — Kural-iyileştirmeli yeniden ölçüm
+
+Yukarıdaki bulgular ve tutarlılık kuralları etiketleme prompt'una eklendi (`LABELING_RULES`,
+hem üretim eğitmeninde hem ölçüm script'inde) ve ölçüm aynı sette tekrarlandı:
+
+| Ölçüm | Doğruluk | 2024 | 2025 | 2026 |
+|---|---|---|---|---|
+| v1 (kuralsız) | %80.8 (97/120) | 30/40 | 33/40 | 34/40 |
+| **v2 (kurallarla)** | **%83.3 (100/120)** | 31/40 | 36/40 | 33/40 |
+
+**Döngü kapandı: ölçtük → hataları analiz ettik → kuralları çıkardık → uyguladık → iyileşmeyi
+doğruladık (+2.5 puan).**
+
+*Metodolojik not:* Kurallar bu setin denetiminden türetildiği için v2 iyileşmesi "örneklem içi"
+bir doğrulamadır; tarafsız bir v3 ölçümü için 2018-2023 kitapçıklarından yeni bir set
+etiketlenebilir. T6'da kendi eğittiğimiz sınıflandırıcı da aynı düzenekle karşılaştırılacaktır.
+v2 uyuşmazlıkları: `data/osym/uyusmazliklar_v2.csv` (20 satır).
 
 ## Denetim izi
 

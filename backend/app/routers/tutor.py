@@ -7,7 +7,14 @@ from sqlmodel import Session, select
 from ..config import settings
 from ..db import get_session
 from ..models import QuestionEvent, Student
-from ..services.queries import tutor_topic_index
+from ..services.mastery import estimate_mastery, study_priorities
+from ..services.queries import (
+    benzer_cikmis_sorular,
+    kazanim_for_topic,
+    load_observations,
+    load_topic_weights,
+    tutor_topic_index,
+)
 
 router = APIRouter(tags=["tutor"])
 
@@ -17,6 +24,20 @@ class AskOut(BaseModel):
     subject: str
     topic: str
     in_scope: bool  # kapsam dışıysa sinyal kaydedilmez, arayüz nazik mesajı gösterir
+    kaynak: str | None = None  # T2: konunun MEB kazanım referansı
+    benzer_sorular: list[str] = []  # T2: aynı konudan çıkmış gerçek ÖSYM soruları
+
+
+class QuizIn(BaseModel):
+    topic: str | None = None  # verilmezse öğrencinin en zayıf konusu seçilir
+
+
+class QuizOut(BaseModel):
+    soru: str
+    secenekler: dict[str, str]
+    dogru: str
+    cozum: str
+    konu: str
 
 
 class EventIn(BaseModel):
@@ -88,6 +109,58 @@ async def ask_question(
         subject=result.subject,
         topic=result.topic,
         in_scope=in_scope,
+        kaynak=kazanim_for_topic(result.topic) if in_scope else None,
+        benzer_sorular=benzer_cikmis_sorular(result.topic) if in_scope else [],
+    )
+
+
+@router.post("/students/{student_id}/quiz", response_model=QuizOut)
+def create_quiz(
+    student_id: int, payload: QuizIn, session: Session = Depends(get_session)
+) -> QuizOut:
+    """T3: Doğrulanmış mini quiz üretir (konu verilmezse en zayıf konu seçilir).
+
+    Öğrencinin cevabı arayüzden `POST /students/{id}/events` (source="quiz") ile
+    gönderilir; doğru cevap ustalık haritasını yukarı günceller.
+    """
+    _ensure_student(session, student_id)
+
+    topic = (payload.topic or "").strip() or None
+    if topic and not _in_scope("Matematik", topic):
+        raise HTTPException(status_code=422, detail=f"Geçersiz konu: {topic}")
+    if topic is None:
+        observations = load_observations(session, student_id)
+        if not observations:
+            raise HTTPException(
+                status_code=422,
+                detail="Önce bir soru sorun ya da quiz için konu belirtin — zayıf konu "
+                "seçebilmek için haritada sinyal olmalı.",
+            )
+        ranked = study_priorities(estimate_mastery(observations), load_topic_weights(), top=1)
+        topic = ranked[0][0].topic
+
+    if not settings.google_api_key:
+        raise HTTPException(
+            status_code=503,
+            detail="GOOGLE_API_KEY tanımlı değil. Kök dizindeki .env dosyasına anahtarınızı "
+            "girin (bkz. .env.example).",
+        )
+
+    try:
+        from ..agents.quiz import generate_quiz
+    except ImportError as exc:
+        raise HTTPException(
+            status_code=503, detail=f"Agent bağımlılıkları kurulu değil: {exc}"
+        ) from exc
+
+    try:
+        quiz = generate_quiz(topic)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    return QuizOut(
+        soru=quiz.soru, secenekler=quiz.secenekler, dogru=quiz.dogru,
+        cozum=quiz.cozum, konu=quiz.konu,
     )
 
 

@@ -111,11 +111,58 @@ if page == "📸 Soru Sor":
             }
         with st.spinner("Eğitmen soruyu inceliyor..."):
             result = api_post(f"/students/{sid}/ask", files=files, data={"text": text or ""})
-        if result and result["in_scope"]:
-            st.success(f"🏷️ **{result['subject']} / {result['topic']}** olarak haritana işlendi")
-            st.markdown(result["explanation"])
-        elif result:
-            st.info(result["explanation"])  # kapsam dışı — nazik yönlendirme, kayıt düşmez
+        if result:
+            st.session_state[f"ask_{sid}"] = result
+            st.session_state.pop(f"quiz_{sid}", None)  # yeni soru → eski quiz temizlenir
+
+    ask = st.session_state.get(f"ask_{sid}")
+    if ask and ask["in_scope"]:
+        st.success(f"🏷️ **{ask['subject']} / {ask['topic']}** olarak haritana işlendi")
+        st.markdown(ask["explanation"])
+        if ask.get("kaynak"):
+            st.caption(f"📚 {ask['kaynak']}")
+        if ask.get("benzer_sorular"):
+            st.caption("🔗 Bu konudan çıkmış sorular: " + " · ".join(ask["benzer_sorular"]))
+
+        # --- T3: doğrulanmış mini quiz — doğru cevap haritayı YUKARI günceller ---
+        quiz_key = f"quiz_{sid}"
+        if st.button("🔁 Benzer soruyla kendini dene"):
+            with st.spinner("Soru üretiliyor ve doğrulanıyor..."):
+                quiz = api_post(f"/students/{sid}/quiz", payload={"topic": ask["topic"]})
+            if quiz:
+                quiz["cevaplandi"] = False
+                st.session_state[quiz_key] = quiz
+
+        quiz = st.session_state.get(quiz_key)
+        if quiz:
+            st.markdown(f"**Mini Quiz — {quiz['konu']}**")
+            st.markdown(quiz["soru"])
+            secim = st.radio(
+                "Cevabın:",
+                list(quiz["secenekler"]),
+                format_func=lambda h: f"{h}) {quiz['secenekler'][h]}",
+                index=None,
+                key=f"secim_{sid}",
+            )
+            if st.button("Cevapla", disabled=secim is None or quiz["cevaplandi"]):
+                dogru_mu = secim == quiz["dogru"]
+                api_post(
+                    f"/students/{sid}/events",
+                    payload={"subject": "Matematik", "topic": quiz["konu"],
+                             "succeeded": dogru_mu, "source": "quiz"},
+                )
+                quiz["cevaplandi"] = True
+                quiz["dogru_mu"] = dogru_mu
+                st.session_state[quiz_key] = quiz
+            if quiz.get("cevaplandi"):
+                if quiz.get("dogru_mu"):
+                    st.success(f"Doğru! ✅ Haritanda **{quiz['konu']}** yukarı güncellendi.")
+                else:
+                    st.error(f"Yanlış — doğru cevap **{quiz['dogru']}**. Haritana işlendi.")
+                with st.expander("Çözümü gör"):
+                    st.markdown(quiz["cozum"])
+    elif ask:
+        st.info(ask["explanation"])  # kapsam dışı — nazik yönlendirme, kayıt düşmez
 
     with st.expander("Fotoğraf yok mu? Takıldığın konuyu tek dokunuşla işaretle"):
         topics = api_get("/topics")

@@ -84,7 +84,12 @@ erDiagram
 4. **Koç agent'ı (`agents/graph.py`)** — LangGraph ReAct: Gemini araç çağrılarıyla analiz çeker,
    veri yokken yorum uydurmaz. Sprint 2'de (B2) süpervizör mimarisine ayrışacak. Hafıza: thread
    bazlı checkpointer (B5'te kalıcı SQLite + profil özeti).
-5. **RAG (Sprint 2, T2)** — MEB/ÖSYM kazanım dokümanları Chroma'da; eğitmen kaynak göstererek anlatır.
+5. **Kaynaklı anlatım (T2)** — konu-indeksli getirme: anlatımın ürettiği kesin konu etiketi
+   anahtar olarak kullanılıp (a) MEB kazanım referansı (`data/kazanimlar_tyt_mat.json`, TTKB
+   2026 belgesinden) ve (b) aynı konudan çıkmış gerçek ÖSYM soruları (T4 setinin nihai
+   etiketlerinden) yanıta eklenir. Kesin anahtar varken embedding araması gereksizdir; Chroma,
+   korpus serbest metne dönüştüğünde (soru metinleri, v2) eklenecek. Öneriler %100 gerçek
+   veridir — halüsinasyon bu katmanda imkânsızdır.
 
 ## Veri ve Model Eğitim Stratejisi
 

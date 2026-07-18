@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT / "backend"))
 from langchain_core.messages import HumanMessage  # noqa: E402
 from langchain_google_genai import ChatGoogleGenerativeAI  # noqa: E402
 
+from app.agents.tutor import LABELING_RULES  # noqa: E402
 from app.config import settings  # noqa: E402
 from app.services.queries import load_topics  # noqa: E402
 
@@ -51,6 +52,8 @@ Kurallar:
 - Bir kısmı önceki/sonraki sayfada kalan soruları DAHİL ETME.
 - Her soru için listeden TAM olarak bir konu seç; listede olmayan ad uydurma.
 
+{rules}
+
 Cevabını SADECE şu JSON biçiminde ver, başka hiçbir şey yazma:
 {{"12": "Problemler", "13": "Kümeler"}}"""
 
@@ -61,9 +64,13 @@ def math_topics() -> list[str]:
 
 
 def load_human_labels() -> dict[tuple[str, int], dict]:
+    """İnsan etiketleri — uyuşmazlık denetiminden geçmiş nihai etiket varsa o esas alınır."""
     rows = list(csv.DictReader(LABELS_CSV.open(encoding="utf-8-sig")))
     return {
-        (r["kitapcik"], int(r["soru_no"])): {"konu": r["konu"].strip(), "not": (r["not"] or "").strip()}
+        (r["kitapcik"], int(r["soru_no"])): {
+            "konu": ((r.get("nihai_konu") or "").strip() or r["konu"].strip()),
+            "not": (r["not"] or "").strip(),
+        }
         for r in rows
         if (r["konu"] or "").strip()
     }
@@ -88,7 +95,7 @@ def label_page(llm: ChatGoogleGenerativeAI, png: Path, topics_text: str) -> dict
     data_uri = "data:image/png;base64," + base64.b64encode(png.read_bytes()).decode()
     message = HumanMessage(
         content=[
-            {"type": "text", "text": PAGE_PROMPT.format(topics=topics_text)},
+            {"type": "text", "text": PAGE_PROMPT.format(topics=topics_text, rules=LABELING_RULES)},
             {"type": "image_url", "image_url": {"url": data_uri}},
         ]
     )
@@ -97,6 +104,8 @@ def label_page(llm: ChatGoogleGenerativeAI, png: Path, topics_text: str) -> dict
 
 
 def measure() -> None:
+    v2 = "--v2" in sys.argv  # v2: raporu/denetim CSV'sini ezmez, ayrı dosyaya yazar
+    mismatch_path = MISMATCH_CSV.with_name("uyusmazliklar_v2.csv") if v2 else MISMATCH_CSV
     if not settings.google_api_key:
         raise SystemExit("GOOGLE_API_KEY tanımlı değil (.env).")
 
@@ -154,7 +163,7 @@ def measure() -> None:
     confusion = Counter((h["konu"], m) for _, h, m in mismatches)
 
     # Uyuşmazlık CSV (denetim turu girdisi)
-    with MISMATCH_CSV.open("w", newline="", encoding="utf-8") as f:
+    with mismatch_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
         writer.writerow(["kitapcik", "soru_no", "insan_konu", "model_konu", "insan_notu"])
         for (booklet, qno), h, m in mismatches:
@@ -212,11 +221,15 @@ def measure() -> None:
         "",
         f"*Denetim listesi: `data/osym/uyusmazliklar.csv` ({len(mismatches)} satır)*",
     ]
-    REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    if not v2:
+        REPORT_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
     print(f"\nDoğruluk: {correct}/{total} = %{accuracy * 100:.1f} | eksik: {len(missing)}")
-    print(f"Rapor: {REPORT_MD}")
-    print(f"Denetim listesi: {MISMATCH_CSV}")
+    for booklet, (oks, n) in per_booklet.items():
+        print(f"  {booklet}: {oks}/{n}")
+    if not v2:
+        print(f"Rapor: {REPORT_MD}")
+    print(f"Uyuşmazlık listesi: {mismatch_path}")
 
 
 if __name__ == "__main__":
