@@ -47,7 +47,7 @@ def api_post(path: str, payload: dict | None = None, files: dict | None = None, 
 # --- Kenar çubuğu: sayfa ve öğrenci seçimi ---
 st.sidebar.title("🎯 Çarpan")
 page = st.sidebar.radio(
-    "Sayfa", ["📸 Soru Sor", "Deneme Netleri", "Analiz Panosu", "Koç Sohbeti"]
+    "Sayfa", ["📸 Soru Sor", "Deneme Netleri", "Analiz Panosu", "Haftalık Plan", "Koç Sohbeti"]
 )
 
 students = api_get("/students")
@@ -248,7 +248,44 @@ elif page == "Analiz Panosu":
             help="Doğrusal eğilim (v0) — Sprint 3'te eğitilmiş modelle değişecek (A5)",
         )
 
-# --- Sayfa 4: Koç Sohbeti ---
+# --- Sayfa 4: Haftalık Plan ---
+elif page == "Haftalık Plan":
+    st.header(f"🗓️ {student['name']} — Haftalık Çalışma Planı")
+    st.caption(
+        "Plan; sınav tarihi, haftalık saat bütçesi ve zayıflık haritasındaki konu "
+        "önceliklerinden otomatik üretilir ve veritabanına kaydedilir."
+    )
+
+    if st.button("✨ Bu haftanın planını oluştur", type="primary"):
+        with st.spinner("Planlayıcı uzman programı hazırlıyor..."):
+            generated = api_post(f"/students/{sid}/plans/generate", payload={})
+        if generated:
+            st.success("Plan oluşturuldu ve kaydedildi.")
+            st.rerun()
+
+    plan = api_get(f"/students/{sid}/plans/latest")
+    if not plan:
+        st.info("Henüz plan yok. Yukarıdaki düğmeyle ilk haftalık planını oluştur.")
+    else:
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Haftalık bütçe", f"{plan['weekly_hours']} saat")
+        col2.metric("Toplam oturum", len(plan["items"]))
+        remaining = plan.get("days_to_exam")
+        col3.metric("Sınava kalan", f"{remaining} gün" if remaining is not None else "Belirtilmedi")
+        st.info(plan["summary"])
+
+        plan_df = pd.DataFrame(plan["items"])[
+            ["day_name", "topic", "activity", "duration_minutes", "rationale"]
+        ]
+        plan_df.columns = ["Gün", "Konu", "Çalışma", "Süre (dk)", "Neden"]
+        st.dataframe(plan_df, hide_index=True, width="stretch")
+
+        st.subheader("Konu öncelikleri")
+        priorities_df = pd.DataFrame(plan["priorities"])
+        if not priorities_df.empty:
+            st.dataframe(priorities_df, hide_index=True, width="stretch")
+
+# --- Sayfa 5: Koç Sohbeti ---
 else:
     st.header(f"💬 Koç — {student['name']}")
     chat_key = f"chat_{sid}"

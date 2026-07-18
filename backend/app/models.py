@@ -6,9 +6,9 @@ from sqlmodel import Field, SQLModel
 class Student(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     name: str
-    exam_date: date | None = None  # hedef sınav (YKS) tarihi
-    weekly_hours: int = 20  # haftalık çalışma saati bütçesi
-    goal: str | None = None  # ör. "Tıp — ilk 30 bin"
+    exam_date: date | None = None
+    weekly_hours: int = 20
+    goal: str | None = None
 
 
 class MockExam(SQLModel, table=True):
@@ -19,34 +19,54 @@ class MockExam(SQLModel, table=True):
 
 
 class SubjectResult(SQLModel, table=True):
-    """Denemenin ders bazlı özeti — öğrenci deneme başına yalnızca 4-5 satır girer.
-
-    Konu kırılımı istemiyoruz: bu tablo sadece net gidişatını besler. Konu bazlı
-    zayıflık haritası QuestionEvent'lerden (pasif sinyallerden) örülür.
-    """
+    """Denemenin ders bazlı özeti; konu kırılımı QuestionEvent'ten gelir."""
 
     id: int | None = Field(default=None, primary_key=True)
     exam_id: int = Field(foreign_key="mockexam.id", index=True)
-    subject: str  # ör. "Matematik"
+    subject: str
     correct: int = 0
     wrong: int = 0
     blank: int = 0
 
 
 class QuestionEvent(SQLModel, table=True):
-    """Pasif öğrenme sinyali — ürünün çekirdek verisi.
-
-    Öğrenci çözemediği soruyu sorduğunda (source=photo_ask, succeeded=False),
-    fotoğrafsız 'bu konuda takıldım' dediğinde (source=manual) veya mini quiz
-    çözdüğünde (source=quiz, succeeded=doğru/yanlış) bir kayıt düşer.
-    Konu etiketini ÖĞRENCİ DEĞİL, yapay zeka koyar (agents/tutor.py).
-    """
+    """Soru sorma ve mini quizlerden kendiliğinden oluşan öğrenme sinyali."""
 
     id: int | None = Field(default=None, primary_key=True)
     student_id: int = Field(foreign_key="student.id", index=True)
     subject: str
     topic: str
-    source: str = "photo_ask"  # photo_ask | manual | quiz
-    succeeded: bool = False  # soru soruldu = çözemedi (False); quiz doğruysa True
+    source: str = "photo_ask"
+    succeeded: bool = False
     happened_on: date
-    question_summary: str | None = None  # Sprint 2'de RAG ve tekrar önerileri için
+    question_summary: str | None = None
+
+
+class StudyPlan(SQLModel, table=True):
+    """Bir öğrenci için üretilmiş haftalık çalışma planının üst kaydı."""
+
+    id: int | None = Field(default=None, primary_key=True)
+    student_id: int = Field(foreign_key="student.id", index=True)
+    week_start: date = Field(index=True)
+    created_on: date = Field(default_factory=date.today)
+    exam_date: date | None = None
+    weekly_hours: int
+    total_minutes: int
+    summary: str
+    priorities_json: str = "[]"
+    is_active: bool = Field(default=True, index=True)
+
+
+class StudyPlanItem(SQLModel, table=True):
+    """Haftalık plan içindeki sıralı çalışma oturumu."""
+
+    id: int | None = Field(default=None, primary_key=True)
+    plan_id: int = Field(foreign_key="studyplan.id", index=True)
+    position: int
+    day_index: int
+    day_name: str
+    subject: str
+    topic: str
+    activity: str
+    duration_minutes: int
+    rationale: str
