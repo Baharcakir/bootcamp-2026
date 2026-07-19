@@ -14,11 +14,11 @@ Takım 76
 
 ## Ürün İsmi
 
---TYT Koçum--
+--Çarpan--
 
 ## Ürün Açıklaması
 
-- TYT Koçum uygulaması, YKS dönemindeki öğrencilere destek amacıyla oluşturulmuş ve öğrencilerin takıldıkları soruları atıp yardım alabileceği, zayıf noktalarını belirleyebileceği ve kişiselleştirilmiş bir anlatıma olanak sağlayan bir uygulamadır.
+- Çarpan uygulaması, YKS dönemindeki öğrencilere destek amacıyla oluşturulmuş ve öğrencilerin takıldıkları soruları atıp yardım alabileceği, zayıf noktalarını belirleyebileceği ve kişiselleştirilmiş bir anlatıma olanak sağlayan bir uygulamadır.
 
 ## Ürün Özellikleri
 

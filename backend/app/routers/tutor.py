@@ -1,4 +1,5 @@
 from datetime import date
+from dataclasses import asdict
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel
@@ -125,3 +126,92 @@ def list_events(
         .limit(limit)
     ).all()
     return list(events)
+
+
+# ---------------------------------------------------------------------------
+# Quiz endpoint'leri (T3 — Sprint 2)
+# ---------------------------------------------------------------------------
+
+class QuizOut(BaseModel):
+    topic: str
+    question: str
+    choices: list[str]
+    answer_index: int      # doğru şık (0-3); arayüz gösterir, kullanıcı cevapladıktan sonra
+    explanation: str
+    is_fallback: bool      # True → AI üretmedi, statik örnek soru kullanıldı
+
+
+class QuizAnswerIn(BaseModel):
+    topic: str
+    selected_index: int    # öğrencinin seçtiği şık (0-3)
+    correct_index: int     # doğru cevabın indeksi
+
+
+class QuizAnswerOut(BaseModel):
+    succeeded: bool
+    explanation: str
+    event_id: int          # haritaya işlenen QuestionEvent ID'si
+
+
+@router.get("/students/{student_id}/quiz", response_model=QuizOut)
+def generate_quiz(
+    student_id: int,
+    topic: str,
+    session: Session = Depends(get_session),
+) -> QuizOut:
+    """Verilen konu için quiz sorusu üretir.
+
+    GOOGLE_API_KEY yoksa veya LLM hatası olursa statik fallback soru döner;
+    arayüz her koşulda çalışmaya devam eder.
+    """
+    _ensure_student(session, student_id)
+    if not _in_scope("Matematik", topic):
+        raise HTTPException(
+            status_code=422,
+            detail=f"Quiz yalnızca TYT Matematik konuları için üretilir. Geçersiz konu: {topic}",
+        )
+
+    from ..agents.quiz import generate_quiz_question
+
+    q = generate_quiz_question(topic, settings.google_api_key)
+    return QuizOut(
+        topic=q.topic,
+        question=q.question,
+        choices=q.choices,
+        answer_index=q.answer_index,
+        explanation=q.explanation,
+        is_fallback=q.is_fallback,
+    )
+
+
+@router.post("/students/{student_id}/quiz/answer", response_model=QuizAnswerOut)
+def submit_quiz_answer(
+    student_id: int,
+    payload: QuizAnswerIn,
+    session: Session = Depends(get_session),
+) -> QuizAnswerOut:
+    """Öğrencinin quiz cevabını haritaya işler.
+
+    Doğruysa succeeded=True → ustalık yukarı; yanlışsa False → zayıflık sinyali.
+    """
+    _ensure_student(session, student_id)
+    if not _in_scope("Matematik", payload.topic):
+        raise HTTPException(status_code=422, detail="Geçersiz konu")
+
+    succeeded = payload.selected_index == payload.correct_index
+    event = QuestionEvent(
+        student_id=student_id,
+        subject="Matematik",
+        topic=payload.topic,
+        source="quiz",
+        succeeded=succeeded,
+        happened_on=date.today(),
+    )
+    session.add(event)
+    session.commit()
+    session.refresh(event)
+    return QuizAnswerOut(
+        succeeded=succeeded,
+        explanation="" ,  # explanation arayüzde zaten gösteriliyor
+        event_id=event.id,
+    )

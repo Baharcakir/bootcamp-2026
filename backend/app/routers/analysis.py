@@ -6,7 +6,7 @@ from sqlmodel import Session
 from ..db import get_session
 from ..models import Student
 from ..services.mastery import estimate_mastery, study_priorities
-from ..services.queries import load_exam_nets, load_observations, load_topic_weights
+from ..services.queries import load_exam_nets, load_observations, load_subject_nets, load_topic_weights
 from ..services.trajectory import net_trend
 
 router = APIRouter(tags=["analysis"])
@@ -51,3 +51,23 @@ def get_trend(student_id: int, session: Session = Depends(get_session)) -> dict:
         "slope_per_week": trend.slope_per_week,
         "predicted_next": trend.predicted_next,
     }
+
+
+@router.get("/students/{student_id}/subject_trend")
+def get_subject_trend(student_id: int, session: Session = Depends(get_session)) -> dict:
+    """Ders bazında ayrı net gidişatı.
+
+    Veritabanında kayıtlı hangi ders varsa onu döner — hardcoded ders ismi yok.
+    Dönen yapı: {"subjects": {"Matematik": {history, slope_per_week, predicted_next}, ...}}
+    """
+    _ensure_student(session, student_id)
+    subject_nets = load_subject_nets(session, student_id)  # {ders: [ExamNet]}
+    result = {}
+    for subject, nets in subject_nets.items():
+        trend = net_trend(nets)
+        result[subject] = {
+            "history": [asdict(e) for e in trend.history],
+            "slope_per_week": trend.slope_per_week,
+            "predicted_next": trend.predicted_next,
+        }
+    return {"subjects": result}

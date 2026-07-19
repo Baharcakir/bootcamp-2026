@@ -20,5 +20,8 @@ chroma_db/
 .idea/
 .DS_Store
 
+.agents/
+.claude/
+
 # Akademi içi belge — public repoya koymuyoruz
 YZTA Bootcamp 2026.pdf

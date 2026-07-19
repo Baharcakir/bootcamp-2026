@@ -77,3 +77,24 @@ def load_exam_nets(session: Session, student_id: int) -> list[ExamNet]:
         total_wrong = sum(r.wrong for r in results)
         nets.append(ExamNet(exam.taken_on, exam.name, compute_net(total_correct, total_wrong)))
     return nets
+
+
+def load_subject_nets(session: Session, student_id: int) -> dict[str, list[ExamNet]]:
+    """Ders bazında ayrı net gidişatı için veri yükler.
+
+    Veritabanında hangi ders (SubjectResult.subject) varsa onu döner;
+    hardcoded ders ismi yoktur. Dönen yapı: {ders_adı: [ExamNet, ...]}.
+    """
+    exams = session.exec(select(MockExam).where(MockExam.student_id == student_id)).all()
+    # ders → ExamNet listesi
+    subject_nets: dict[str, list[ExamNet]] = {}
+    for exam in exams:
+        results = session.exec(
+            select(SubjectResult).where(SubjectResult.exam_id == exam.id)
+        ).all()
+        for r in results:
+            net = compute_net(r.correct, r.wrong)
+            subject_nets.setdefault(r.subject, []).append(
+                ExamNet(exam.taken_on, exam.name, net)
+            )
+    return subject_nets

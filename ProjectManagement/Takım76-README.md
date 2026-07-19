@@ -10,15 +10,15 @@ Takım 76
 - Bahar Çakır: Scrum Master
 - Görkem Çetinkaya: Team Member/Developer
 - Doğa Alışkan: Team Member/Developer
-- Ece Nur Şahin: Team Member/Developer
+- Ece Nur Şahin: Team Member/Developer *(19 Temmuz 2026'da bootcamp'ten ayrıldı)*
 
 ## Ürün İsmi
 
---TYT Koçum--
+--Çarpan--
 
 ## Ürün Açıklaması
 
-- TYT Koçum uygulaması, YKS dönemindeki öğrencilere destek amacıyla oluşturulmuş ve öğrencilerin takıldıkları soruları atıp yardım alabileceği, zayıf noktalarını belirleyebileceği ve kişiselleştirilmiş bir anlatıma olanak sağlayan bir uygulamadır.
+- Çarpan uygulaması, YKS dönemindeki öğrencilere destek amacıyla oluşturulmuş ve öğrencilerin takıldıkları soruları atıp yardım alabileceği, zayıf noktalarını belirleyebileceği ve kişiselleştirilmiş bir anlatıma olanak sağlayan bir uygulamadır.
 
 ## Ürün Özellikleri
 
@@ -78,6 +78,53 @@ Alınan kararlar: Veritabanı için gerekli olan TYT örnek sorularının toplan
 
 # Sprint 2
 
+- **Sprint Notları**: Sprint hedefi, ürünün çekirdek döngüsünü uçtan uca kapatmak ve kalitesini ölçmekti: soru fotoğrafından adım adım anlatım + otomatik konu etiketi, MEB kazanımına dayalı kaynak gösterimi ve benzer çıkmış soru önerisi, doğrulanmış mini quiz, sentetik öğrenci verisiyle kalibre edilen ustalık modeli, süpervizör agent mimarisi ve haftalık çalışma planı. Sprint başında işler kişi başına görev paketleri halinde dağıtılmış; sprint ortasında kod işbirliği dal + Pull Request + gözden geçirme düzenine geçirilmiştir (PR #1, PR #2).
+
+- **Takım Değişikliği**: Ece Nur Şahin sprint sonunda bootcamp'ten ayrılmıştır; durum akademiye Scrum Master tarafından bildirilmiştir ve takım 4 kişiyle devam etmektedir. Ayrılan üyenin süreç işleri Görkem'e, arayüz işleri Bahar'a devredilmiştir.
+
+- **Tahmin Edilen Tamamlanacak Puan**: Sprint 2 planı 64 puandır; sprint kapanışında tüm 64 puan tamamlanmıştır.
+
+| Story | Puan | Durum | Katkıda Bulunan |
+|---|---|---|---|
+| T2 — Kaynaklı anlatım (MEB kazanımı + çıkmış soru önerisi) | 8 | ✅ | Görkem |
+| T3 — Doğrulanmış quiz + ustalık güncelleme döngüsü | 8 | ✅ | Görkem |
+| T4 — ÖSYM değerlendirme seti + doğruluk raporu | 5 | ✅ | Görkem |
+| A3 — Sentetik öğrenci üreteci | 8 | ✅ | Doğa |
+| A4 — Ustalık modeli kalibrasyonu | 8 | ✅ | Doğa |
+| B2 — Süpervizör agent mimarisi | 5 | ✅ | Emir Arda |
+| B3 — Haftalık çalışma planı | 8 | ✅ | Emir Arda |
+| D3 — Test kapsamının genişletilmesi (12 → 30 test) | 4 | ✅ | Görkem |
+| E2 — Sprint 2 teslim seti | 2 | ✅ | Görkem |
+| C2 — Soru sorma mobil deneyim turu + quiz arayüzü | 3 | ✅ | Bahar |
+| C3 — Panoda ders bazlı net gidişatı + pano cilası | 5 | ✅ | Bahar |
+
+- **Öne Çıkan Ölçüm**: Otomatik konu etiketleme, 120 gerçek ÖSYM sorusundan (2024-2026 TYT) oluşan elle etiketli sette ölçülmüştür; uyuşmazlık denetimi ve prompt'a eklenen tutarlılık kurallarıyla doğruluk **%76.7 → %80.8 → %83.3** olarak iyileştirilmiştir. Yöntem, sistematik hata analizi ve denetim izleri: [etiketleme doğruluk raporu](../docs/etiketleme-dogruluk-raporu.md)
+
+- **Daily Scrum**: Bu sprintte daily ritmi düzenli işlememiş, koordinasyon büyük ölçüde Pull Request açıklamaları ve birebir mesajlaşma üzerinden yürümüştür; bu durum retrospektifte iyileştirme maddesi olarak ele alınmıştır: [Sprint 2 Daily Scrum Notları](Sprint2Documents/DailyScrumMeetingNotesSprint2.md)
+
+- **Sprint board update**: Sprint board screenshotları:
+![Backlog 1](Sprint2/backlog1.png)
+![Backlog 2](Sprint2/backlog2.png)
+![Backlog 3](Sprint2/backlog3.png)
+
+- **Ürün Durumu**: Ekran görüntüleri (soru sorma akışı, deneme neti girişi, konu bazlı renk gradyanlı ustalık haritası, ders bazlı net gidişatı ve haftalık plan). 30 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
+
+  <img src="Sprint2Documents/sprint2_soru_sor.png" alt="Sprint 2 Soru Sor" width="300">
+  <img src="Sprint2Documents/sprint2_deneme_netleri.png" alt="Sprint 2 Deneme Netleri" width="300">
+  <img src="Sprint2Documents/sprint2_analiz_panosu.png" alt="Sprint 2 Analiz Panosu" width="300">
+  <img src="Sprint2Documents/sprint2_net_gidisati.png" alt="Sprint 2 Net Gidişatı" width="300">
+  <img src="Sprint2Documents/sprint2_koc_sohbeti.png" alt="Sprint 2 Koç Sohbeti" width="300">
+
+- **Sprint Review**: 
+Canlı demo: soru fotoğrafı → anlatım → quiz → zayıflık haritasının güncellenişi → koçtan haftalık plan. Doğruluk raporunun sunumu (%83.3) ve Sprint 3 önceliklendirmesi planlanmıştır.
+Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etmesi jüri sunumu için kritik olduğu görülmüştür ve fallback mekanizması hayata geçirilmiştir. Subject trend endpoint generic yazıldı — ilerleyen sprintlerde yeni ders eklenmesi halinde kod değişmeyecek.
+
+- **Sprint Retrospective:**
+  - Teknik hedeflerin tamamı kapatılmış, ölç → iyileştir → doğrula döngüsü kanıtıyla tamamlanmıştır
+  - Dal + Pull Request + gözden geçirme kültürü kurulmuştur; test kapsamı 12'den 30'a çıkmıştır
+  - Süreç belgeleri (daily, board) kodun gerisinde kalmıştır; Sprint 3'te board ve daily sorumlusu Bahar olacak, her akşam kısa yazılı daily tutulacaktır
+  - Görev sahiplenmedeki boşlukların erken konuşulması kararlaştırılmıştır
+  - Streamlit'in mobil deneyimi sınırlı kalmaktadır; Sprint 3'te PWA veya farklı frontend framework değerlendirilebilir
 
 ---
 
