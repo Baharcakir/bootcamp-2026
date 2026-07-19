@@ -287,7 +287,7 @@ if page == "📸 Soru Sor":
                     sel_idx = quiz_st.get("sel_idx", -1)
                     correct_idx = quiz_st["answer_index"]
                     if sel_idx == correct_idx:
-                        st.success(f"✅ Doğru! Ustalık haritana başarı olarak işlendi.")
+                        st.success("✅ Doğru! Ustalık haritana başarı olarak işlendi.")
                     else:
                         correct_choice = quiz_st["choices"][correct_idx] if correct_idx >= 0 else "?"
                         st.error(f"❌ Yanlış. Doğru cevap: **{correct_choice}**")
