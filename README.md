@@ -108,10 +108,10 @@ pytest backend/tests && ruff check backend frontend
 
 ## 🗂️ Proje Yönetimi
 
-- **Product Backlog:** [board linki eklenecek]
+- **Product Backlog:** [Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
 - **Veri kaynakları ve toplama rehberi:** [docs/veri-kaynaklari.md](docs/veri-kaynaklari.md)
 - **Final teslim kontrol listesi:** [docs/teslim-kontrol.md](docs/teslim-kontrol.md)
-- **Sprint Board:** [link eklenecek]
+- **Sprint Board:** [Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806) (kırmızı = task, mavi = story)
 - **Daily Scrum:** Her akşam 21:30, 15 dk (WhatsApp/Slack) — notlar sprint klasörlerinde
 
 | Sprint | Tarih | Klasör |

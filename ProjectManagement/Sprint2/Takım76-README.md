@@ -1,102 +1,133 @@
-# Sprint 2 Raporu — 6-19 Temmuz 2026 · Takım 76 · Çarpan
+# **Takım İsmi**
 
-## Sprint Notları
+Takım 76
 
-Sprint hedefi: çekirdek döngüyü kapatmak ve kaliteyi ölçmek — kaynaklı anlatım (T2), doğrulanmış
-quiz (T3), etiketleme doğruluğunun gerçek ÖSYM sorularında ölçülmesi (T4), sentetik veri ve
-kalibrasyon (A3-A4), süpervizör agent mimarisi (B2) ve haftalık plan (B3).
+# Ürün İle İlgili Bilgiler
 
-Sprint başında işler kişi başına "görev paketleri" olarak dağıtıldı (5 paket). Sprint ortasında
-kod işbirliği dal + Pull Request + gözden geçirme düzenine geçirildi (PR #1, PR #2).
+## Takım Elemanları
 
-**Takım değişikliği:** Ece, sprint sonunda bootcamp'ten ayrıldı; takım 5 kişiden 4 kişiye düştü.
-Üzerindeki süreç işleri (rapor, board, teslim seti) Görkem'e, arayüz işleri (C2, C3) Bahar'a
-devredildi. Durum akademiye Scrum Master tarafından bildirildi.
+- Emir Arda Tomaç: Product Owner
+- Bahar Çakır: Scrum Master
+- Görkem Çetinkaya: Team Member/Developer
+- Doğa Alışkan: Team Member/Developer
+- Ece Nur Şahin: Team Member/Developer *(19 Temmuz 2026'da bootcamp'ten ayrıldı)*
 
-## Tahmin Edilen ve Gerçekleşen Puan
+## Ürün İsmi
 
-Sprint 2 planı **64 puandı**; **56 puan tamamlandı**, 8 puanlık iki iş (C2, C3) sprint
-kapanışına kadar Bahar tarafından tamamlanıyor.
+--TYT Koçum--
+
+## Ürün Açıklaması
+
+- TYT Koçum uygulaması, YKS dönemindeki öğrencilere destek amacıyla oluşturulmuş ve öğrencilerin takıldıkları soruları atıp yardım alabileceği, zayıf noktalarını belirleyebileceği ve kişiselleştirilmiş bir anlatıma olanak sağlayan bir uygulamadır.
+
+## Ürün Özellikleri
+
+- Soru fotoğraflarından adım adım soru çözümü
+- Anlatımlardan sonra pekiştirmek amaçlı benzer soru çözümü
+- Çözülemeyen sorulardan oluşturulan zayıflık haritası
+- Haftalık kişisel çalışma planı
+- Gelecek denemelerdeki başarı tahminleri
+- AI koçuyla konuşabilme 
+
+
+
+## Hedef Kitle
+
+- YKS'ye hazırlanan öğrenciler
+- Deneme netlerini arttırmak isteyen öğrenciler
+- 15-25 yaş arası kullanıcılar
+
+
+## Product Backlog URL
+
+[Miro Backlog Board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
+
+---
+
+# Sprint 1
+
+- **Backlog düzeni ve Story seçimleri**: Backlog'umuz ilk yapılacak story'lere göre düzenlenmiştir. Sprint başına tahmin edilen puan sayısını geçmeyecek şekilde sıradan seçimler yapılmaktadır. Story başına çıkan tahmin puanı, toplam puanın yarısından az tutulmuştur. 
+
+Story'ler yapılacak işlere (task'lere) bölünmüştür. Miro Board'da gözüken kırmızı item'lar yapılacak işleri (task) gösterirken, mavi item'lar story'leri temsil etmektedir.
+
+- **Daily Scrum**: Daily Scrum toplantılarının zamansal sebeplerden ötürü Slack üzerinden yapılmasına karar verilmiştir. Daily Scrum toplantısı örneği jpeg veya word olarak Readme'de tarafımızdan paylaşılmaktadır: [Sprint 1 Daily Scrum Chats](../Sprint1/DailyScrumMeetingNotesSprint1.docx)
+
+- **Sprint board update**: Sprint board screenshotları: 
+![Backlog 1](../Sprint1/backlog1.png)
+![Backlog 2](../Sprint1/backlog2.png)
+![Backlog 3](../Sprint1/backlog3.png)
+![Backlog 4](../Sprint1/backlog4.png)
+
+- **Ürün Durumu**: Ekran görüntüleri:
+  
+  <img src="../Sprint1/products1.png" alt="Sprint 1 Products" width="300">
+  <img src="../Sprint1/products2.png" alt="Sprint 1 Products" width="300">
+  <img src="../Sprint1/products3.png" alt="Sprint 1 Products" width="300">
+  <img src="../Sprint1/products4.png" alt="Sprint 1 Products" width="300">
+  <img src="../Sprint1/products5.png" alt="Sprint 1 Products" width="300">
+  <img src="../Sprint1/products6.png" alt="Sprint 1 Products" width="300">
+
+- **Sprint Review**: 
+Alınan kararlar: Veritabanı için gerekli olan TYT örnek sorularının toplanması gerekmektedir. Kişiselleştirilmiş öğrenme asistanı için fine-tuning işlemine gerek olmadığına ve aynı sonucun Gemini API ve RAG yöntemiyle ulaşılabileceğine karar verilmiştir.
+
+- **Sprint Retrospective:**
+  - Takım içindeki görev dağılımıyla ilgili düzenleme yapılması kararı alınmıştır
+  - Makine öğrenmesi modellerinin eğitimiyle ilgili tüm ekip üyelerinin araştırma yapması kararı alınmıştır
+
+---
+
+# Sprint 2
+
+- **Sprint Notları**: Sprint hedefi, ürünün çekirdek döngüsünü uçtan uca kapatmak ve kalitesini ölçmekti: soru fotoğrafından adım adım anlatım + otomatik konu etiketi, MEB kazanımına dayalı kaynak gösterimi ve benzer çıkmış soru önerisi, doğrulanmış mini quiz, sentetik öğrenci verisiyle kalibre edilen ustalık modeli, süpervizör agent mimarisi ve haftalık çalışma planı. Sprint başında işler kişi başına görev paketleri halinde dağıtılmış; sprint ortasında kod işbirliği dal + Pull Request + gözden geçirme düzenine geçirilmiştir (PR #1, PR #2).
+
+- **Takım Değişikliği**: Ece Nur Şahin sprint sonunda bootcamp'ten ayrılmıştır; durum akademiye Scrum Master tarafından bildirilmiştir ve takım 4 kişiyle devam etmektedir. Ayrılan üyenin süreç işleri Görkem'e, arayüz işleri Bahar'a devredilmiştir.
+
+- **Tahmin Edilen Tamamlanacak Puan**: Sprint 2 planı 64 puandır; 56 puan tamamlanmıştır. Kalan 8 puanlık iki arayüz işi (C2, C3) sprint kapanışına kadar tamamlanmak üzere Bahar'a devredilmiştir.
 
 | Story | Puan | Durum |
 |---|---|---|
 | T2 — Kaynaklı anlatım (MEB kazanımı + çıkmış soru önerisi) | 8 | ✅ |
 | T3 — Doğrulanmış quiz + ustalık güncelleme döngüsü | 8 | ✅ |
-| T4 — ÖSYM değerlendirme seti + doğruluk raporu | 5 | ✅ (v2 iyileştirmesiyle) |
+| T4 — ÖSYM değerlendirme seti + doğruluk raporu | 5 | ✅ |
 | A3 — Sentetik öğrenci üreteci | 8 | ✅ |
-| A4 — Ustalık modeli kalibrasyonu (MAE 0.076) | 8 | ✅ |
-| B2 — Süpervizör agent mimarisi (testli yönlendirme) | 5 | ✅ |
-| B3 — Haftalık plan (deterministik servis + DB + arayüz) | 8 | ✅ |
-| D3 — Test kapsamı (12 → 30 test) | 4 | ✅ |
-| E2 — Sprint 2 teslim seti | 2 | ✅ (bu klasör) |
-| C2 — Soru sorma mobil UX turu | 3 | 🔄 Bahar'da — sprint kapanışına kadar |
-| C3 — Pano cilası (matematik neti ayrı seri) | 5 | 🔄 Bahar'da — sprint kapanışına kadar |
+| A4 — Ustalık modeli kalibrasyonu | 8 | ✅ |
+| B2 — Süpervizör agent mimarisi | 5 | ✅ |
+| B3 — Haftalık çalışma planı | 8 | ✅ |
+| D3 — Test kapsamının genişletilmesi (12 → 30 test) | 4 | ✅ |
+| E2 — Sprint 2 teslim seti | 2 | ✅ |
+| C2 — Soru sorma mobil deneyim turu | 3 | 🔄 kapanışa kadar |
+| C3 — Panoda matematik netinin ayrı gösterimi | 5 | 🔄 kapanışa kadar |
 
-**Not:** C2/C3, ayrılan üyenin işleriydi; sprint sonunda Bahar'a devredildi. Kapanışa
-yetişmezse Sprint 3 planına ilk sıradan alınacak ve bu rapor güncellenecektir.
+- **Öne Çıkan Ölçüm**: Otomatik konu etiketleme, 120 gerçek ÖSYM sorusundan (2024-2026 TYT) oluşan elle etiketli sette ölçülmüştür; uyuşmazlık denetimi ve prompt'a eklenen tutarlılık kurallarıyla doğruluk **%76.7 → %80.8 → %83.3** olarak iyileştirilmiştir. Yöntem, sistematik hata analizi ve denetim izleri: [etiketleme doğruluk raporu](../../docs/etiketleme-dogruluk-raporu.md)
 
-## Öne Çıkan Çıktı: Ölç → İyileştir → Doğrula Döngüsü
+- **Daily Scrum**: Bu sprintte daily ritmi düzenli işlememiş, koordinasyon büyük ölçüde Pull Request açıklamaları ve birebir mesajlaşma üzerinden yürümüştür; bu durum retrospektifte iyileştirme maddesi olarak ele alınmıştır: [Sprint 2 Daily Scrum Notları](DailyScrumMeetingNotesSprint2.md)
 
-Otomatik konu etiketleme, 120 gerçek ÖSYM sorusundan oluşan elle etiketli sette ölçüldü:
+- **Sprint board update**: Sprint board screenshotları:
+![Backlog 1](backlog1.png)
+![Backlog 2](backlog2.png)
+![Backlog 3](backlog3.png)
 
-| Aşama | Doğruluk |
-|---|---|
-| İlk ölçüm | %76.7 |
-| Uyuşmazlık denetimi sonrası (nihai etiketler) | %80.8 |
-| Kural-iyileştirmeli v2 prompt | **%83.3** |
+- **Ürün Durumu**: Ekran görüntüleri (soru sorma ve anlatım + quiz akışı, deneme neti girişi, analiz panosu, haftalık plan, API dokümantasyonu). 30 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
-Detay: [docs/etiketleme-dogruluk-raporu.md](../../docs/etiketleme-dogruluk-raporu.md)
-(yöntem, sistematik hata analizi, tutarlılık kuralları, denetim izleri).
+  <img src="products1.png" alt="Sprint 2 Products" width="300">
+  <img src="products2.png" alt="Sprint 2 Products" width="300">
+  <img src="products3.png" alt="Sprint 2 Products" width="300">
+  <img src="products4.png" alt="Sprint 2 Products" width="300">
+  <img src="products5.png" alt="Sprint 2 Products" width="300">
 
-## Daily Scrum
+- **Sprint Review**: Canlı demo (soru fotoğrafı → anlatım → quiz → zayıflık haritasının güncellenişi → koçtan haftalık plan), doğruluk raporunun sunumu ve Sprint 3 önceliklendirmesi (net tahmin modeli, kendi konu sınıflandırıcımız, kalıcı hafıza, canlıya alma, tanıtım videosu) planlanmıştır.
+Katılımcılar: [19 Temmuz toplantısı sonrası eklenecek]
+Alınan kararlar: [19 Temmuz toplantısı sonrası eklenecek]
 
-Bu sprintte daily ritmi düzenli işlemedi; koordinasyon büyük ölçüde PR açıklamaları ve birebir
-mesajlaşma üzerinden yürüdü. Bunu retrospektifte iyileştirme maddesi olarak ele aldık
-(aşağıda). Not formatı [DailyScrum/README.md](DailyScrum/README.md) dosyasındadır; Sprint 3'te
-her akşam kısa yazılı daily'ye dönülecektir.
+- **Sprint Retrospective:**
+  - Teknik hedeflerin büyük bölümü tamamlanmış, ölç → iyileştir → doğrula döngüsü kanıtıyla kapatılmıştır
+  - Dal + Pull Request + gözden geçirme kültürü kurulmuştur; test kapsamı 12'den 30'a çıkmıştır
+  - Süreç belgeleri (daily, board) kodun gerisinde kalmıştır; Sprint 3'te board ve daily sorumlusu Bahar olacak, her akşam kısa yazılı daily tutulacaktır
+  - Görev sahiplenmedeki boşlukların erken konuşulması kararlaştırılmıştır
+  - [Diğer maddeler 19 Temmuz toplantısı sonrası kesinleşecektir]
 
-## Sprint Board
+---
 
-Board, Sprint 1'de kurulan Miro panosunda yürütülmektedir (kırmızı = task, mavi = story).
-Sprint 2 sonu board görüntüleri: `screenshots/board-sprint2-*.png`
+# Sprint 3
 
-## Ürün Durumu
-
-Ekran görüntüleri [screenshots/](screenshots/) klasöründe:
-
-1. `urun-1-soru-sor.png` — fotoğraf/metin → anlatım + otomatik konu etiketi + MEB kazanımı +
-   çıkmış soru önerisi + mini quiz akışı
-2. `urun-2-deneme-netleri.png` — 10 saniyelik ders bazlı net girişi
-3. `urun-3-analiz-panosu.png` — güven aralıklı ustalık haritası + öncelik listesi + net gidişatı
-4. `urun-4-haftalik-plan.png` — süpervizör üzerinden üretilen haftalık plan
-5. `api-docs.png` — FastAPI otomatik dokümantasyonu (tüm uçlar)
-
-Teknik durum: **30 otomatik test + lint, GitHub Actions'ta her push'ta koşuyor ve yeşil.**
-
-## Sprint Review — 19 Temmuz [toplantı sonrası kesinleşecek]
-
-Taslak gündem:
-- Canlı demo: soru fotoğrafı → anlatım → quiz → haritanın güncellenişi; koçtan plan isteme
-- Doğruluk raporunun sunumu (%83.3 ve yöntem)
-- Sprint 3 önceliklendirmesi: A5 (net tahmin modeli), T6 (kendi sınıflandırıcımız), taşınan
-  C2/C3, kalıcı hafıza (B5), deploy (D4), video
-
-Katılımcılar: [toplantıda doldurulacak]
-Kararlar: [toplantıda doldurulacak]
-
-## Sprint Retrospective [toplantı sonrası kesinleşecek — taslak maddeler]
-
-**İyi gidenler:**
-- Teknik hedeflerin %88'i tamamlandı; ölç→iyileştir→doğrula döngüsü kanıtla kapandı
-- PR + gözden geçirme kültürü kuruldu ve iki PR'da sorunsuz işledi
-- Test kapsamı 12'den 30'a çıktı, CI kesintisiz yeşil kaldı
-
-**Geliştirilecekler:**
-- Süreç belgeleri (daily, board) kodun gerisinde kaldı
-- Görev sahiplenmede boşluklar oluştu (sahipsiz kalan paketler geç fark edildi)
-- Takım üyesi kaybı sprint sonunda netleşti; erken sinyaller konuşulmalıydı
-
-**Aksiyonlar:**
-- [ ] Sprint 3'te board ve daily sorumlusu: Bahar; her akşam kısa yazılı daily
-- [x] Ece'nin ayrılışı akademiye bildirildi (SM)
-- [ ] C2/C3'ün sprint kapanışına kadar tamamlanması (Bahar)
+---
