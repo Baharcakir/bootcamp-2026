@@ -13,10 +13,11 @@ from app.services.mastery import (
     GUESS_RATE
 )
 
-#1. PARAMETRELER VE KONULAR
+# 1. PARAMETRELER VE KONULAR
 SUBJECT = "Matematik"
 TOPICS = ["Üslü Sayılar", "Köklü Sayılar", "Fonksiyonlar", "Polinomlar", "Çarpanlara Ayırma"]
 NUM_STUDENTS = 1000
+SLIP_RATE = 0.10  # %10 Dikkatsizlik (Slip) ihtimali
 
 def generate_student_data():
     """
@@ -30,7 +31,6 @@ def generate_student_data():
     
     for student_id in range(NUM_STUDENTS):
         # Her öğrenci için bu konularda rastgele bir Gerçek Bilgi Seviyesi belirliyoruz [0.0 - 1.0]
-        # Öğrenci Üslü Sayıları gerçekten %80 biliyor olabilir.
         true_knowledges = {topic: random.uniform(0.1, 0.9) for topic in TOPICS}
         
         student_observations = []
@@ -52,16 +52,19 @@ def generate_student_data():
                 # Her bir soru için öğrencinin doğru yapıp yapamayacağını simüle ediyoruz
                 for _ in range(num_questions):
                     # Karar mekanizması: 
-                    # Öğrenci konuyu biliyorsa (true_k olasılıkla) doğru çözer.
-                    # Bilmiyorsa (1 - true_k olasılıkla) boş bırakabilir ya da şansıyla (%20 ihtimalle) doğru atabilir.
+                    # Öğrenci konuyu biliyorsa (true_k olasılıkla) doğru çözer...
                     if random.random() < true_k:
-                        correct += 1
+                        # ...ama %10 ihtimalle dikkatsizlik (slip) yapıp yanlış cevap verir!
+                        if random.random() < SLIP_RATE:
+                            wrong += 1
+                        else:
+                            correct += 1
                     else:
                         # Bilmediği soruda %15 ihtimalle boş bıraksın, kalanı yanlış yapsın (şans başarısı hariç)
                         tahmin_olasiligi = random.random()
                         if tahmin_olasiligi < GUESS_RATE: # %20 Şans başarısı (Soru 5 şıklı)
                             correct += 1
-                        elif tahmin_olasiligi < 0.35: # %15 Boş bırakma ihtimali
+                        elif tahmin_olasiligi < (GUESS_RATE + 0.15): # %15 Boş bırakma ihtimali (0.20 + 0.15 = 0.35)
                             blank += 1
                         else:
                             wrong += 1
@@ -100,7 +103,7 @@ def generate_student_data():
     print(f"Ortalama Mutlak Hata (MAE): {mae:.4f}")
     print(f"Kök Ortalama Kare Hata (RMSE): {rmse:.4f}")
     print("="*40)
-    print("Yorum: MAE değeri 0'a ne kadar yakınsa, modelimiz öğrencilerin gerçek seviyesini o kadar doğru tahmin ediyor demektir.")
+    print("Yorum: Slip (dikkatsizlik) senaryosu dahil edilmiştir. Modelin ustalık kestirim hatası gerçekçi insan davranışı altında test edilmiştir.")
 
 if __name__ == "__main__":
     generate_student_data()
