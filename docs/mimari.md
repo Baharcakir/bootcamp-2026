@@ -84,7 +84,12 @@ erDiagram
 4. **Koç agent'ı (`agents/graph.py`)** — LangGraph ReAct: Gemini araç çağrılarıyla analiz çeker,
    veri yokken yorum uydurmaz. Sprint 2'de (B2) süpervizör mimarisine ayrışacak. Hafıza: thread
    bazlı checkpointer (B5'te kalıcı SQLite + profil özeti).
-5. **RAG (Sprint 2, T2)** — MEB/ÖSYM kazanım dokümanları Chroma'da; eğitmen kaynak göstererek anlatır.
+5. **Kaynaklı anlatım (T2)** — konu-indeksli getirme: anlatımın ürettiği kesin konu etiketi
+   anahtar olarak kullanılıp (a) MEB kazanım referansı (`data/kazanimlar_tyt_mat.json`, TTKB
+   2026 belgesinden) ve (b) aynı konudan çıkmış gerçek ÖSYM soruları (T4 setinin nihai
+   etiketlerinden) yanıta eklenir. Kesin anahtar varken embedding araması gereksizdir; Chroma,
+   korpus serbest metne dönüştüğünde (soru metinleri, v2) eklenecek. Öneriler %100 gerçek
+   veridir — halüsinasyon bu katmanda imkânsızdır.
 
 ## Veri ve Model Eğitim Stratejisi
 
@@ -135,13 +140,14 @@ Bu, rubrikteki "model seçimi, kullanımı, geliştirmesi" kaleminin tam karşı
 1. **Değerlendirme seti dokunulmazdır ve %100 gerçek ÖSYM sorusudur.** AI üretimi soru
    değerlendirme setine ASLA girmez (kendi ödevini kendine puanlatmak olur); yalnızca eğitim
    setine ve quiz bankasına girer. Umursadığımız dağılım gerçek sınav dağılımıdır.
-2. **Değerlendirme seti elle ve çift etiketlenir.** İki kişi bağımsız etiketler, anlaşmazlığı
-   üçüncü kişi çözer; anlaşma oranı (inter-annotator agreement) raporlanır.
+2. **Değerlendirme seti elle etiketlenir** (tek etiketçi + kararsızlık işaretleme yöntemi).
+   Otomatik ölçümle uyuşmayan sorular ve işaretli sorular ikinci kez incelenerek nihai etiket
+   kesinleşir (uyuşmazlık denetimi); kullanılan yöntem doğruluk raporunda açıkça belirtilir.
 3. **Eğitim etiketleri yarı otomatik olabilir:** Gemini önerir, insan hızlıca onaylar. Ama
    değerlendirme seti elle kalır — yoksa "Gemini'nin etiketlerine göre Gemini'yi ölçme"
    döngüselliğine düşülür ve karşılaştırma anlamını yitirir.
 4. **Veri bütçesi (gerçekçi):** ÖSYM ~8 yılda ~320 gerçek TYT matematik sorusu yayımladı →
-   ~100 değerlendirme (dokunulmaz) + ~220 eğitim; 26 konuda az örnekli sınıflar AI üretimi
+   ~100 değerlendirme (dokunulmaz) + ~220 eğitim; 27 konuda az örnekli sınıflar AI üretimi
    sorularla dengelenir. Kendi modelimiz Gemini'yi geçemeyebilir — sonuç yine de geçerlidir:
    "ölçtük, veriye dayanarak seçtik" raporu deliverable'dır, kazanan üretime girer.
 

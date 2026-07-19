@@ -1,6 +1,6 @@
 {
   "exam": "TYT",
-  "note": "v1 koçluk kapsamı yalnızca TYT Matematik'tir (tutor_scope). Diğer dersler deneme neti takibi için listelenir. Konu listesi A1 kapsamında güncel ÖSYM/MEB kaynaklarıyla doğrulanacak. Konu ağırlıkları v0'da ders içinde eşit varsayılır; T4 setinden konu frekansları çıkarılınca ağırlıklar güncellenecek (A4).",
+  "note": "v1 koçluk kapsamı yalnızca TYT Matematik'tir (tutor_scope). Diğer dersler deneme neti takibi için listelenir. Konu listesi TTKB 2026 YKS kapsam belgesiyle (9-10. sınıf kazanımları) doğrulandı (16 Tem): Polinomlar ve İkinci Dereceden Denklemler 10. sınıf kapsamında EKLENDİ; Analitik Geometri ve Çember (11. sınıf) ÇIKARILDI; dik üçgen trigonometrisi 9.4.4 gereği kapsamda. Sayı Basamakları/Temel Kavramlar resmi listede yok ama sınavda fiilen soruluyor (ortaokul temeli), tutuluyor. Konu ağırlıkları v0'da eşit; T4 frekanslarıyla güncellenecek (A4).",
   "tutor_scope": ["Matematik"],
   "subjects": [
     {
@@ -28,16 +28,17 @@
         "Kümeler",
         "Mantık",
         "Fonksiyonlar",
+        "Polinomlar",
+        "İkinci Dereceden Denklemler",
         "Permütasyon-Kombinasyon",
         "Olasılık",
         "Veri ve İstatistik",
         "Doğruda ve Üçgende Açılar",
-        "Özel Üçgenler ve Dik Üçgen",
+        "Üçgenin Yardımcı Elemanları",
+        "Dik Üçgen ve Trigonometri",
         "Üçgende Alan ve Benzerlik",
         "Çokgenler ve Dörtgenler",
-        "Çember ve Daire",
-        "Katı Cisimler",
-        "Analitik Geometri"
+        "Katı Cisimler"
       ]
     },
     {

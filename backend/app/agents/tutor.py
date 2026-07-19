@@ -8,11 +8,10 @@
 Kapsam dışı sorular (Türkçe, fen, sosyal, AYT'ye özgü ileri konular) kibarca yönlendirilir ve
 sinyal olarak KAYDEDİLMEZ — harita yalnızca kapsam içi sinyallerle örülür.
 
-Yol haritası:
-- T2 (Sprint 2): anlatımı kazanım dokümanları + ÖSYM çıkmış sorularıyla temellendir (RAG).
-- T3 (Sprint 2): anlatım sonrası benzer soru + mini quiz → başarı sinyali ustalığı günceller.
-- T4 (Sprint 2): ÖSYM çıkmış sorularından etiketli değerlendirme seti; etiketleme doğruluğu raporu.
-- T6 (Sprint 3): kendi konu sınıflandırıcımızı eğit (embedding + klasik ML), Gemini ile karşılaştır.
+T2 kaynaklandırma: konu etiketi kesin anahtar olduğundan MEB kazanımı ve benzer çıkmış soru
+önerisi router katmanında konu-indeksli getirmeyle (embedding'siz) eklenir — bkz. queries.py.
+T4 ölçümü: %80.8 nihai doğruluk; buradaki LABELING_RULES o ölçümün bulgularından türetildi.
+T3 quiz üretimi: agents/quiz.py. T6 (Sprint 3): kendi sınıflandırıcımız aynı sette karşılaştırılacak.
 """
 
 from __future__ import annotations
@@ -29,14 +28,32 @@ from ..services.queries import tutor_topic_index
 
 OUT_OF_SCOPE = "Kapsam Dışı"
 
+# T4 doğruluk ölçümünün bulgularından türetilen etiketleme kuralları (v2).
+# Hem üretim anlatımında hem ölçüm script'inde (measure_labeling.py) kullanılır.
+LABELING_RULES = """ETİKETLEME KURALLARI (T4 ölçümünden — dikkatle uygula):
+- Konuyu, sorunun BAĞLAM HİKÂYESİ değil çözümün KİLİT TEKNİĞİ belirler. Hikâye içine gömülü
+  olması soruyu otomatik olarak "Problemler" yapmaz; teknik başka konudansa o konuyu seç.
+- "Problemler" yalnızca işin ağırlığı gerçek hayat senaryosunu denkleme/modele dökmekse seçilir.
+- Görselde 3 boyutlu nesne olması "Katı Cisimler" yapmaz; hacim/yüzey hesabı yoksa o konu değildir.
+- Günlük anlamda akıl yürütme "Mantık" değildir; "Mantık" yalnızca önermeler, doğruluk tablosu,
+  De Morgan içeriğidir.
+- Grafik (dairesel/sütun/histogram) okumak çözümün omurgasıysa "Veri ve İstatistik" seç.
+- Pisagor/Öklid çözümün kilit tekniğiyse "Dik Üçgen ve Trigonometri" seç (alan/çevre çerçeve olsa bile).
+- Yeni tanım verilen sayı sorularında tanımın işlediği konuyu seç (asallık → Temel Kavramlar,
+  periyodik desen/kalan → Bölme ve Bölünebilme).
+- Üçgen eşitsizliği ve açı-kenar ilişkileri → "Doğruda ve Üçgende Açılar"."""
+
 TUTOR_PROMPT = """Sen deneyimli ve sabırlı bir TYT Matematik eğitmenisin. Öğrenci çözemediği bir
 soru gönderdi. Çarpan v1 yalnızca TYT Matematik (geometri dahil) kapsamında çalışır.
 
 Görevlerin:
 1. KAPSAM KONTROLÜ: Soru TYT Matematik/Geometri kapsamında değilse (Türkçe, fen, sosyal,
-   yabancı dil ya da AYT'ye özgü ileri konular: türev, integral, logaritma, trigonometri...)
-   anlatım yapma; "explanation" alanına kibarca şu an yalnızca TYT Matematik'te uzman olduğunu,
-   diğer derslerin yolda olduğunu yaz. "subject" ve "topic" alanlarına "{out_of_scope}" koy.
+   yabancı dil ya da AYT'ye özgü ileri konular: türev, integral, logaritma, diziler,
+   analitik geometri, çember analitiği, ileri trigonometri — toplam-fark formülleri,
+   trigonometrik denklemler vb.) anlatım yapma; "explanation" alanına kibarca şu an yalnızca
+   TYT Matematik'te uzman olduğunu, diğer derslerin yolda olduğunu yaz. "subject" ve "topic"
+   alanlarına "{out_of_scope}" koy. DİKKAT: dik üçgende trigonometrik oranlar (sinüs, kosinüs,
+   tanjant; 30-45-60 derece) TYT KAPSAMINDADIR, reddetme.
 2. Kapsam içindeyse soruyu adım adım, lise seviyesinde Türkçe anlat; sonucu açıkça ver.
    "Neden bu adımı attık" mantığını kur, öğrenciyi küçümseme.
 3. Soruyu aşağıdaki konu listesinden TAM olarak bir konuyla etiketle (listede olmayan etiket
@@ -45,6 +62,8 @@ Görevlerin:
 
 Konu listesi (TYT Matematik):
 {taxonomy}
+
+{rules}
 
 Cevabını SADECE şu JSON biçiminde ver, başka hiçbir şey yazma:
 {{"explanation": "...", "subject": "...", "topic": "...", "question_summary": "..."}}"""
@@ -94,7 +113,9 @@ def explain_question(
         google_api_key=settings.google_api_key,
         temperature=0.2,
     )
-    prompt = TUTOR_PROMPT.format(taxonomy=_taxonomy_text(), out_of_scope=OUT_OF_SCOPE)
+    prompt = TUTOR_PROMPT.format(
+        taxonomy=_taxonomy_text(), out_of_scope=OUT_OF_SCOPE, rules=LABELING_RULES
+    )
     content: list[dict] = [{"type": "text", "text": prompt}]
     if text:
         content.append({"type": "text", "text": f"Öğrencinin sorusu/notu: {text}"})

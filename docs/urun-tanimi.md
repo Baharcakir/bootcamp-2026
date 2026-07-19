@@ -56,7 +56,7 @@ Bilinçli bir giriş stratejisi — dağınık bir "her ders" ürünü yerine te
    ders; koçluk talebinin merkezi.
 2. **Ölçülebilir kalite:** Adım adım anlatım ve otomatik konu etiketleme matematikte nesnel
    olarak doğrulanabilir (T4 değerlendirme seti); paragraf/sosyal anlatımı öznel kalır.
-3. **Analitik değer:** TYT Matematik 26 konuya yayılır — harita gerçekten bilgi taşır. (Türkçe'nin
+3. **Analitik değer:** TYT Matematik 27 konuya yayılır — harita gerçekten bilgi taşır. (Türkçe'nin
    ~26/40'ı tek konudur: Paragraf; harita anlamsızlaşır.)
 4. **Maliyet:** RAG korpusu, quiz doğrulama ve değerlendirme seti tek müfredatta 4 kat ucuz.
 
@@ -90,7 +90,7 @@ TYT Matematik → AYT Matematik → Fen → tüm YKS. Deneme neti takibi bugün 
 
 - 📸 **Soru anlatımı (TYT Matematik):** fotoğraf/metin → adım adım çözüm (Gemini Vision), müfredat
   kaynaklı ve çıkmış soru referanslı (RAG, T2); kapsam dışı sorulara nazik yönlendirme
-- 🏷️ **Otomatik konu etiketleme:** yapay zeka her soruyu 26 konuluk taksonomiye göre sınıflandırır;
+- 🏷️ **Otomatik konu etiketleme:** yapay zeka her soruyu 27 konuluk taksonomiye göre sınıflandırır;
   doğruluğu ÖSYM çıkmış sorularında ölçülür (T4), Sprint 3'te kendi eğittiğimiz sınıflandırıcıyla
   karşılaştırılır (T6)
 - 🗺️ **Kendiliğinden oluşan zayıflık haritası:** güven aralıklı Bayesçi ustalık skorları; sorulan

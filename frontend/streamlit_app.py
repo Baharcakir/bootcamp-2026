@@ -10,10 +10,11 @@
 yapay zeka koyar. Denemeden yalnızca ders bazında net girilir (4-5 satır, ~10 saniye).
 
 Sprint 2 değişiklikleri:
-- Mobil UX: sidebar collapsed başlangıç, kamera akışı iyileştirmesi, tablo sadeleştirme
+- Mobil UX: sidebar auto başlangıç, kamera akışı iyileştirmesi, tablo sadeleştirme
 - Pano: ders bazlı ayrı net çizgileri (hangi ders varsa hepsi), haftalık plan görünümü
 - Quiz arayüzü: anlatımdan sonra benzer soru, cevap haritaya işlenir
 - Grafik: yatay bar + renk gradient + okunabilirlik
+- Derin Bağlantı (Deep Linking): query params ile sayfa yönlendirmesi
 """
 
 import os
@@ -89,11 +90,18 @@ def api_post(
 
 
 # ── Kenar çubuğu: sayfa ve öğrenci seçimi ───────────────────────────────────
+PAGES = ["📸 Soru Sor", "📝 Deneme Netleri", "📊 Analiz Panosu", "📅 Haftalık Plan", "💬 Koç Sohbeti"]
+
+# Derin bağlantı (Deep Linking) entegrasyonu
+_page_param = st.query_params.get("page", "")
+_default_page = int(_page_param) if _page_param.isdigit() and int(_page_param) < len(PAGES) else 0
+
 with st.sidebar:
     st.title("🎯 Çarpan")
     page = st.radio(
         "Sayfa seç",
-        ["📸 Soru Sor", "📝 Deneme Netleri", "📊 Analiz Panosu", "💬 Koç Sohbeti"],
+        PAGES,
+        index=_default_page,
         label_visibility="collapsed",
     )
     st.divider()
@@ -180,92 +188,121 @@ if page == "📸 Soru Sor":
         with st.spinner("Eğitmen soruyu inceliyor..."):
             result = api_post(f"/students/{sid}/ask", files=files, data={"text": text or ""})
 
-        if result and result["in_scope"]:
-            st.success(f"🏷️ **{result['subject']} / {result['topic']}** olarak haritana işlendi")
-            st.markdown(result["explanation"])
-
-            # Quiz başlat (konu kaydet)
-            st.session_state.quiz_state[sid] = {
-                "topic": result["topic"],
-                "question": None,
-                "choices": [],
-                "answer_index": -1,
-                "explanation": "",
-                "answered": False,
-                "is_fallback": False,
-            }
-            st.session_state[f"quiz_open_{sid}"] = True
-
-        elif result:
-            st.info(result["explanation"])  # kapsam dışı — nazik yönlendirme
-
-    # ── Mini Quiz Bölümü ─────────────────────────────────────────────────────
-    quiz_st = st.session_state.quiz_state.get(sid)
-    if quiz_st and st.session_state.get(f"quiz_open_{sid}"):
-        st.divider()
-        st.subheader("🔁 Benzer Soru — Mini Quiz")
-
-        if quiz_st["question"] is None:
-            # Henüz soru üretilmemiş → üret
-            with st.spinner(f"**{quiz_st['topic']}** konusunda soru hazırlanıyor..."):
-                qdata = api_get(f"/students/{sid}/quiz", topic=quiz_st["topic"])
-
-            if qdata:
-                quiz_st["question"] = qdata["question"]
-                quiz_st["choices"] = qdata["choices"]
-                quiz_st["answer_index"] = qdata["answer_index"]
-                quiz_st["explanation"] = qdata["explanation"]
-                quiz_st["is_fallback"] = qdata.get("is_fallback", False)
-
-        if quiz_st["question"]:
-            if quiz_st.get("is_fallback"):
-                st.caption("⚡ Örnek soru (API key tanımlı olunca Gemini'den üretilir)")
-            st.markdown(f"**{quiz_st['question']}**")
-
-            if not quiz_st["answered"]:
-                selected = st.radio(
-                    "Cevabını seç:",
-                    quiz_st["choices"],
-                    index=None,
-                    key=f"quiz_radio_{sid}",
-                )
-                col_ans, _ = st.columns([2, 3])
-                with col_ans:
-                    if st.button(
-                        "✅ Cevapla",
-                        disabled=selected is None,
-                        use_container_width=True,
-                        key=f"quiz_submit_{sid}",
-                    ):
-                        sel_idx = quiz_st["choices"].index(selected)
-                        ans = api_post(
-                            f"/students/{sid}/quiz/answer",
-                            payload={
-                                "topic": quiz_st["topic"],
-                                "selected_index": sel_idx,
-                                "correct_index": quiz_st["answer_index"],
-                            },
-                        )
-                        quiz_st["answered"] = True
-                        quiz_st["sel_idx"] = sel_idx
-                        st.rerun()
+        if result:
+            st.session_state[f"ask_{sid}"] = result
+            if result.get("in_scope"):
+                # Yeni anlatım gelince eski quiz durumunu temizleyip bu konuyla ilklendir
+                st.session_state.quiz_state[sid] = {
+                    "topic": result["topic"],
+                    "question": None,
+                    "choices": [],
+                    "answer_index": -1,
+                    "explanation": "",
+                    "answered": False,
+                    "is_fallback": False,
+                }
+                st.session_state[f"quiz_open_{sid}"] = True
             else:
-                sel_idx = quiz_st.get("sel_idx", -1)
-                correct_idx = quiz_st["answer_index"]
-                if sel_idx == correct_idx:
-                    st.success(f"✅ Doğru! Ustalık haritana başarı olarak işlendi.")
-                else:
-                    correct_choice = quiz_st["choices"][correct_idx] if correct_idx >= 0 else "?"
-                    st.error(f"❌ Yanlış. Doğru cevap: **{correct_choice}**")
-                st.info(f"💡 {quiz_st['explanation']}")
+                st.session_state.pop(f"quiz_open_{sid}", None)
 
-                col_r, _ = st.columns([2, 3])
-                with col_r:
-                    if st.button("🔄 Yeni Soru", use_container_width=True, key=f"quiz_reset_{sid}"):
-                        quiz_st["question"] = None
-                        quiz_st["answered"] = False
-                        quiz_st.pop("sel_idx", None)
-                        st.rerun()
+    # Anlatım sonucu ve kazanım referanslarını göster
+    ask = st.session_state.get(f"ask_{sid}")
+    if ask and ask.get("in_scope"):
+        st.success(f"🏷️ **{ask['subject']} / {ask['topic']}** olarak haritana işlendi")
+        st.markdown(ask["explanation"])
+        
+        # MEB kazanım referansı (T2)
+        if ask.get("kaynak"):
+            st.info(f"📚 **Kazanım Referansı:** {ask['kaynak']}")
+        
+        # Çıkmış soru benzerleri (T2)
+        if ask.get("benzer_sorular"):
+            st.caption("🔗 **Bu konudan çıkmış benzer sorular:** " + " · ".join(ask["benzer_sorular"]))
+
+        # ── Mini Quiz Bölümü (T3) ─────────────────────────────────────────────
+        quiz_st = st.session_state.quiz_state.get(sid)
+        if quiz_st and st.session_state.get(f"quiz_open_{sid}"):
+            st.divider()
+            st.subheader("🔁 Benzer Soru — Mini Quiz")
+
+            if quiz_st["question"] is None:
+                # Henüz soru üretilmemiş → üret
+                with st.spinner(f"**{quiz_st['topic']}** konusunda benzer soru hazırlanıyor..."):
+                    qdata = api_get(f"/students/{sid}/quiz", topic=quiz_st["topic"])
+
+                if qdata:
+                    # Quiz API'si secenekler dict (A, B, C...) veya choices list dönebilir
+                    # Görkem'in doğrulanmış quizi: secenekler: {"A": "10", "B": "12"...} ve dogru: "B"
+                    choices_dict = qdata.get("secenekler")
+                    if choices_dict:
+                        choices_list = [f"{h}) {choices_dict[h]}" for h in sorted(choices_dict.keys())]
+                        correct_key = qdata.get("dogru", "A")
+                        # Harfe karşılık gelen index'i bul
+                        correct_idx = sorted(choices_dict.keys()).index(correct_key)
+                    else:
+                        choices_list = qdata.get("choices", [])
+                        correct_idx = qdata.get("answer_index", 0)
+
+                    quiz_st["question"] = qdata.get("soru") or qdata.get("question")
+                    quiz_st["choices"] = choices_list
+                    quiz_st["answer_index"] = correct_idx
+                    quiz_st["explanation"] = qdata.get("cozum") or qdata.get("explanation", "")
+                    quiz_st["is_fallback"] = qdata.get("is_fallback", False)
+
+            if quiz_st["question"]:
+                if quiz_st.get("is_fallback"):
+                    st.caption("⚡ Örnek soru (API key tanımlı olunca Gemini'den üretilir)")
+                st.markdown(f"**{quiz_st['question']}**")
+
+                if not quiz_st["answered"]:
+                    selected = st.radio(
+                        "Cevabını seç:",
+                        quiz_st["choices"],
+                        index=None,
+                        key=f"quiz_radio_{sid}",
+                    )
+                    col_ans, _ = st.columns([2, 3])
+                    with col_ans:
+                        if st.button(
+                            "✅ Cevapla",
+                            disabled=selected is None,
+                            use_container_width=True,
+                            key=f"quiz_submit_{sid}",
+                        ):
+                            sel_idx = quiz_st["choices"].index(selected)
+                            # Backend'e event ekle (T3)
+                            dogru_mu = (sel_idx == quiz_st["answer_index"])
+                            api_post(
+                                f"/students/{sid}/quiz/answer",
+                                payload={
+                                    "topic": quiz_st["topic"],
+                                    "selected_index": sel_idx,
+                                    "correct_index": quiz_st["answer_index"],
+                                },
+                            )
+                            quiz_st["answered"] = True
+                            quiz_st["sel_idx"] = sel_idx
+                            st.rerun()
+                else:
+                    sel_idx = quiz_st.get("sel_idx", -1)
+                    correct_idx = quiz_st["answer_index"]
+                    if sel_idx == correct_idx:
+                        st.success(f"✅ Doğru! Ustalık haritana başarı olarak işlendi.")
+                    else:
+                        correct_choice = quiz_st["choices"][correct_idx] if correct_idx >= 0 else "?"
+                        st.error(f"❌ Yanlış. Doğru cevap: **{correct_choice}**")
+                    st.info(f"💡 {quiz_st['explanation']}")
+
+                    col_r, _ = st.columns([2, 3])
+                    with col_r:
+                        if st.button("🔄 Yeni Soru", use_container_width=True, key=f"quiz_reset_{sid}"):
+                            quiz_st["question"] = None
+                            quiz_st["answered"] = False
+                            quiz_st.pop("sel_idx", None)
+                            st.rerun()
+
+    elif ask:
+        st.info(ask["explanation"])  # kapsam dışı
 
     st.divider()
 
@@ -284,7 +321,7 @@ if page == "📸 Soru Sor":
             ):
                 st.success("İşlendi — haritan güncellendi")
 
-    # ── Son sinyaller (sade tablo) ───────────────────────────────────────────
+    # ── Son sinyaller ───────────────────────────────────────────────────────
     events = api_get(f"/students/{sid}/events", limit=8)
     if events:
         st.subheader("Son sinyaller")
@@ -503,36 +540,46 @@ elif page == "📊 Analiz Panosu":
                 f"{mat['slope_per_week']:+.1f} net",
             )
 
-    st.divider()
 
-    # ── Haftalık Plan ────────────────────────────────────────────────────────
-    with st.expander("📅 Haftalık Çalışma Planı", expanded=False):
-        st.caption(
-            "Koç, sınav tarihini ve çalışma saatini hesaba katarak kişisel plan çıkarır. "
-            "API key tanımlıysa Gemini'den gelir."
-        )
-        if st.button("🗓️ Plan Oluştur", use_container_width=True, key="plan_btn"):
-            with st.spinner("Koç plan hazırlıyor..."):
-                result = api_post(
-                    f"/students/{sid}/chat",
-                    payload={
-                        "message": (
-                            "Bu hafta ne çalışmalıyım? Sınav tarihimi ve haftalık çalışma saatimi "
-                            "hesaba katarak, zayıf konularıma göre maddeli, öncelikli bir haftalık "
-                            "plan yaz. Her konu için tahmini saat belirt."
-                        )
-                    },
-                )
-            if result:
-                st.markdown(result["reply"])
-            else:
-                st.info(
-                    "Koç şu an kullanılamıyor (GOOGLE_API_KEY gerekli). "
-                    "`.env` dosyasına anahtarını ekle: https://aistudio.google.com/apikey"
-                )
+# ── SAYFA 4: Haftalık Plan (Görkem/Emir Arda'nın B3 Bileşeni) ─────────────────
+elif page == "📅 Haftalık Plan":
+    st.header(f"🗓️ {student['name']} — Haftalık Çalışma Planı")
+    st.caption(
+        "Plan; sınav tarihi, haftalık saat bütçesi ve zayıflık haritasındaki konu "
+        "önceliklerinden otomatik üretilir ve veritabanına kaydedilir."
+    )
+
+    if st.button("✨ Bu haftanın planını oluştur", type="primary"):
+        with st.spinner("Planlayıcı uzman programı hazırlıyor..."):
+            generated = api_post(f"/students/{sid}/plans/generate", payload={})
+        if generated:
+            st.success("Plan oluşturuldu ve kaydedildi.")
+            st.rerun()
+
+    plan = api_get(f"/students/{sid}/plans/latest")
+    if not plan:
+        st.info("Henüz plan yok. Yukarıdaki düğmeyle ilk haftalık planını oluştur.")
+    else:
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Haftalık bütçe", f"{plan['weekly_hours']} saat")
+        col2.metric("Toplam oturum", len(plan["items"]))
+        remaining = plan.get("days_to_exam")
+        col3.metric("Sınava kalan", f"{remaining} gün" if remaining is not None else "Belirtilmedi")
+        st.info(plan["summary"])
+
+        plan_df = pd.DataFrame(plan["items"])[
+            ["day_name", "topic", "activity", "duration_minutes", "rationale"]
+        ]
+        plan_df.columns = ["Gün", "Konu", "Çalışma", "Süre (dk)", "Neden"]
+        st.dataframe(plan_df, hide_index=True, use_container_width=True)
+
+        st.subheader("Konu öncelikleri")
+        priorities_df = pd.DataFrame(plan["priorities"])
+        if not priorities_df.empty:
+            st.dataframe(priorities_df, hide_index=True, use_container_width=True)
 
 
-# ── SAYFA 4: Koç Sohbeti ───────────────────────────────────────────────────
+# ── SAYFA 5: Koç Sohbeti ───────────────────────────────────────────────────
 else:
     st.header(f"💬 Koç — {student['name']}")
 

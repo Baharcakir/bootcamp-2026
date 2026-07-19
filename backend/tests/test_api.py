@@ -133,3 +133,32 @@ def test_api_anahtari_yoksa_koc_503_doner(student_id, client, monkeypatch):
     monkeypatch.setattr("app.routers.coach.settings.google_api_key", None)
     resp = client.post(f"/students/{student_id}/chat", json={"message": "Nasılım?"})
     assert resp.status_code == 503
+
+
+def test_quiz_gecersiz_konu_422(student_id, client):
+    resp = client.post(f"/students/{student_id}/quiz", json={"topic": "Türev"})
+    assert resp.status_code == 422
+
+
+def test_quiz_konusuz_ve_verisiz_422(student_id, client):
+    resp = client.post(f"/students/{student_id}/quiz", json={})
+    assert resp.status_code == 422
+    assert "konu" in resp.json()["detail"].lower()
+
+
+def test_quiz_anahtarsiz_503(student_id, client, monkeypatch):
+    monkeypatch.setattr("app.routers.tutor.settings.google_api_key", None)
+    resp = client.post(f"/students/{student_id}/quiz", json={"topic": "Problemler"})
+    assert resp.status_code == 503
+
+
+def test_kazanim_ve_benzer_soru_getirme():
+    from app.services.queries import benzer_cikmis_sorular, kazanim_for_topic
+
+    kaynak = kazanim_for_topic("Problemler")
+    assert kaynak is not None and "9.3.5.2" in kaynak
+    assert kazanim_for_topic("Olmayan Konu") is None
+
+    benzer = benzer_cikmis_sorular("Problemler")
+    assert benzer, "T4 setinde Problemler etiketi var, öneri boş olmamalı"
+    assert all("TYT s." in b for b in benzer)

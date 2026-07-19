@@ -100,7 +100,7 @@ Alınan kararlar: Veritabanı için gerekli olan TYT örnek sorularının toplan
 
 - **Öne Çıkan Ölçüm**: Otomatik konu etiketleme, 120 gerçek ÖSYM sorusundan (2024-2026 TYT) oluşan elle etiketli sette ölçülmüştür; uyuşmazlık denetimi ve prompt'a eklenen tutarlılık kurallarıyla doğruluk **%76.7 → %80.8 → %83.3** olarak iyileştirilmiştir. Yöntem, sistematik hata analizi ve denetim izleri: [etiketleme doğruluk raporu](../docs/etiketleme-dogruluk-raporu.md)
 
-- **Daily Scrum**: Bu sprintte daily ritmi düzenli işlememiş, koordinasyon büyük ölçüde Pull Request açıklamaları ve birebir mesajlaşma üzerinden yürümüştür; bu durum retrospektifte iyileştirme maddesi olarak ele alınmıştır: [Sprint 2 Daily Scrum Notları](Sprint2Documents/DailyScrumMeetingNotesSprint2.md)
+- **Daily Scrum**: Bu sprintte daily ritmi düzenli işlememiş, koordinasyon büyük ölçüde Pull Request açıklamaları ve birebir mesajlaşma üzerinden yürümüştür; bu durum retrospektifte iyileştirme maddesi olarak ele alınmıştır: [Sprint 2 Daily Scrum Notları](Sprint2/DailyScrumMeetingNotesSprint2.md)
 
 - **Sprint board update**: Sprint board screenshotları:
 ![Backlog 1](Sprint2/backlog1.png)
@@ -109,14 +109,15 @@ Alınan kararlar: Veritabanı için gerekli olan TYT örnek sorularının toplan
 
 - **Ürün Durumu**: Ekran görüntüleri (soru sorma akışı, deneme neti girişi, konu bazlı renk gradyanlı ustalık haritası, ders bazlı net gidişatı ve haftalık plan). 30 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
-  <img src="Sprint2Documents/sprint2_soru_sor.png" alt="Sprint 2 Soru Sor" width="300">
-  <img src="Sprint2Documents/sprint2_deneme_netleri.png" alt="Sprint 2 Deneme Netleri" width="300">
-  <img src="Sprint2Documents/sprint2_analiz_panosu.png" alt="Sprint 2 Analiz Panosu" width="300">
-  <img src="Sprint2Documents/sprint2_net_gidisati.png" alt="Sprint 2 Net Gidişatı" width="300">
-  <img src="Sprint2Documents/sprint2_koc_sohbeti.png" alt="Sprint 2 Koç Sohbeti" width="300">
+  <img src="Sprint2/sprint2_soru_sor.png" alt="Sprint 2 Soru Sor" width="300">
+  <img src="Sprint2/sprint2_deneme_netleri.png" alt="Sprint 2 Deneme Netleri" width="300">
+  <img src="Sprint2/sprint2_analiz_panosu.png" alt="Sprint 2 Analiz Panosu" width="300">
+  <img src="Sprint2/sprint2_net_gidisati.png" alt="Sprint 2 Net Gidişatı" width="300">
+  <img src="Sprint2/sprint2_koc_sohbeti.png" alt="Sprint 2 Koç Sohbeti" width="300">
 
 - **Sprint Review**: 
 Canlı demo: soru fotoğrafı → anlatım → quiz → zayıflık haritasının güncellenişi → koçtan haftalık plan. Doğruluk raporunun sunumu (%83.3) ve Sprint 3 önceliklendirmesi planlanmıştır.
+Katılımcılar: [19 Temmuz toplantısı sonrası eklenecek]
 Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etmesi jüri sunumu için kritik olduğu görülmüştür ve fallback mekanizması hayata geçirilmiştir. Subject trend endpoint generic yazıldı — ilerleyen sprintlerde yeni ders eklenmesi halinde kod değişmeyecek.
 
 - **Sprint Retrospective:**

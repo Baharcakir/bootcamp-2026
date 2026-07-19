@@ -17,17 +17,14 @@ plan çıkarır.
 
 ## 👥 Takım
 
-<!-- TODO: İsimleri, rolleri ve profilleri doldurun (5 kişi: 1 PO, 1 SM, 3 Developer) -->
-
 | İsim | Rol | GitHub |
 |---|---|---|
-| [AD SOYAD] | Product Owner | [profil] |
-| [AD SOYAD] | Scrum Master | [profil] |
-| [AD SOYAD] | Developer | [profil] |
-| [AD SOYAD] | Developer | [profil] |
-| [AD SOYAD] | Developer | [profil] |
+| Bahar Çakır | Scrum Master · Süreç & Arayüz | [Baharcakir](https://github.com/Baharcakir) |
+| Görkem Çetinkaya | Developer · Eğitmen hattı (RAG, quiz, ölçüm) | [gorkem-cetinkaya](https://github.com/gorkem-cetinkaya) |
+| Doğa Alışkan | Developer · Modeller & Sentetik Veri | [dogalskn](https://github.com/dogalskn) |
+| Emir Arda Tomaç | Product Owner · Agent Mimarisi & Plan | [emirardatomac](https://github.com/emirardatomac) |
 
-**Takım ismi:** [TAKIM İSMİ]
+**Takım:** Takım 76
 
 ## 🧠 Ürün Açıklaması
 
@@ -36,13 +33,13 @@ ama pahalıdır. "Analiz" araçları ise öğrenciden ödev gibi veri girişi is
 
 Çarpan'ın çekirdek döngüsü bu üç problemi birden çözer: öğrenci **takıldığı matematik sorusunun
 fotoğrafını atar**, eğitmen yapay zeka **adım adım anlatır** (değer anında verilir) ve aynı anda
-soruyu 26 konuluk TYT Matematik taksonomisine göre **otomatik konu etiketleyip** zayıflık sinyali
+soruyu 27 konuluk TYT Matematik taksonomisine göre **otomatik konu etiketleyip** zayıflık sinyali
 olarak kaydeder. Sinyaller biriktikçe Bayesçi ustalık haritası, konu öncelikleri ve haftalık plan
 kendiliğinden oluşur. Denemelerden yalnızca ders bazında toplam net girilir (4-5 satır, ~10 saniye).
 
 **Anlatım aynı zamanda teşhistir** — analitik, kullanımın yan ürünüdür.
 
-**v1 kapsamı bilinçli olarak TYT Matematik'tir** (en acı nokta, ölçülebilir kalite, 26 konuluk
+**v1 kapsamı bilinçli olarak TYT Matematik'tir** (en acı nokta, ölçülebilir kalite, 27 konuluk
 anlamlı harita); mimari ders-bağımsızdır, taksonomi + korpus ekleyerek genişler. Model eğitim
 stratejisi (ÖSYM çıkmış soruları, AI üretimi sorular, sentetik kohortlar): [docs/mimari.md](docs/mimari.md)
 
@@ -111,14 +108,14 @@ pytest backend/tests && ruff check backend frontend
 
 ## 🗂️ Proje Yönetimi
 
-- **Product Backlog:** [board linki eklenecek]
+- **Product Backlog:** [Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
 - **Veri kaynakları ve toplama rehberi:** [docs/veri-kaynaklari.md](docs/veri-kaynaklari.md)
 - **Final teslim kontrol listesi:** [docs/teslim-kontrol.md](docs/teslim-kontrol.md)
-- **Sprint Board:** [link eklenecek]
+- **Sprint Board:** [Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806) (kırmızı = task, mavi = story)
 - **Daily Scrum:** Her akşam 21:30, 15 dk (WhatsApp/Slack) — notlar sprint klasörlerinde
 
 | Sprint | Tarih | Klasör |
 |---|---|---|
-| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1Documents](ProjectManagement/Sprint1Documents/) |
-| Sprint 2 | 6 – 19 Temmuz | [Sprint2Documents](ProjectManagement/Sprint2Documents/) |
-| Sprint 3 | 20 Temmuz – 2 Ağustos | [Sprint3Documents](ProjectManagement/Sprint3Documents/) |
+| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1](ProjectManagement/Sprint1/) |
+| Sprint 2 | 6 – 19 Temmuz | [Sprint2](ProjectManagement/Sprint2/) |
+| Sprint 3 | 20 Temmuz – 2 Ağustos | [Sprint3](ProjectManagement/Sprint3/) |
