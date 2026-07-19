@@ -57,8 +57,8 @@ her akşam kısa yazılı daily'ye dönülecektir.
 
 ## Sprint Board
 
-Board kartları ve kurulum adımları: [board-kartlari.md](board-kartlari.md).
-Board görüntüleri kurulum sonrası bu klasöre eklenecektir: `screenshots/board-*.png`
+Board, Sprint 1'de kurulan Miro panosunda yürütülmektedir (kırmızı = task, mavi = story).
+Sprint 2 sonu board görüntüleri: `screenshots/board-sprint2-*.png`
 
 ## Ürün Durumu
 
