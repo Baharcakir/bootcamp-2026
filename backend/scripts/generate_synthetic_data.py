@@ -16,6 +16,11 @@ from app.services.mastery import (
 # 1. PARAMETRELER VE KONULAR
 SUBJECT = "Matematik"
 TOPICS = ["Üslü Sayılar", "Köklü Sayılar", "Fonksiyonlar", "Polinomlar", "Çarpanlara Ayırma"]
+
+# Rastgelelik sonuçlarının herkes için aynı çıkması amacıyla seed ekledik
+random.seed(42)
+np.random.seed(42)
+
 NUM_STUDENTS = 1000
 SLIP_RATE = 0.10  # %10 Dikkatsizlik (Slip) ihtimali
 
