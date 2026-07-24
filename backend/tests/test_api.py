@@ -117,11 +117,12 @@ def test_sonucsuz_deneme_reddedilir(student_id, client):
     assert resp.status_code == 422
 
 
-def test_api_anahtari_yoksa_soru_sorma_503_doner(student_id, client, monkeypatch):
+def test_api_anahtari_yoksa_metin_soru_yerel_etiketlenir(student_id, client, monkeypatch):
+    # T6 demo modu: anahtar yokken yazılı soru 503 yerine yerel modelle etiketlenir
     monkeypatch.setattr("app.routers.tutor.settings.google_api_key", None)
     resp = client.post(f"/students/{student_id}/ask", data={"text": "Bu soruyu çözemedim"})
-    assert resp.status_code == 503
-    assert "GOOGLE_API_KEY" in resp.json()["detail"]
+    assert resp.status_code == 200
+    assert resp.json()["yerel_etiket"] is True
 
 
 def test_bos_soru_gonderilemez(student_id, client):

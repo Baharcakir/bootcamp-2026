@@ -9,6 +9,7 @@ pydantic-settings>=2.4
 numpy>=1.26
 scipy>=1.13
 pandas>=2.2
+scikit-learn>=1.5  # T6 konu sınıflandırıcısı ve A5 net tahmin modeli
 
 # --- Agent ve LLM ---
 langgraph>=0.4

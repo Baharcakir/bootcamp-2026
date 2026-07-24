@@ -18,6 +18,7 @@ from langchain_core.messages import HumanMessage
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from ..config import settings
+from .utils import content_to_text
 
 logger = logging.getLogger(__name__)
 
@@ -108,7 +109,7 @@ def _parse_json(reply: str) -> dict:
 
 def _ask(llm: ChatGoogleGenerativeAI, prompt: str) -> dict:
     reply = llm.invoke([HumanMessage(content=prompt)]).content
-    return _parse_json(reply if isinstance(reply, str) else str(reply))
+    return _parse_json(content_to_text(reply))
 
 
 def _fallback(topic: str) -> Quiz:
@@ -166,3 +167,29 @@ def generate_quiz(topic: str, google_api_key: str | None = None) -> Quiz:
 
     logger.warning("Quiz üretimi başarısız (%s); fallback kullanılıyor.", last_error)
     return _fallback(topic)
+
+
+@dataclass(frozen=True)
+class QuizQuestion:
+    """Arayüzün beklediği liste-indeksli quiz biçimi (GET /students/{id}/quiz)."""
+
+    topic: str
+    question: str
+    choices: list[str]
+    answer_index: int
+    explanation: str
+    is_fallback: bool
+
+
+def generate_quiz_question(topic: str, google_api_key: str | None = None) -> QuizQuestion:
+    """generate_quiz'in arayüz uyarlaması: şık sözlüğünü sıralı listeye çevirir."""
+    quiz = generate_quiz(topic, google_api_key)
+    letters = sorted(quiz.secenekler)
+    return QuizQuestion(
+        topic=quiz.konu,
+        question=quiz.soru,
+        choices=[quiz.secenekler[h] for h in letters],
+        answer_index=letters.index(quiz.dogru),
+        explanation=quiz.cozum,
+        is_fallback=quiz.is_fallback,
+    )

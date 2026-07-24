@@ -25,6 +25,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 from ..config import settings
 from ..services.queries import tutor_topic_index
+from .utils import content_to_text
 
 OUT_OF_SCOPE = "Kapsam Dışı"
 
@@ -127,7 +128,7 @@ def explain_question(
         content.append({"type": "image_url", "image_url": {"url": data_uri}})
 
     reply = llm.invoke([HumanMessage(content=content)]).content
-    data = _parse_reply(reply if isinstance(reply, str) else str(reply))
+    data = _parse_reply(content_to_text(reply))
     return TutorResult(
         explanation=data.get("explanation", ""),
         subject=data.get("subject", OUT_OF_SCOPE),

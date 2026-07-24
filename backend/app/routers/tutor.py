@@ -7,6 +7,7 @@ from sqlmodel import Session, select
 from ..config import settings
 from ..db import get_session
 from ..models import QuestionEvent, Student
+from ..services.classifier import classify_topic
 from ..services.mastery import estimate_mastery, study_priorities
 from ..services.queries import (
     benzer_cikmis_sorular,
@@ -26,6 +27,7 @@ class AskOut(BaseModel):
     in_scope: bool  # kapsam dışıysa sinyal kaydedilmez, arayüz nazik mesajı gösterir
     kaynak: str | None = None  # T2: konunun MEB kazanım referansı
     benzer_sorular: list[str] = []  # T2: aynı konudan çıkmış gerçek ÖSYM soruları
+    yerel_etiket: bool = False  # T6: etiket anahtarsız yerel sınıflandırıcıdan geldi
 
 
 class QuizIn(BaseModel):
@@ -74,10 +76,42 @@ async def ask_question(
     if file is None and not (text and text.strip()):
         raise HTTPException(status_code=422, detail="Fotoğraf veya soru metni gönderin")
     if not settings.google_api_key:
-        raise HTTPException(
-            status_code=503,
-            detail="GOOGLE_API_KEY tanımlı değil. Kök dizindeki .env dosyasına anahtarınızı "
-            "girin (bkz. .env.example).",
+        # T6 demo modu: anahtar yokken yazılı sorular yerel sınıflandırıcıyla etiketlenir;
+        # anlatım yapılamasa da sinyal düşer, zayıflık haritası işlemeye devam eder.
+        yerel_konu = classify_topic(text) if file is None else None
+        if yerel_konu is None:
+            raise HTTPException(
+                status_code=503,
+                detail="GOOGLE_API_KEY tanımlı değil. Fotoğraflı soru ve anlatım için kök "
+                "dizindeki .env dosyasına anahtarınızı girin (bkz. .env.example).",
+            )
+        in_scope = _in_scope("Matematik", yerel_konu)
+        if in_scope:
+            session.add(
+                QuestionEvent(
+                    student_id=student_id,
+                    subject="Matematik",
+                    topic=yerel_konu,
+                    source="photo_ask",
+                    succeeded=False,
+                    happened_on=date.today(),
+                    question_summary=(text or "").strip()[:120] or None,
+                )
+            )
+            session.commit()
+        return AskOut(
+            explanation=(
+                "GOOGLE_API_KEY tanımlı olmadığı için adım adım anlatım yapılamıyor. "
+                f"Yine de sorun, kendi eğittiğimiz yerel modelle konu etiketlendi: {yerel_konu}. "
+                + ("Sinyal zayıflık haritana işlendi. " if in_scope else "")
+                + "Anlatım ve fotoğraflı soru için .env dosyasına anahtar ekleyebilirsin."
+            ),
+            subject="Matematik",
+            topic=yerel_konu,
+            in_scope=in_scope,
+            kaynak=kazanim_for_topic(yerel_konu) if in_scope else None,
+            benzer_sorular=benzer_cikmis_sorular(yerel_konu) if in_scope else [],
+            yerel_etiket=True,
         )
 
     try:

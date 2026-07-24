@@ -1,0 +1,7 @@
+{
+  "kol": "ÖSYM + tüm AI",
+  "cv": 0.5708333333333334,
+  "eval_dogruluk": 0.5833333333333334,
+  "egitim_boyutu": 557,
+  "parametreler": "char_wb(2, 5), C=4.0, cw=balanced"
+}

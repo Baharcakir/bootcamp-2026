@@ -23,6 +23,7 @@ from sqlmodel import Session
 
 from ..config import settings
 from ..db import engine
+from .utils import content_to_text
 from ..services.planner import generate_and_save_weekly_plan, plan_to_markdown
 from .prompts import ANALYST_SYSTEM_PROMPT, TUTOR_SYSTEM_PROMPT
 from .routing import RouteName, classify_intent
@@ -44,7 +45,7 @@ _checkpointer = MemorySaver()
 def _latest_user_text(state: CoachState) -> str:
     for message in reversed(state.get("messages", [])):
         if isinstance(message, HumanMessage):
-            return str(message.content)
+            return content_to_text(message.content)
     return ""
 
 
@@ -134,7 +135,7 @@ def _tutor_node() -> SpecialistNode:
             *state.get("messages", []),
         ]
         reply = llm.invoke(messages)
-        return {"messages": [AIMessage(content=str(reply.content), name="tutor_agent")]}
+        return {"messages": [AIMessage(content=content_to_text(reply.content), name="tutor_agent")]}
 
     return run
 
@@ -161,4 +162,4 @@ def ask_coach(student_id: int, message: str) -> str:
         },
         config=config,
     )
-    return str(result["messages"][-1].content)
+    return content_to_text(result["messages"][-1].content)

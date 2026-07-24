@@ -32,6 +32,7 @@ from langchain_core.messages import HumanMessage  # noqa: E402
 from langchain_google_genai import ChatGoogleGenerativeAI  # noqa: E402
 
 from app.agents.tutor import LABELING_RULES  # noqa: E402
+from app.agents.utils import content_to_text  # noqa: E402
 from app.config import settings  # noqa: E402
 from app.services.queries import load_topics  # noqa: E402
 
@@ -100,7 +101,7 @@ def label_page(llm: ChatGoogleGenerativeAI, png: Path, topics_text: str) -> dict
         ]
     )
     reply = llm.invoke([message]).content
-    return parse_json_reply(reply if isinstance(reply, str) else str(reply))
+    return parse_json_reply(content_to_text(reply))
 
 
 def measure() -> None:
