@@ -1,6 +1,6 @@
 from datetime import date
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from pydantic import BaseModel
 from sqlmodel import Session, select
 
@@ -8,7 +8,6 @@ from ..db import get_session
 from ..models import MockExam, Student, SubjectResult
 from ..services.queries import load_topics
 from ..services.trajectory import compute_net
-from fastapi import UploadFile, File, HTTPException
 from ..services.karne_parser import parse_report_card
 
 router = APIRouter(tags=["exams"])
