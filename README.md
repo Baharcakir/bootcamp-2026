@@ -51,14 +51,16 @@ Detaylı ürün tanımı: [docs/urun-tanimi.md](docs/urun-tanimi.md)
 - 📸 Soru fotoğrafı/metni → adım adım anlatım (Gemini Vision) + otomatik konu etiketi
 - 🗺️ Kendiliğinden oluşan zayıflık haritası — Bayesçi ustalık skorları, güven aralıklarıyla
 - 🔁 Anlatım sonrası mini quiz: doğru cevap ustalığı yukarı günceller (döngü kapanır)
-- 📈 Net gidişatı ve gelecek deneme tahmini (10 saniyelik ders-bazlı deneme girişi)
+- 📈 Net gidişatı ve gelecek deneme tahmini — GradientBoosting modeli, baseline'ı %34 geçiyor
 - 🗓️ Kişiye özel haftalık çalışma planı (sınav tarihi, zaman bütçesi, konu öncelikleri)
-- 💬 Öğrenciyi hatırlayan yapay zeka koçu (LangGraph agent + araç kullanımı + hafıza)
+- 💬 Öğrenciyi hatırlayan yapay zeka koçu (LangGraph agent + araç kullanımı + kalıcı hafıza)
 - 📚 Müfredat kazanımlarına dayalı, kaynak gösteren anlatım (RAG)
+- 📷 Deneme karnesi fotoğrafından net okuma (Gemini Vision) — öğrenci hiç veri girmez
+- 🤖 Yerel konu sınıflandırıcısı — API key olmadan da çalışır, milisaniyede sonuç
 
-**Stretch**
-- 📷 Deneme karnesi fotoğrafından net okuma (Gemini Vision)
+**Stretch / Sonraki**
 - ✅ Plan uyum takibi ve otomatik plan revizyonu
+- 🌐 TYT Türkçe, Fen Bilimleri konu genişlemesi
 
 ## 🎯 Hedef Kitle
 
@@ -114,8 +116,17 @@ pytest backend/tests && ruff check backend frontend
 - **Sprint Board:** [Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806) (kırmızı = task, mavi = story)
 - **Daily Scrum:** Her akşam 21:30, 15 dk (WhatsApp/Slack) — notlar sprint klasörlerinde
 
-| Sprint | Tarih | Klasör |
+| Sprint | Tarih | Klasör | Rapor |
+|---|---|---|---|
+| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1](ProjectManagement/Sprint1/) | — |
+| Sprint 2 | 6 – 19 Temmuz | [Sprint2](ProjectManagement/Sprint2/) | [Sprint 2 README](ProjectManagement/Sprint2/Takım76-Sprint2-README.md) |
+| Sprint 3 | 20 Temmuz – 2 Ağustos | [Sprint3](ProjectManagement/Sprint3/) | [Sprint 3 README](ProjectManagement/Sprint3/Takım76-Sprint3-README.md) |
+
+## 🧪 Model Kanıtları
+
+| Kanıt | Doğruluk / Metrik | Belge |
 |---|---|---|
-| Sprint 1 | 19 Haziran – 5 Temmuz | [Sprint1](ProjectManagement/Sprint1/) |
-| Sprint 2 | 6 – 19 Temmuz | [Sprint2](ProjectManagement/Sprint2/) |
-| Sprint 3 | 20 Temmuz – 2 Ağustos | [Sprint3](ProjectManagement/Sprint3/) |
+| Otomatik konu etiketleme (Gemini, 120 ÖSYM sorusu) | **%83.3** | [etiketleme-dogruluk-raporu.md](docs/etiketleme-dogruluk-raporu.md) |
+| Kendi konu sınıflandırıcımız (TF-IDF + LogReg) | **%58.3** | [siniflandirici-karsilastirma.md](docs/siniflandirici-karsilastirma.md) |
+| Bayesçi ustalık modeli kalibrasyonu (1000 sentetik öğrenci) | MAE **0.1021** | [kalibrasyon.md](docs/kalibrasyon.md) |
+| GradientBoosting net tahmin modeli | MAE **2.10** (baseline 3.17, **%34 iyileşme**) | [net-tahmin.md](docs/net-tahmin.md) |

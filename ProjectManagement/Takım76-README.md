@@ -131,4 +131,50 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 
 # Sprint 3
 
+- **Sprint Notları**: Sprint hedefi, Sprint 2'de kanıtlanan çekirdek döngüyü jüri önünde savunulabilir kılmak ve final teslimi tamamlamaktı: kendi eğittiğimiz konu sınıflandırıcısı (T6), GradientBoosting net tahmin modeli (A5), karne fotoğrafından otomatik net okuma (T5), koç agent kalıcı hafızası (B4) ve eğitim verisi altyapısının tamamlanması. Ayrıntılı uygulama notları: [Sprint 3 detay raporu](Sprint3/Takım76-Sprint3-README.md)
+
+- **Tahmin Edilen Tamamlanacak Puan**: Sprint 3 planı 58 puandır; sprint kapanışında tüm 58 puan tamamlanmıştır.
+
+| Story | Puan | Durum | Katkıda Bulunan |
+|---|---|---|---|
+| T5 — Karne fotoğrafından net okuma | 8 | ✅ | Bahar |
+| T6 — Kendi konu sınıflandırıcısını eğit ve karşılaştır | 8 | ✅ | Görkem |
+| T7 — Sınıflandırıcıyı `/ask` akışına entegre et | 5 | ✅ | Görkem |
+| A5 — GradientBoosting net tahmin modeli | 8 | ✅ | Doğa |
+| A6 — Net tahmini Analiz Panosu'na entegre et | 3 | ✅ | Doğa |
+| B4 — Koç agent kalıcı hafıza (SQLite) | 5 | ✅ | Emir Arda |
+| B5 — Agent araç zenginleştirmesi | 3 | ✅ | Emir Arda |
+| D4 — Canlı ürün deploymenti | 5 | ✅ | Emir Arda |
+| E3 — Sprint 3 teslim seti | 5 | ✅ | Bahar |
+| E4 — Daily & board canlı tutma | 3 | ✅ | Bahar |
+| Q1 — Eğitim verisi altyapısı (transkripsiyon + üretim) | 5 | ✅ | Görkem |
+
+- **Öne Çıkan Ölçümler**:
+  - **Kendi sınıflandırıcımız:** TF-IDF + LogReg modeli aynı 120 soruluk ÖSYM setinde **%58.3** doğruluk; Gemini zero-shot **%83.3**. Fark dürüstçe raporlandı. Asıl değeri: API key olmadan sistem çalışır, milisaniyede sonuç verir. [siniflandirici-karsilastirma.md](../docs/siniflandirici-karsilastirma.md)
+  - **Net tahmin modeli:** GradientBoosting, baseline'ı (**MAE: 2.10 vs 3.17, ~%34 iyileşme**). [net-tahmin.md](../docs/net-tahmin.md)
+  - **Kalibrasyon:** Bayesçi ustalık modeli 1000 sentetik öğrenciyle kalibre edildi, MAE 0.1021. [kalibrasyon.md](../docs/kalibrasyon.md)
+  - **Eğitim verisi:** 318 AI üretimi soru (`data/uretilen_sorular.csv`), 1000 sentetik öğrenci profili (`data/synthetic_students.csv`)
+
+- **Daily Scrum**: Sprint 3'te daily ritmi her akşam yazılı olarak toplanmıştır (Sprint 2 retrosunda söz verilen iyileştirme). Notların derlemesi: [Sprint 3 Daily Scrum Notları](Sprint3/DailyScrumMeetingNotesSprint3.md)
+
+- **Sprint board update**: Sprint board ekran görüntüleri sprint tamamlandığında eklenecektir:
+
+  > 📌 [Miro Backlog Board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
+
+- **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + GradientBoosting net tahmini, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 30 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
+
+  > Ekran görüntüleri çekilip `Sprint3/` klasörüne eklenecek.
+
+- **Sprint Review**:
+  Canlı demo: karne fotoğrafı → net okuma → soru fotoğrafı → anlatım (yerel sınıflandırıcı ile) → quiz → harita → koç → plan. Model kanıtlarının sunumu (T6 %58.3 karşılaştırma, A5 %34 iyileşme, A4 kalibrasyon).
+  Katılımcılar: Bahar, Görkem, Doğa, Emir Arda.
+  Alınan kararlar: Gemini vs. kendi modelimiz farkı (%83.3 vs %58.3) jüriye dürüstçe sunulacak; fallback mekanizması demo için kritik ve çalışır durumda; video senaryosu finallendi.
+
+- **Sprint Retrospective:**
+  - Teknik hedeflerin tamamı kapatıldı: kendi modellerimiz eğitildi, karşılaştırıldı ve entegre edildi
+  - Süreç belgeleri (daily, board) Sprint 2 retrosunda söz verilen düzeye çıkarıldı
+  - Eğitim verisi altyapısı sağlamlaştı: transkripsiyon, üretim ve eğitim pipeline'ları scriptlendi
+  - Kendi modelimiz %58.3 ile Gemini'yi geçemedi — fark anlaşılır (27 sınıf, ~500 örnek); daha büyük veri ile kapatılabilir (post-bootcamp)
+  - Streamlit mobil deneyimi hâlâ sınırlı; sonraki versiyonda PWA değerlendirilebilir
+
 ---
