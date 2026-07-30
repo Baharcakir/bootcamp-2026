@@ -14,6 +14,8 @@ scikit-learn>=1.5  # T6 konu sınıflandırıcısı ve A5 net tahmin modeli
 # --- Agent ve LLM ---
 langgraph>=0.4
 langchain-google-genai>=2.0
+google-generativeai>=0.8   # karne_parser: Gemini Vision ile karne fotoğrafı okuma
+Pillow>=10.0               # karne_parser: görsel işleme
 
 # --- Arayüz ---
 streamlit>=1.38
