@@ -8,6 +8,8 @@ from ..db import get_session
 from ..models import MockExam, Student, SubjectResult
 from ..services.queries import load_topics
 from ..services.trajectory import compute_net
+from fastapi import UploadFile, File, HTTPException
+from ..services.karne_parser import parse_report_card
 
 router = APIRouter(tags=["exams"])
 
@@ -79,3 +81,18 @@ def list_exams(student_id: int, session: Session = Depends(get_session)) -> list
         net = compute_net(sum(r.correct for r in results), sum(r.wrong for r in results))
         out.append(ExamOut(id=exam.id, name=exam.name, taken_on=exam.taken_on, net=net))
     return out
+
+@router.post("/upload-report-card")
+async def upload_report_card(file: UploadFile = File(...)):
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Lütfen geçerli bir görsel yükleyin.")
+    
+    contents = await file.read()
+    try:
+        data = parse_report_card(contents)
+        return {
+            "status": "success",
+            "extracted_data": data
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Karne okuma hatası: {str(e)}")
