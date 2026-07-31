@@ -28,3 +28,6 @@ data/osym/raw/
 
 # Akademi içi belge — public repoya koymuyoruz
 YZTA Bootcamp 2026.pdf
+
+# Streamlit yerel sırları
+.streamlit/secrets.toml
