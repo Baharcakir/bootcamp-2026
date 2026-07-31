@@ -13,6 +13,13 @@ plan çıkarır.
 
 </div>
 
+## 🌐 Canlı Uygulama
+
+- **Arayüz:** https://carpan-tyt-kocu.streamlit.app/
+- **API:** https://bootcamp-2026-production.up.railway.app
+- **API sağlık kontrolü:** https://bootcamp-2026-production.up.railway.app/health
+- **API dokümantasyonu:** https://bootcamp-2026-production.up.railway.app/docs
+
 ---
 
 ## 👥 Takım
@@ -48,17 +55,19 @@ Detaylı ürün tanımı: [docs/urun-tanimi.md](docs/urun-tanimi.md)
 ## ✨ Özellikler
 
 **MVP**
+
 - 📸 Soru fotoğrafı/metni → adım adım anlatım (Gemini Vision) + otomatik konu etiketi
 - 🗺️ Kendiliğinden oluşan zayıflık haritası — Bayesçi ustalık skorları, güven aralıklarıyla
 - 🔁 Anlatım sonrası mini quiz: doğru cevap ustalığı yukarı günceller (döngü kapanır)
 - 📈 Net gidişatı ve gelecek deneme tahmini — GradientBoosting modeli, baseline'ı %34 geçiyor
 - 🗓️ Kişiye özel haftalık çalışma planı (sınav tarihi, zaman bütçesi, konu öncelikleri)
-- 💬 Öğrenciyi hatırlayan yapay zeka koçu (LangGraph agent + araç kullanımı + kalıcı hafıza)
+- 💬 Öğrenciyi oturumlar arasında hatırlayan yapay zeka koçu (LangGraph + SQLite `SqliteSaver`)
 - 📚 Müfredat kazanımlarına dayalı, kaynak gösteren anlatım (RAG)
 - 📷 Deneme karnesi fotoğrafından net okuma (Gemini Vision) — öğrenci hiç veri girmez
 - 🤖 Yerel konu sınıflandırıcısı — API key olmadan da çalışır, milisaniyede sonuç
 
 **Stretch / Sonraki**
+
 - ✅ Plan uyum takibi ve otomatik plan revizyonu
 - 🌐 TYT Türkçe, Fen Bilimleri konu genişlemesi
 
@@ -74,13 +83,13 @@ Detaylı ürün tanımı: [docs/urun-tanimi.md](docs/urun-tanimi.md)
 flowchart LR
     UI[Streamlit Arayüzü] -->|soru fotoğrafı| API[FastAPI]
     API --> TUT[Eğitmen<br/>anlatım + otomatik konu etiketi]
-    TUT --> LLM[Gemini 2.5 Flash<br/>Vision]
+    TUT --> LLM[Gemini Flash<br/>Vision]
     TUT -->|sinyal| DB[(SQLite / SQLModel)]
     API --> SVC[Analiz Servisleri<br/>ustalık · gidişat · öncelik]
     SVC --> DB
     API --> AG[LangGraph Koç Agent'ı]
     AG -->|araçlar| SVC
-    AG --> MEM[(Oturum Hafızası)]
+    AG --> MEM[(Kalıcı Koç Hafızası<br/>SQLite SqliteSaver)]
     AG --> LLM
     TUT -.Sprint 2.-> RAG[(Chroma<br/>kazanım dokümanları)]
 ```
@@ -91,22 +100,124 @@ Detay ve rubrik eşlemesi: [docs/mimari.md](docs/mimari.md)
 
 ```bash
 # Gereksinim: Python 3.11+
-python3 -m venv .venv && source .venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
+
 pip install -r requirements.txt
-cp .env.example .env        # GOOGLE_API_KEY girin (soru anlatımı ve koç için)
+cp .env.example .env
+
+# .env dosyasına GOOGLE_API_KEY değerini girin.
+# Kalıcı hafıza ve veritabanı yolları isteğe bağlı olarak değiştirilebilir:
+#
+# GOOGLE_API_KEY=...
+# DATABASE_URL=sqlite:///./carpan.db
+# COACH_MEMORY_PATH=./data/coach-checkpoints.sqlite3
 
 # Demo verisi (opsiyonel): panoyu dolu görmek için
 python backend/scripts/seed_demo.py
 
-# API (http://localhost:8000/docs)
+# API — http://localhost:8000/docs
 uvicorn app.main:app --reload --app-dir backend
 
-# Arayüz — ayrı terminalde (http://localhost:8501)
+# Arayüz — ayrı terminalde http://localhost:8501
 streamlit run frontend/streamlit_app.py
 
 # Testler ve lint
-pytest backend/tests && ruff check backend frontend
+pytest backend/tests -q
+ruff check backend frontend
 ```
+
+## 🧠 Kalıcı Koç Hafızası
+
+Koç konuşmaları LangGraph `SqliteSaver` aracılığıyla SQLite dosyasına kaydedilir.
+
+Her öğrenci için ayrı bir konuşma dizisi kullanılır:
+
+```python
+config = {
+    "configurable": {
+        "thread_id": f"student-{student_id}"
+    }
+}
+```
+
+Yerel çalıştırmada varsayılan hafıza dosyası:
+
+```text
+./data/coach-checkpoints.sqlite3
+```
+
+Railway canlı ortamında kullanılan kalıcı yollar:
+
+```text
+DATABASE_URL=sqlite:////data/carpan.db
+COACH_MEMORY_PATH=/data/coach-checkpoints.sqlite3
+```
+
+Railway servisinde `/data` yoluna bağlı kalıcı bir volume kullanılır. Böylece uygulama yeniden
+başlatıldığında öğrenci verileri ve koç konuşmaları korunur.
+
+## ☁️ Canlıya Alma
+
+### Backend — Railway
+
+Başlangıç komutu `railway.json` içinde tanımlıdır:
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port $PORT --app-dir backend
+```
+
+Railway ortam değişkenleri:
+
+```text
+GOOGLE_API_KEY=...
+DATABASE_URL=sqlite:////data/carpan.db
+COACH_MEMORY_PATH=/data/coach-checkpoints.sqlite3
+LANGGRAPH_STRICT_MSGPACK=true
+RAILPACK_PYTHON_VERSION=3.11
+```
+
+Kalıcı volume mount yolu:
+
+```text
+/data
+```
+
+### Arayüz — Streamlit Community Cloud
+
+Streamlit giriş dosyası:
+
+```text
+frontend/streamlit_app.py
+```
+
+Streamlit Secrets ayarı:
+
+```toml
+CARPAN_API_URL = "https://bootcamp-2026-production.up.railway.app"
+```
+
+`GOOGLE_API_KEY` yalnızca Railway Variables bölümünde tutulur ve repoya eklenmez.
+
+## ✅ Sprint 3 Kabul Testi
+
+Kalıcı hafıza testi için:
+
+1. Canlı uygulamada bir öğrenci oluştur.
+2. Koç sohbetine gir.
+3. Koça belirli bir konu üzerinde çalıştığını söyle.
+4. Railway servisini yeniden başlat veya yeniden deploy et.
+5. Aynı öğrenciyi tekrar seç.
+6. Koça önceki konuşmada hangi konu üzerinde çalışıldığını sor.
+7. Koç önceki konuşmayı doğru şekilde hatırlıyorsa kalıcı hafıza kabul testi başarılıdır.
+
+Otomatik testler:
+
+```bash
+pytest backend/tests -q
+```
+
+CI sonucu GitHub Actions üzerinden doğrulanır.
 
 ## 🗂️ Proje Yönetimi
 
