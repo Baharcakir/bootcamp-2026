@@ -122,6 +122,9 @@ with st.sidebar:
         student = st.selectbox(
             "Öğrenci",
             students,
+            # En son eklenen öğrenci seçili gelir: yeni öğrenci ekleyen kişi
+            # doğrudan onunla çalışmaya başlar, listede aşağı inmesi gerekmez.
+            index=len(students) - 1,
             format_func=lambda s: s["name"],
         )
 
