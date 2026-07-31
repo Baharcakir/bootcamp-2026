@@ -12,7 +12,8 @@ pandas>=2.2
 scikit-learn>=1.5  # T6 konu sınıflandırıcısı ve A5 net tahmin modeli
 
 # --- Agent ve LLM ---
-langgraph>=0.4
+langgraph>=0.4,<2
+langgraph-checkpoint-sqlite>=2.0,<4
 langchain-google-genai>=2.0
 google-generativeai>=0.8   # karne_parser: Gemini Vision ile karne fotoğrafı okuma
 Pillow>=10.0               # karne_parser: görsel işleme
@@ -24,8 +25,8 @@ httpx>=0.27
 
 # --- Geliştirme / test ---
 pytest>=8.2
-ruff>=0.6,<0.16  # 0.16'nın yeni varsayılan kuralları mevcut kodu kırıyor; uyum ayrı iş olarak ele alınacak
-playwright>=1.45  # ekran görüntüsü aracı (capture_screenshots.py; sistem Chrome'unu kullanır)
+ruff>=0.6,<0.16  # 0.16'nın yeni varsayılan kuralları mevcut kodu kırıyor
+playwright>=1.45  # ekran görüntüsü aracı
 
 # Sprint 2'de RAG icin eklenecek (backlog T2):
 # chromadb>=0.5

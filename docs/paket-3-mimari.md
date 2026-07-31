@@ -1,94 +1,66 @@
-# Paket 3 - Agent Mimarisi ve Haftalık Plan
+# Paket 3 - Agent Mimarisi, Kalıcı Hafıza ve Canlıya Alma
 
 ## 1. Yönlendirme stratejisi
 
-Koordinatörün kritik yönlendirme kararı `agents/routing.py` içinde saf bir fonksiyonla verilir. Böylece model sürümü, sıcaklık veya API kesintisi plan isteğinin yanlış uzmana gitmesine neden olmaz.
+Koordinatörün kritik yönlendirme kararı `agents/routing.py` içinde saf bir fonksiyonla
+verilir. Supervisor, LangGraph `StateGraph` üzerinde conditional edge ile yalnız seçilen
+uzmana gider.
 
 | Örnek istek | Rota |
 |---|---|
 | “Nerelerde zayıfım?” | analyst |
-| “Netlerim nasıl gidiyor?” | analyst |
 | “Bu hafta ne çalışayım?” | planner |
-| “Bana haftalık program yap.” | planner |
 | “Çarpanlara ayırmayı anlat.” | tutor |
-
-Supervisor, LangGraph `StateGraph` üzerinde conditional edge ile seçilen tek node'a gider.
 
 ## 2. Uzmanlar
 
-### Analist
+- **Analist:** `ogrenci_profili`, `konu_analizi`, `net_gidisati` araçlarını kullanan ReAct agent.
+- **Planlayıcı:** Planı deterministik servisle üretir ve aynı işlemde veritabanına kaydeder.
+- **Eğitmen:** TYT Matematik anlatımına odaklanan ayrı sistem prompt'u kullanır.
 
-ReAct agent olarak çalışır ve yalnızca veri araçlarını kullanır:
+## 3. Kalıcı koç hafızası
 
-- `ogrenci_profili`
-- `konu_analizi`
-- `net_gidisati`
-
-### Planlayıcı
-
-Plan üretimi ve DB yazımı kritik olduğu için deterministik servis node'udur. LLM'in geçersiz JSON üretmesi, süre toplamını bozması veya planı kaydetmeyi unutması engellenir.
-
-Girdiler:
-
-- `Student.exam_date`
-- `Student.weekly_hours`
-- Bayesçi ustalık haritasından türetilen konu öncelikleri
-
-Çıktı:
-
-- `WeeklyPlanOut` Pydantic modeli
-- Gün, konu, etkinlik, dakika ve gerekçe içeren oturumlar
-
-Kurallar:
-
-- Toplam dakika tam olarak `weekly_hours * 60` olur.
-- Oturum sayısı 3-14 aralığında tutulur.
-- Öncelik skorları oturum sayılarına ağırlıklı dağıtılır.
-- Aynı konu mümkün olduğunca arka arkaya gelmez.
-- Veri yoksa temel TYT Matematik konularıyla teşhis planı oluşturulur.
-
-### Eğitmen
-
-TYT Matematik kavram ve soru anlatımına odaklanan ayrı sistem prompt'u ile çalışır.
-
-## 3. Hafıza
-
-Parent supervisor graph `MemorySaver` ile derlenir. API çağrısında:
+Parent supervisor graph artık RAM tabanlı `MemorySaver` yerine
+`langgraph-checkpoint-sqlite` paketindeki `SqliteSaver` ile derlenir.
 
 ```python
 config = {"configurable": {"thread_id": f"student-{student_id}"}}
 ```
 
-kullanılır. Böylece aynı öğrenciye ait geçmiş kullanıcı ve uzman mesajları sonraki çağrıda state'e eklenir.
+Her öğrenci ayrı thread kullanır. Checkpoint yolu `COACH_MEMORY_PATH` ile ayarlanır.
+Yerel varsayılan `./data/coach-checkpoints.sqlite3`, Railway dağıtımında ise
+`/data/coach-checkpoints.sqlite3` olur.
 
-## 4. Veritabanı
+SQLite bağlantısında:
 
-### StudyPlan
+- `check_same_thread=False`
+- `busy_timeout=5000`
+- `journal_mode=WAL`
+- eşzamanlı graph çağrıları için süreç içi kilit
 
-- öğrenci
-- hafta başlangıcı
-- oluşturma tarihi
-- sınav tarihi snapshot'ı
-- haftalık saat ve toplam dakika
-- özet
-- konu öncelikleri JSON snapshot'ı
-- aktif/pasif durumu
+kullanılır. Böylece küçük tek-instance demo dağıtımında checkpoint yazımları güvenli olur.
 
-### StudyPlanItem
+## 4. Kabul testleri
 
-- plan ilişkisi
-- sıra ve gün
-- ders / konu
-- çalışma etkinliği
-- dakika
-- öncelik gerekçesi
+`backend/tests/test_persistent_memory.py` üç durumu doğrular:
 
-Yeni plan üretildiğinde önceki aktif planlar pasif hale getirilir. Geçmiş planlar silinmez.
+1. Bağlantı ve graph tamamen kapatılıp tekrar açıldığında önceki oturum geri gelir.
+2. Farklı öğrenci `thread_id` değerlerinin geçmişleri birbirine karışmaz.
+3. Checkpoint dizini ve SQLite dosyası otomatik oluşturulur.
 
-## 5. API ve pano
+## 5. Kalıcı disk ve deploy
 
-`plans.py` router'ı plan üretme, son planı okuma ve geçmiş planları listeleme uçlarını sağlar. Streamlit'e yeni **Haftalık Plan** sayfası eklenmiştir. Sayfa planı üretir, DB'den tekrar okur ve tablo halinde gösterir.
+API Railway üzerinde çalışır ve `/data` yoluna volume bağlanır:
 
-## 6. Test edilebilirlik
+```text
+DATABASE_URL=sqlite:////data/carpan.db
+COACH_MEMORY_PATH=/data/coach-checkpoints.sqlite3
+```
 
-`build_supervisor_graph()` uzman node'larını dependency injection ile alır. Yönlendirme testlerinde Gemini çağrısı yapılmadan sahte uzmanlar kullanılabilir. Planlama servisi de LLM'den bağımsız olduğu için deterministik test edilir.
+Arayüz Streamlit Community Cloud'da çalışır ve `CARPAN_API_URL` secret'ı ile API'ye
+bağlanır. Ayrıntılı adımlar `docs/deploy.md` içindedir.
+
+## 6. Plan veritabanı
+
+`StudyPlan` ve `StudyPlanItem` yapısı korunur. Yeni plan üretildiğinde önceki aktif planlar
+pasif hale getirilir; geçmiş planlar silinmez.

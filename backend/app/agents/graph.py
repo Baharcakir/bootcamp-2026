@@ -3,9 +3,9 @@
 Akış:
 START -> supervisor -> analyst | planner | tutor -> END
 
-Supervisor kararı deterministiktir ve birim testlidir. Parent graph MemorySaver ile
-thread_id başına konuşma geçmişini tutar. Planlayıcı uzman yapılandırılmış planı
-üretip aynı adımda veritabanına kaydeder.
+Supervisor kararı deterministiktir ve birim testlidir. Parent graph, SqliteSaver ile
+``thread_id`` başına konuşma geçmişini kalıcı olarak tutar. Planlayıcı uzman
+yapılandırılmış planı üretip aynı adımda veritabanına kaydeder.
 """
 
 from __future__ import annotations
@@ -13,9 +13,13 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import Annotated, Callable, TypedDict
 
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_core.messages import (
+    AIMessage,
+    BaseMessage,
+    HumanMessage,
+    SystemMessage,
+)
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.graph.message import add_messages
 from langgraph.prebuilt import create_react_agent
@@ -23,11 +27,12 @@ from sqlmodel import Session
 
 from ..config import settings
 from ..db import engine
-from .utils import content_to_text
 from ..services.planner import generate_and_save_weekly_plan, plan_to_markdown
+from .memory import COACH_INVOKE_LOCK, close_coach_memory, get_coach_memory
 from .prompts import ANALYST_SYSTEM_PROMPT, TUTOR_SYSTEM_PROMPT
 from .routing import RouteName, classify_intent
 from .tools import konu_analizi, net_gidisati, ogrenci_profili
+from .utils import content_to_text
 
 
 class CoachState(TypedDict, total=False):
@@ -39,7 +44,6 @@ class CoachState(TypedDict, total=False):
 
 
 SpecialistNode = Callable[[CoachState], dict]
-_checkpointer = MemorySaver()
 
 
 def _latest_user_text(state: CoachState) -> str:
@@ -68,7 +72,8 @@ def build_supervisor_graph(
 ):
     """Enjekte edilebilir uzman node'larla supervisor graph'ı derler.
 
-    Enjeksiyon, yönlendirme testlerinin gerçek LLM/API anahtarına ihtiyaç duymamasını sağlar.
+    Enjeksiyon, yönlendirme ve hafıza testlerinin gerçek LLM/API anahtarına ihtiyaç
+    duymamasını sağlar.
     """
 
     builder = StateGraph(CoachState)
@@ -109,7 +114,8 @@ def _analyst_node() -> SpecialistNode:
     def run(state: CoachState) -> dict:
         context = SystemMessage(
             content=(
-                f"Aktif öğrenci ID={state['student_id']}. Araç çağrılarında bu student_id'yi kullan."
+                f"Aktif öğrenci ID={state['student_id']}. "
+                "Araç çağrılarında bu student_id'yi kullan."
             )
         )
         result = agent.invoke({"messages": [context, *state.get("messages", [])]})
@@ -122,7 +128,9 @@ def _planner_node(state: CoachState) -> dict:
     # Kritik veri yazma adımı LLM'e bırakılmaz: yapılandırılmış servis tek kaynak olur.
     with Session(engine) as session:
         plan = generate_and_save_weekly_plan(session, state["student_id"])
-    return {"messages": [AIMessage(content=plan_to_markdown(plan), name="planner_agent")]}
+    return {
+        "messages": [AIMessage(content=plan_to_markdown(plan), name="planner_agent")]
+    }
 
 
 def _tutor_node() -> SpecialistNode:
@@ -135,7 +143,11 @@ def _tutor_node() -> SpecialistNode:
             *state.get("messages", []),
         ]
         reply = llm.invoke(messages)
-        return {"messages": [AIMessage(content=content_to_text(reply.content), name="tutor_agent")]}
+        return {
+            "messages": [
+                AIMessage(content=content_to_text(reply.content), name="tutor_agent")
+            ]
+        }
 
     return run
 
@@ -148,18 +160,30 @@ def _build_graph():
             "planner": _planner_node,
             "tutor": _tutor_node(),
         },
-        checkpointer=_checkpointer,
+        checkpointer=get_coach_memory().saver,
     )
+
+
+def close_coach_runtime() -> None:
+    """Graph cache'ini ve SQLite bağlantısını uygulama kapanırken temizler."""
+
+    with COACH_INVOKE_LOCK:
+        _build_graph.cache_clear()
+        close_coach_memory()
 
 
 def ask_coach(student_id: int, message: str) -> str:
     graph = _build_graph()
     config = {"configurable": {"thread_id": f"student-{student_id}"}}
-    result = graph.invoke(
-        {
-            "student_id": student_id,
-            "messages": [HumanMessage(content=message)],
-        },
-        config=config,
-    )
+
+    # Tek SQLite bağlantısı küçük demo dağıtımında paylaşılır. Eşzamanlı checkpoint
+    # yazılarını seri hale getirerek "database is locked" riskini azaltırız.
+    with COACH_INVOKE_LOCK:
+        result = graph.invoke(
+            {
+                "student_id": student_id,
+                "messages": [HumanMessage(content=message)],
+            },
+            config=config,
+        )
     return content_to_text(result["messages"][-1].content)

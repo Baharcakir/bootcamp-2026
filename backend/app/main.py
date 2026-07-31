@@ -10,13 +10,23 @@ from .routers import analysis, coach, exams, plans, students, tutor
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     init_db()
-    yield
+    try:
+        yield
+    finally:
+        # Agent modülü yalnız sohbet kullanıldıysa yüklenmiş olabilir. Kapanışta graph
+        # cache'i ve SQLite checkpoint bağlantısı temizlenir.
+        try:
+            from .agents.graph import close_coach_runtime
+        except ImportError:
+            pass
+        else:
+            close_coach_runtime()
 
 
 app = FastAPI(
     title="Çarpan API",
     description="TYT Matematik netini yükselten yapay zeka koçu",
-    version="0.2.0",
+    version="0.3.0",
     lifespan=lifespan,
 )
 app.add_middleware(
@@ -35,4 +45,4 @@ app.include_router(coach.router)
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "ok"}
+    return {"status": "ok", "version": app.version}
