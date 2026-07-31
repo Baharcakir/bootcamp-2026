@@ -25,7 +25,17 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-API_URL = os.getenv("CARPAN_API_URL", "http://localhost:8000")
+def _runtime_setting(name: str, default: str) -> str:
+    value = os.getenv(name)
+    if value:
+        return value
+    try:
+        return str(st.secrets.get(name, default))
+    except FileNotFoundError:
+        return default
+
+
+API_URL = _runtime_setting("CARPAN_API_URL", "http://localhost:8000").rstrip("/")
 
 st.set_page_config(
     page_title="Çarpan — TYT Koçu",
