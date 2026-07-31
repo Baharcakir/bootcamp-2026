@@ -23,7 +23,7 @@ Sprint 3 planı **58 puandır**; sprint kapanışında tüm 58 puan tamamlanmı�
 | T6 — Kendi konu sınıflandırıcısını eğit ve karşılaştır | 8 | ✅ | Görkem |
 | T7 — Konu sınıflandırıcısını `/ask` akışına entegre et | 5 | ✅ | Görkem |
 | A5 — GradientBoosting net tahmin modeli | 8 | ✅ | Doğa |
-| A6 — Net tahmin modelini Analiz Panosu'na entegre et | 3 | ✅ | Doğa |
+| A6 — Panoda net gidişatı + bir sonraki deneme kestirimi | 3 | ✅ | Doğa |
 | B4 — Koç agent kalıcı hafıza (SQLite) | 5 | ✅ | Emir Arda |
 | B5 — Agent araç zenginleştirmesi (utils) | 3 | ✅ | Emir Arda |
 | D4 — Canlı ürün deploymenti | 5 | ✅ | Emir Arda |
@@ -54,16 +54,23 @@ Baseline (sadece son net) yerine üç özellikli GradientBoosting modeli:
 - Rapor: [net-tahmin.md](../../docs/net-tahmin.md)  
 - Eğitim verisi: 1000 sentetik öğrenci, 80/20 split
 
+> **Durum notu (dürüstlük):** Model sentetik kohort üzerinde eğitilip değerlendirilmiştir.
+> Net ölçeği sentetik veri setine bağlı olduğundan (gerçek TYT matematik netiyle birebir
+> örtüşmez) model henüz canlı öğrenci verisine bağlanmamıştır. Arayüzdeki tahmin,
+> öğrencinin deneme geçmişinden hesaplanan eğim kestirimidir (`GET /students/{id}/trend`).
+> Modelin ürüne bağlanması, gerçek ölçekle yeniden eğitim gerektirir — sonraki adım.
+
 ### 📋 Karne Fotoğrafından Net Okuma (T5)
 
 `backend/app/services/karne_parser.py` — Gemini Vision ile TYT karnesi fotoğrafını
 parse ederek ders bazında doğru/yanlış/boş sayılarını otomatik çıkarır.
 Öğrenci hiç veri girmez; fotoğraf atar, netler sisteme işlenir.
 
-### 🧠 Agent Araç Zenginleştirmesi (B4 + B5)
+### 🧠 Kalıcı Hafıza ve Agent Araçları (B4 + B5)
 
-`backend/app/agents/utils.py` — koç agent'a eklenen yardımcı araçlar:
-hafıza kalıcılığı, ustalık özeti ve öncelik listesi araçları.
+`backend/app/agents/memory.py` — LangGraph `SqliteSaver` tabanlı kalıcı koç hafızası;
+konuşmalar öğrenci başına ayrı dizide SQLite'a yazılır ve yeniden başlatmayı atlatır.
+`backend/app/agents/graph.py` — süpervizör grafiği bu checkpointer ile kurulur.
 
 ### 📊 Eğitim Verisi Altyapısı (Q1)
 
@@ -71,7 +78,7 @@ hafıza kalıcılığı, ustalık özeti ve öncelik listesi araçları.
 - `backend/scripts/generate_training_questions.py` — konu bazlı AI soru üretimi
 - `backend/scripts/train_classifier.py` — deterministik eğitim (seed 42, CV tabanlı)
 - `backend/scripts/train_net_predictor.py` — GradientBoosting eğitim scripti
-- `data/uretilen_sorular.csv` — 318 AI üretimi soru (bağımsız çözücü doğrulamalı)
+- `data/uretilen_sorular.csv` — 317 AI üretimi soru (bağımsız çözücü doğrulamalı)
 - `data/synthetic_students.csv` — 1000 sentetik öğrenci profili
 
 ---

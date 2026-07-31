@@ -59,7 +59,7 @@ Detaylı ürün tanımı: [docs/urun-tanimi.md](docs/urun-tanimi.md)
 - 📸 Soru fotoğrafı/metni → adım adım anlatım (Gemini Vision) + otomatik konu etiketi
 - 🗺️ Kendiliğinden oluşan zayıflık haritası — Bayesçi ustalık skorları, güven aralıklarıyla
 - 🔁 Anlatım sonrası mini quiz: doğru cevap ustalığı yukarı günceller (döngü kapanır)
-- 📈 Net gidişatı ve gelecek deneme tahmini — GradientBoosting modeli, baseline'ı %34 geçiyor
+- 📈 Net gidişatı ve bir sonraki deneme kestirimi (deneme geçmişinden)
 - 🗓️ Kişiye özel haftalık çalışma planı (sınav tarihi, zaman bütçesi, konu öncelikleri)
 - 💬 Öğrenciyi oturumlar arasında hatırlayan yapay zeka koçu (LangGraph + SQLite `SqliteSaver`)
 - 📚 Müfredat kazanımlarına dayalı, kaynak gösteren anlatım (RAG)
@@ -91,7 +91,8 @@ flowchart LR
     AG -->|araçlar| SVC
     AG --> MEM[(Kalıcı Koç Hafızası<br/>SQLite SqliteSaver)]
     AG --> LLM
-    TUT -.Sprint 2.-> RAG[(Chroma<br/>kazanım dokümanları)]
+    TUT --> RAG[(Konu-indeksli kaynak<br/>MEB kazanımları + çıkmış sorular)]
+    TUT --> CLS[Yerel konu sınıflandırıcı<br/>anahtarsız demo modu]
 ```
 
 Detay ve rubrik eşlemesi: [docs/mimari.md](docs/mimari.md)

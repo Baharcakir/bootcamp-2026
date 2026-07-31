@@ -86,7 +86,7 @@ class Quiz:
 
 def _llm(temperature: float, google_api_key: str | None = None) -> ChatGoogleGenerativeAI:
     api_key = google_api_key or settings.google_api_key
-    model = settings.gemini_model or "gemini-2.5-flash"
+    model = settings.gemini_model or "gemini-flash-latest"
     return ChatGoogleGenerativeAI(
         model=model,
         google_api_key=api_key,

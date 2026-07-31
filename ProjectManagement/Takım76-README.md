@@ -141,7 +141,7 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 | T6 — Kendi konu sınıflandırıcısını eğit ve karşılaştır | 8 | ✅ | Görkem |
 | T7 — Sınıflandırıcıyı `/ask` akışına entegre et | 5 | ✅ | Görkem |
 | A5 — GradientBoosting net tahmin modeli | 8 | ✅ | Doğa |
-| A6 — Net tahmini Analiz Panosu'na entegre et | 3 | ✅ | Doğa |
+| A6 — Panoda net gidişatı + bir sonraki deneme kestirimi | 3 | ✅ | Doğa |
 | B4 — Koç agent kalıcı hafıza (SQLite) | 5 | ✅ | Emir Arda |
 | B5 — Agent araç zenginleştirmesi | 3 | ✅ | Emir Arda |
 | D4 — Canlı ürün deploymenti | 5 | ✅ | Emir Arda |
@@ -151,9 +151,9 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 
 - **Öne Çıkan Ölçümler**:
   - **Kendi sınıflandırıcımız:** TF-IDF + LogReg modeli aynı 120 soruluk ÖSYM setinde **%58.3** doğruluk; Gemini zero-shot **%83.3**. Fark dürüstçe raporlandı. Asıl değeri: API key olmadan sistem çalışır, milisaniyede sonuç verir. [siniflandirici-karsilastirma.md](../docs/siniflandirici-karsilastirma.md)
-  - **Net tahmin modeli:** GradientBoosting, baseline'ı (**MAE: 2.10 vs 3.17, ~%34 iyileşme**). [net-tahmin.md](../docs/net-tahmin.md)
+  - **Net tahmin modeli:** GradientBoosting, sentetik kohortta baseline'ı geçti (**MAE 2.10 vs 3.17, ~%34 iyileşme**). Model sentetik ölçekte eğitildiği için henüz canlı veriye bağlanmadı; panodaki tahmin deneme geçmişinden hesaplanan kestirimdir. [net-tahmin.md](../docs/net-tahmin.md)
   - **Kalibrasyon:** Bayesçi ustalık modeli 1000 sentetik öğrenciyle kalibre edildi, MAE 0.1021. [kalibrasyon.md](../docs/kalibrasyon.md)
-  - **Eğitim verisi:** 318 AI üretimi soru (`data/uretilen_sorular.csv`), 1000 sentetik öğrenci profili (`data/synthetic_students.csv`)
+  - **Eğitim verisi:** 317 AI üretimi soru (`data/uretilen_sorular.csv`), 1000 sentetik öğrenci profili (`data/synthetic_students.csv`)
 
 - **Daily Scrum**: Sprint 3'te daily ritmi her akşam yazılı olarak toplanmıştır (Sprint 2 retrosunda söz verilen iyileştirme). Notların derlemesi: [Sprint 3 Daily Scrum Notları](Sprint3/DailyScrumMeetingNotesSprint3.md)
 
@@ -161,7 +161,7 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 
   > 📌 [Miro Backlog Board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
 
-- **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + GradientBoosting net tahmini, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 30 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
+- **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + net gidişatı kestirimi, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 38 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
   > Ekran görüntüleri çekilip `Sprint3/` klasörüne eklenecek.
 

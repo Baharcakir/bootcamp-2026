@@ -22,8 +22,8 @@ flowchart TB
         end
     end
     DB[(SQLite<br/>SQLModel)]
-    LLM[Gemini 2.5 Flash — Vision]
-    RAGDB[(Chroma — Sprint 2<br/>kazanım dokümanları)]
+    LLM[Gemini Flash — Vision]
+    RAGDB[(Konu-indeksli kaynak<br/>MEB kazanımları + çıkmış sorular)]
 
     UI -->|soru fotoğrafı / HTTP| API
     API --> TUT
@@ -163,7 +163,9 @@ Bu, rubrikteki "model seçimi, kullanımı, geliştirmesi" kaleminin tam karşı
 ## Teknoloji Gerekçeleri
 
 - **FastAPI + SQLModel:** hızlı, tipli, otomatik OpenAPI dokümantasyonu (`/docs` jüri demosunda etkili).
-- **Gemini 2.5 Flash:** ücretsiz kota + hız; vision desteği C6 (OCR) stretch'ini de karşılıyor.
+- **Gemini Flash (`gemini-flash-latest`):** ücretsiz kota + hız; vision desteği karne okuma
+  (T5) ve soru fotoğrafı akışını karşılıyor. Takma ad kullanılır: sürüm emekliye ayrıldığında
+  kod değişmez (2.5 Flash yeni projelere kapandığında bu sayede tek satırda geçildi).
 - **LangGraph:** durum makinesi + checkpointer hafıza; süpervizör desenine doğal geçiş.
 - **SQLite → Postgres:** MVP'de sıfır kurulum; `DATABASE_URL` ile canlıda Postgres'e geçilebilir.
 - **Streamlit:** 5 kişilik AI/DS ekibinin gücünü modele harcaması için en hızlı arayüz; Sprint 3'te

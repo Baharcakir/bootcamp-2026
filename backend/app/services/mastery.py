@@ -11,7 +11,8 @@ Yaklaşım: Beta-Binomial modeli.
 Çalışma önceliği: konunun sınavdaki soru ağırlığı × (1 − kötümser ustalık). Böylece hem zayıf
 hem de henüz belirsiz konular öne çıkar; sınavda çok soru getiren konular önceliklenir.
 
-TODO(A4 — Sprint 2): parametreleri (yarı ömür, önsel) sentetik veriyle kalibre et, raporla.
+Parametreler (yarı ömür, önsel, şans düzeltmesi) 1000 kişilik sentetik kohortla kalibre
+edilmiştir — yöntem ve hata metrikleri: docs/kalibrasyon.md (A4).
 """
 
 from __future__ import annotations

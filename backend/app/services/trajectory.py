@@ -1,8 +1,9 @@
 """Net gidişatı — v0: doğrusal eğilim taban çizgisi.
 
-TODO(A5 — Sprint 3): sentetik kohortla (A3 üreteci) eğitilmiş GradientBoosting regresyonuna
-yükselt; girdiler: son N denemenin konu ustalıkları + ders netleri. Bu taban çizgisiyle
-karşılaştırmalı değerlendirme raporu repoya eklenecek.
+Arayüzdeki "bir sonraki deneme" kestirimi buradan gelir. A5 kapsamında sentetik kohortla
+bir GradientBoosting modeli eğitilip bu taban çizgisiyle karşılaştırılmıştır
+(docs/net-tahmin.md); model sentetik net ölçeğinde eğitildiğinden gerçek öğrenci verisine
+bağlanmadan önce yeniden eğitilmelidir, bu nedenle üretimde hâlâ bu servis kullanılır.
 """
 
 from __future__ import annotations

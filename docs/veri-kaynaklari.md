@@ -20,8 +20,9 @@
 
 - **Nerede:** mufredat.meb.gov.tr → Ortaöğretim Matematik Dersi (9-12) Öğretim Programı.
   Kazanım listeleri konu anlatımının "müfredat dili"ni ve eğitmenin kaynak göstermesini sağlar.
-- **Kullanım (T2):** kazanımlar konu başına bölünüp Chroma'ya işlenir; eğitmen anlatırken
-  ilgili kazanımı çeker ve kaynak gösterir.
+- **Kullanım (T2):** kazanımlar konu başına indekslenir (`data/kazanimlar_tyt_mat.json`);
+  eğitmen anlatırken ilgili kazanımı çeker ve kaynak gösterir. Konu etiketi kesin
+  anahtar olduğu için embedding araması kullanılmadı — gerekçe: [mimari.md](mimari.md).
 
 ## 3. AI Üretimi Sorular (sentetik veri — üretim protokolü zorunlu)
 
