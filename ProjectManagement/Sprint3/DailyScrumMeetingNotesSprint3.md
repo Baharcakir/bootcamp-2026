@@ -7,7 +7,7 @@
 
 ## Hafta 1: 20–26 Temmuz 2026
 
-### 📅 20 Temmuz Pazar
+### 📅 20 Temmuz Pazartesi
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -18,7 +18,7 @@
 
 ---
 
-### 📅 21 Temmuz Pazartesi
+### 📅 21 Temmuz Salı
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -29,7 +29,7 @@
 
 ---
 
-### 📅 22 Temmuz Salı
+### 📅 22 Temmuz Çarşamba
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -40,7 +40,7 @@
 
 ---
 
-### 📅 23 Temmuz Çarşamba
+### 📅 23 Temmuz Perşembe
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -51,7 +51,7 @@
 
 ---
 
-### 📅 24 Temmuz Perşembe
+### 📅 24 Temmuz Cuma
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -62,7 +62,7 @@
 
 ---
 
-### 📅 25 Temmuz Cuma
+### 📅 25 Temmuz Cumartesi
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -73,7 +73,7 @@
 
 ---
 
-### 📅 26 Temmuz Cumartesi
+### 📅 26 Temmuz Pazar
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -86,7 +86,7 @@
 
 ## Hafta 2: 27 Temmuz – 2 Ağustos 2026
 
-### 📅 27 Temmuz Pazar
+### 📅 27 Temmuz Pazartesi
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -97,7 +97,7 @@
 
 ---
 
-### 📅 28 Temmuz Pazartesi
+### 📅 28 Temmuz Salı
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -108,7 +108,7 @@
 
 ---
 
-### 📅 29 Temmuz Salı
+### 📅 29 Temmuz Çarşamba
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -119,7 +119,7 @@
 
 ---
 
-### 📅 30 Temmuz Çarşamba
+### 📅 30 Temmuz Perşembe
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -130,7 +130,7 @@
 
 ---
 
-### 📅 31 Temmuz Perşembe
+### 📅 31 Temmuz Cuma
 
 | Kişi | Dün | Bugün | Engel |
 |---|---|---|---|
@@ -138,17 +138,6 @@
 | Görkem | Son testler | Sprint 3 klasörü ekran görüntüleri | — |
 | Doğa | Kontrol listesi | README son okuma | — |
 | Emir Arda | Kontrol listesi | Form taslağı | — |
-
----
-
-### 📅 1 Ağustos Cuma
-
-| Kişi | Dün | Bugün | Engel |
-|---|---|---|---|
-| Bahar | Video YouTube'da | 📩 **Teslim formu gönder** | — |
-| Görkem | Ekran görüntüleri | Son commit push | — |
-| Doğa | README tamam | — | — |
-| Emir Arda | Form taslak | Formu SM'e ilet | — |
 
 ---
 
