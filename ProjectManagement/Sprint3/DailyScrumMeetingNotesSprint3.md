@@ -141,6 +141,17 @@
 
 ---
 
+### 📅 1 Ağustos Cumartesi
+
+| Kişi | Dün | Bugün | Engel |
+|---|---|---|---|
+| Bahar | Video kurgusu | Senaryo güncellemesine göre video revizyonu | — |
+| Görkem | Ekran görüntüleri | Canlıdan ürün görüntüleri, belge tutarlılık taraması | — |
+| Doğa | README son okuma | Rapor sayılarının kontrolü | — |
+| Emir Arda | Form taslağı | Teslim formu son hazırlık | — |
+
+---
+
 ## Genel Notlar
 
 - **Engeller** proje grubunda paylaşıldı, 24 saat içinde çözüm bulundu
