@@ -1,100 +1,120 @@
 # 🎬 Video Senaryosu — Çarpan (3 dakika)
 
-**Hedef:** Jüri önünde 3 dakikada değer önerisini + AI kanıtlarını + canlı demoyu göster.  
+**Hedef:** Jüri önünde 3 dakikada değer önerisini + canlı demoyu + AI kanıtlarını göster.  
 **Format:** Ekran kaydı (canlı URL üzerinden) + gerçek telefon fotoğraf çekimi sahnesi.  
-**Ses:** Türkçe anlatım + ekran paylaşımı.
+**Ses:** Türkçe anlatım + ekran paylaşımı.  
+**Canlı adres:** https://carpan-tyt-kocu.streamlit.app/ (açılışta Demo Öğrenci seçili gelir)
 
 ---
 
 ## ⏱️ Sahne Planı
 
-### 0:00 – 0:30 | Sorun (Problem Frame)
+### 0:00 – 0:25 | Sorun (Problem Frame)
 
-**Ne gösterilir:** Siyah/koyu arka plan, minimal metin overlay  
+**Ne gösterilir:** Koyu arka plan, minimal metin overlay  
 **Anlatım:**
-> "YKS'ye hazırlanan öğrencilerin %80'i hangi konulardan zayıf olduğunu bilmiyor.
-> Soru çözüm uygulamaları sadece anlatır — öğrenciyi tanımaz.
-> Koçluk pahalıdır. 'Analiz' araçları form doldurtur — kimse doldurmaz."
+> "YKS'ye hazırlanan bir öğrenci hangi konudan zayıf olduğunu çoğu zaman bilmez.
+> Soru çözüm uygulamaları soruyu anlatır ama öğrenciyi tanımaz.
+> Koçluk pahalıdır. 'Analiz' araçları ise form doldurtur — kimse doldurmaz."
 
 **Geçiş:** "Biz farklı bir şey yaptık."
 
+> ⚠️ Kaynaksız istatistik kullanma (ör. "öğrencilerin %80'i"). Elimizde böyle bir
+> araştırma verisi yok; jüri kaynak sorarsa savunamayız.
+
 ---
 
-### 0:30 – 1:00 | Çözüm Fikri (Value Proposition)
+### 0:25 – 0:45 | Çözüm Fikri (Value Proposition)
 
 **Ne gösterilir:** Uygulama ana ekranı (Soru Sor sayfası)  
 **Anlatım:**
 > "Çarpan'da öğrenci hiç veri girmez.
 > Çözemediği matematik sorusunun fotoğrafını atar — sistem anında adım adım anlatır
-> ve soruyu otomatik konu etiketleyerek zayıflık haritasını kendiliğinden örüyor."
+> ve soruyu otomatik konu etiketleyerek zayıflık haritasını kendiliğinden örer."
 
 **Anahtar mesaj:** *Analitik, kullanımın yan ürünüdür.*
 
 ---
 
-### 1:00 – 2:15 | Canlı Demo (Live Demo)
+### 0:45 – 2:10 | Canlı Demo (Live Demo)
 
-#### 1:00 – 1:35 — Soru Sor → Anlatım → Harita
+#### 0:45 – 1:15 — Soru Sor → Anlatım → Etiket → Quiz
 
 **Akış:**
 1. Telefon kamerası sahnesi: gerçek TYT sorusu kağıda fotoğraf çekiliyor
-2. Fotoğraf uygulamaya yükleniyor (ya da kamera input kullanılıyor)
+2. Fotoğraf uygulamaya yükleniyor
 3. "🧑‍🏫 Anlat" butonuna basılıyor
-4. Spinner → **anlatım ekranda beliriyor**
-5. `🏷️ Matematik / Problemler olarak haritana işlendi` mesajı gösteriliyor
+4. Spinner → **anlatım ekranda beliriyor** + MEB kazanımı kaynağı + benzer çıkmış sorular
+5. `🏷️ Matematik / … olarak haritana işlendi` mesajı gösteriliyor
 6. Mini Quiz açılıyor → şık seçiliyor → "✅ Doğru! Ustalık haritana işlendi."
 
 **Anlatım:**
-> "Fotoğraf yüklüyorum — yapay zeka adım adım anlatıyor ve konuyu otomatik etiketliyor.
-> Anlatım bitti, hemen benzer soru geliyor — doğru cevaplıyorum, harita güncelleniyor."
+> "Fotoğraf yüklüyorum — yapay zeka adım adım anlatıyor, konuyu otomatik etiketliyor
+> ve müfredat kazanımını kaynak gösteriyor. Hemen ardından benzer soru geliyor;
+> doğru cevaplıyorum, harita güncelleniyor."
 
-#### 1:35 – 1:55 — Analiz Panosu
-
-**Akış:**
-1. Analiz Panosu sayfasına geçiş
-2. Renkli ustalık haritası (kırmızı → sarı → yeşil) gösteriliyor
-3. ⭐ Tahmin yıldızı üzerine hover
-
-**Anlatım:**
-> "Ustalık haritası — kırmızı konulardan zayıf, yeşil güçlü.
-> Yıldız işareti bir sonraki deneme için tahminimiz."
-
-#### 1:55 – 2:15 — Haftalık Plan + Koç
+#### 1:15 – 1:30 — Karne Fotoğrafından Net Okuma (T5)
 
 **Akış:**
-1. Haftalık Plan sayfası → "✨ Bu haftanın planını oluştur" → plan tablosu
-2. Koç Sohbeti sayfası → "Nerelerde zayıfım?" → koç yanıtı
+1. Deneme Netleri sayfası
+2. Gerçek bir deneme karnesi fotoğrafı yükleniyor
+3. Ders bazlı doğru/yanlış/boş sayıları **otomatik dolduruluyor**, öğrenci onaylıyor
 
 **Anlatım:**
-> "Sınav tarihim ve saat bütçem sisteme tanımlı — kişisel haftalık plan otomatik çıkıyor.
-> Koça soruyorum: 'Nerelerde zayıfım?' — öğrencimi tanıyan, verilere dayalı cevap alıyorum."
+> "Deneme netlerini elle girmek zorunda da değil — karnesinin fotoğrafını atıyor,
+> netler kendiliğinden okunuyor. Öğrenci hiçbir yere veri girmiyor."
+
+#### 1:30 – 1:50 — Analiz Panosu
+
+**Akış:**
+1. Analiz Panosu sayfası
+2. Renkli ustalık haritası (kırmızı → yeşil), güven aralıklarıyla
+3. Öncelikli konular tablosu, ardından net gidişatı grafiği + tahmin noktası
+
+**Anlatım:**
+> "Ustalık haritası: kırmızı konular zayıf, yeşiller güçlü — ve her birinin güven aralığı var,
+> yani az veriyle kesin konuşmuyoruz. Aşağıda net gidişatı ve bir sonraki deneme kestirimi."
+
+#### 1:50 – 2:10 — Haftalık Plan + Koç (kalıcı hafıza)
+
+**Akış:**
+1. Haftalık Plan sayfası → plan tablosu
+2. Koç Sohbeti → "Nerelerde zayıfım?" → veriye dayalı cevap
+3. **Sayfa yenilenir** → "Dün hangi konuya çalışmıştık?" → koç önceki konuşmayı hatırlıyor
+
+**Anlatım:**
+> "Sınav tarihim ve zaman bütçem tanımlı; haftalık plan otomatik çıkıyor.
+> Koç öğrenciyi verisiyle tanıyor — ve sayfayı yenilesem bile konuşmayı hatırlıyor,
+> çünkü hafızası kalıcı."
 
 ---
 
-### 2:15 – 2:45 | AI Kanıtları (AI Evidence)
+### 2:10 – 2:45 | AI Kanıtları (AI Evidence)
 
-**Ne gösterilir:** Ekranda rapor sayfaları / kod / metrikler  
-**Anlatım:**
+**Ne gösterilir:** Ekranda gerçek rapor dosyaları (slayt değil)
 
-> "Şimdi biraz teknik detay."
-
-**Gösterilecekler (slayt değil — ekranda gerçek belgeler):**
-
-1. **%83.3 doğruluk** → `docs/etiketleme-dogruluk-raporu.md` ekranda açık
-   > "120 gerçek ÖSYM sorusunda otomatik konu etiketleme %83.3 doğruluk."
+1. **Etiketleme doğruluğu** → `docs/etiketleme-dogruluk-raporu.md`
+   > "120 gerçek ÖSYM sorusundan oluşan elle etiketli sette ölçtük: %76.7'den başlayıp
+   > hata analiziyle %83.3'e çıkardık."
 
 2. **Kendi sınıflandırıcımız** → `docs/siniflandirici-karsilastirma.md`
-   > "Kendi eğittiğimiz TF-IDF + LogReg modelimiz %58.3 — API key olmadan çalışır,
-   > milisaniyede sonuç verir, sıfır maliyet."
+   > "Kendi modelimizi de eğittik: aynı sette %58.3. Gemini'yi geçmedi ve bunu dürüstçe
+   > raporladık — ama API anahtarı olmadan, milisaniyede, sıfır maliyetle çalışıyor;
+   > uygulamanın anahtarsız demo modunu o taşıyor."
 
 3. **Kalibrasyon** → `docs/kalibrasyon.md`
-   > "Bayesçi ustalık modeli 1000 sentetik öğrenciyle kalibre edildi: MAE %10.2."
+   > "Bayesçi ustalık modelini 1000 sentetik öğrenciyle kalibre ettik; dikkatsizlik
+   > senaryosu dahil ortalama hata 0.10."
 
-4. **Net tahmin** → `docs/net-tahmin.md`
-   > "GradientBoosting net tahmin modeli baseline'ı %34 geçti."
+4. **Agent mimarisi** → `README.md` mimari diyagramı
+   > "LangGraph süpervizör mimarisi: yönlendirme deterministik, eğitmen/analist/planlayıcı
+   > uzmanları orkestre ediyor, hafıza SQLite'ta kalıcı."
 
-5. **Agent mimarisi** → `README.md` mermaid diyagramı
-   > "LangGraph süpervizör mimarisi: koç, tutor ve analiz agent'larını orkestre ediyor."
+> ⚠️ **Net tahmin modeli (A5) burada iddia edilmeyecek.** Panodaki tahmin, deneme
+> geçmişinden hesaplanan kestirimdir; GradientBoosting modeli sentetik kohortta eğitilip
+> raporlanmış bir çalışmadır ve gerçek ölçekte yeniden eğitilmeden ürüne bağlanmadı.
+> Söylenecekse tam olarak böyle söylenmeli — "panodaki tahmini o model üretiyor"
+> izlenimi verilmemeli.
 
 ---
 
@@ -104,8 +124,8 @@
 **Anlatım:**
 > "Takım 76 — Bahar, Görkem, Doğa ve Emir Arda.
 > Repo: github.com/Baharcakir/bootcamp-2026
-> Sonraki adım: gerçek öğrenci pilotu, müfredat genişlemesi (TYT Türkçe, Fen),
-> ve B2B — öğretmenlerin sınıflarını takip edeceği panel."
+> Sonraki adım: gerçek öğrenci pilotu, müfredat genişlemesi (TYT Türkçe, Fen)
+> ve öğretmenlerin sınıflarını takip edeceği panel."
 
 **Kapanış:** Logo + "Çarpan — Önce değer, sonra veri."
 
@@ -116,18 +136,19 @@
 | Sahne | Araç | Not |
 |---|---|---|
 | Telefon fotoğrafı | Fiziksel telefon | Gerçek kağıt soru + gerçek çekim — slayt değil |
-| Ekran kaydı | OBS / QuickTime | `localhost:8501` — canlı URL üzerinden |
-| Ses | Mikrofon | Gürültüsüz ortam, sade anlatım |
-| Metrikler | Browser | Markdown dosyaları ekranda açık — terminal/IDE değil |
+| Karne fotoğrafı | Fiziksel telefon | Gerçek bir deneme karnesi (isim/TC görünmesin) |
+| Ekran kaydı | OBS / QuickTime | **Canlı URL üzerinden** — yerel sunucu değil |
+| Metrikler | Tarayıcı | Markdown dosyaları GitHub'da açık — terminal/IDE değil |
 | Kapanış | Ekran | GitHub repo + takım tablosu |
 
 ## ⚠️ Çekim Öncesi Kontrol
 
-- [ ] Backend çalışıyor: `uvicorn app.main:app --reload --app-dir backend`
-- [ ] Frontend çalışıyor: `streamlit run frontend/streamlit_app.py`
-- [ ] Demo öğrencisi var ve ustalık haritasında veri dolu
-- [ ] API key `.env` dosyasında tanımlı (Gemini anlatımı için)
-- [ ] Ekran çözünürlüğü 1080p+
-- [ ] Ses test edildi
+- [ ] Canlı arayüz açılıyor: https://carpan-tyt-kocu.streamlit.app/
+- [ ] Açılışta **Demo Öğrenci** seçili geliyor ve pano dolu görünüyor
+- [ ] Canlı API ayakta: `/health` → `{"status":"ok"}`
+- [ ] Soru sorma, quiz, plan ve koç canlıda bir kez denendi (Gemini yanıt veriyor)
+- [ ] Karne fotoğrafı hazır ve kişisel bilgi içermiyor
+- [ ] Ekran çözünürlüğü 1080p+, ses test edildi
 - [ ] Yedek: ekran kaydı önceden alındı (canlı demo riskine karşı)
 - [ ] Süre prova edildi: **3 dakika aşılmıyor**
+- [ ] Video YouTube'a **liste dışı veya herkese açık** yüklendi (gizli olursa jüri açamaz)
