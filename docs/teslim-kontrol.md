@@ -11,7 +11,7 @@
 - [ ] **3 sprint klasörü eksiksiz** — her biri için: sprint raporu, puan tahmini + mantığı,
       daily scrum notları/görüntüleri, sprint board görüntüleri, ürün durumu görüntüleri,
       sprint review, sprint retrospective
-      → Sprint 1 ve 2 tamam; **Sprint 3'te board ve ürün ekran görüntüleri eksik**
+      → Sprint 1 ve 2 tamam; **Sprint 3'te yalnızca board görüntüleri kaldı**
 - [ ] **3 dakikalık ürün videosu YouTube'da** (liste dışı/public), linki formda
 - [ ] **Ürün Teslim Formu** eksiksiz dolduruldu ve gönderildi (SM)
 - [ ] Canlı ürün linki README'de ve formda (D4 — opsiyonel ama 10 puan)

@@ -163,7 +163,14 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 
 - **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + net gidişatı kestirimi, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 38 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
-  > Ekran görüntüleri çekilip `Sprint3/` klasörüne eklenecek.
+  Aşağıdaki görüntüler **canlı uygulamadan** alınmıştır: soru sorma (gerçek anlatım +
+  otomatik konu etiketi), deneme netleri, ustalık haritası, haftalık plan ve koç sohbeti.
+
+  <img src="Sprint3/products1.png" alt="Sprint 3 Soru Sor" width="300">
+  <img src="Sprint3/products2.png" alt="Sprint 3 Deneme Netleri" width="300">
+  <img src="Sprint3/products3.png" alt="Sprint 3 Analiz Panosu" width="300">
+  <img src="Sprint3/products4.png" alt="Sprint 3 Haftalık Plan" width="300">
+  <img src="Sprint3/products5.png" alt="Sprint 3 Koç Sohbeti" width="300">
 
 - **Sprint Review**:
   Canlı demo: karne fotoğrafı → net okuma → soru fotoğrafı → anlatım (yerel sınıflandırıcı ile) → quiz → harita → koç → plan. Model kanıtlarının sunumu (T6 %58.3 karşılaştırma, A5 %34 iyileşme, A4 kalibrasyon).

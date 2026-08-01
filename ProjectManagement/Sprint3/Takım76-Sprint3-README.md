@@ -109,12 +109,17 @@ Sprint 3 sonu itibarıyla ürünün aktif ekranları:
 - **📸 Soru Sor:** Fotoğraf → Gemini Vision → adım adım anlatım + otomatik konu etiketi
   (API key yoksa yerel sınıflandırıcı devreye girer)
 - **📋 Karne Okuma:** Karne fotoğrafı → Gemini Vision → net otomatik kaydı
-- **📊 Analiz Panosu:** Bayesçi ustalık haritası + GradientBoosting net tahmini
+- **📊 Analiz Panosu:** Bayesçi ustalık haritası + deneme geçmişinden net kestirimi
 - **📅 Haftalık Plan:** Öncelik + zaman bütçesi bazlı kişisel plan
 - **💬 Koç Sohbeti:** LangGraph agent + kalıcı hafıza + araç kullanımı
 
-> Ekran görüntüleri çekilip bu klasöre eklenecek:  
-> `sprint3_soru_sor.png`, `sprint3_analiz_panosu.png`, `sprint3_karne.png`
+Canlı uygulamadan alınan ekran görüntüleri:
+
+<img src="products1.png" alt="Soru Sor" width="300">
+<img src="products2.png" alt="Deneme Netleri" width="300">
+<img src="products3.png" alt="Analiz Panosu" width="300">
+<img src="products4.png" alt="Haftalık Plan" width="300">
+<img src="products5.png" alt="Koç Sohbeti" width="300">
 
 ---
 
