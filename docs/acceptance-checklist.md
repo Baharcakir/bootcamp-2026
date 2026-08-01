@@ -23,8 +23,8 @@
 - [x] Kalıcı `/data` volume değişkenleri belgeli
 - [x] Streamlit Community Cloud secret örneği
 - [x] Görsel yükleme limiti 10 MB
-- [ ] Railway API canlı URL'si README'ye yazıldı
-- [ ] Streamlit canlı URL'si README'ye yazıldı
+- [x] Railway API canlı URL'si README'ye yazıldı
+- [x] Streamlit canlı URL'si README'ye yazıldı
 - [ ] Telefonla dış ağdan uçtan uca test tamamlandı
 - [ ] Restart sonrası “dün hangi konuya çalışmıştık?” kabul testi tamamlandı
 
@@ -32,4 +32,4 @@
 
 - [x] Pytest hafıza testleri eklendi
 - [x] CI mevcut test/lint komutları yeni dosyaları kapsıyor
-- [ ] GitHub Actions son çalışma yeşil
+- [x] GitHub Actions son çalışma yeşil

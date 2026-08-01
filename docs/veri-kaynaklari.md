@@ -41,9 +41,14 @@
 - Kullanım: ustalık modeli kalibrasyonu (A4 — "model gerçek ustalığı yakalıyor mu?") ve
   net tahmin modeli eğitimi (A5). Raporlarda "sentetik" olduğu açıkça yazılır.
 
-## Yapılacaklar (Sprint 2 girişi)
+## Durum (Sprint 3 sonu — tamamlandı)
 
-- [ ] ÖSYM PDF'leri indirildi ve soru bazında ayıklandı (kişi 4)
-- [ ] 100 soruluk değerlendirme adayı seçildi; çift etiketleme turu planlandı (PO + kişi 4)
-- [ ] MEB kazanım dokümanı indirildi, konu eşlemesi yapıldı (kişi 4)
-- [ ] AI soru üretim + doğrulama script taslağı (kişi 4, T3 ile birlikte)
+- [x] ÖSYM PDF'leri indirildi ve soru bazında ayıklandı — 9 kitapçık (2018-2026),
+      `backend/scripts/prepare_osym_eval.py`
+- [x] 120 soruluk değerlendirme seti (2024-2026) elle etiketlendi. Yöntem çift etiketçi
+      yerine **tek etiketçi + kararsızlık işaretleme + uyuşmazlık denetimi** olarak
+      uygulandı; gerekçe ve denetim izleri: [etiketleme-dogruluk-raporu.md](etiketleme-dogruluk-raporu.md)
+- [x] MEB kazanım dokümanı indirildi, konu eşlemesi yapıldı —
+      `backend/app/data/kazanimlar_tyt_mat.json`
+- [x] AI soru üretimi + bağımsız çözücü doğrulaması — 317 soru,
+      `backend/scripts/generate_training_questions.py`

@@ -127,4 +127,6 @@ TYT Matematik → AYT Matematik → Fen → tüm YKS. Deneme neti takibi bugün 
 
 ## Product Backlog
 
-Product backlog sprint board'u üzerinde yönetilir: [link eklenecek]
+Product backlog sprint board'u üzerinde yönetilir:
+[Miro board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
+(kırmızı = task, mavi = story)
