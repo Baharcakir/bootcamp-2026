@@ -15,7 +15,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-DEFAULT_OUT = Path("ProjectManagement/Sprint3")
+DEFAULT_OUT = Path("ProjectManagement/Sprint3Documents")
 UI = "http://localhost:8501"
 API_DOCS = "http://localhost:8000/docs"
 PAGES = [
