@@ -4,8 +4,8 @@
 eğittiğimiz bir model aynı işi ne kadar iyi yapar?
 
 **Veri:** Eğitim = 2018-2023 ÖSYM soruları (Gemini transkripsiyonu + iki bağımsız
-model görüşü; çelişkiler T4 tutarlılık kurallarıyla tek tek karara bağlandı — analiz
-Claude destekli, nihai onay insan) ve bağımsız çözücü doğrulamasından geçmiş AI
+model görüşü; çelişkiler T4 tutarlılık kurallarıyla tek tek karara bağlandı ve her
+etiket insan onayından geçti) ve bağımsız çözücü doğrulamasından geçmiş AI
 üretimi sorular. Değerlendirme = T4'teki 120 soruluk, elle etiketli 2024-2026 seti;
 eğitime hiçbir biçimde girmez (bu script kodla zorlar).
 

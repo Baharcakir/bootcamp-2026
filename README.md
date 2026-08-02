@@ -294,6 +294,6 @@ repoya eklenmez.
 ## Proje Yönetimi Belgeleri
 
 - **Veri kaynakları ve toplama rehberi:** [docs/veri-kaynaklari.md](docs/veri-kaynaklari.md)
-- **Final teslim kontrol listesi:** [docs/teslim-kontrol.md](docs/teslim-kontrol.md)
-- **Kabul kontrol listesi:** [docs/acceptance-checklist.md](docs/acceptance-checklist.md)
+- **Agent mimarisi ve kalıcı hafıza:** [docs/agent-mimarisi.md](docs/agent-mimarisi.md)
+- **Canlıya alma adımları:** [docs/deploy.md](docs/deploy.md)
 - **Sprint klasörleri:** [Sprint 1](ProjectManagement/Sprint1Documents/) · [Sprint 2](ProjectManagement/Sprint2Documents/) · [Sprint 3](ProjectManagement/Sprint3Documents/)

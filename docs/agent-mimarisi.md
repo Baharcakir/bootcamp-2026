@@ -1,4 +1,4 @@
-# Paket 3 - Agent Mimarisi, Kalıcı Hafıza ve Canlıya Alma
+# Agent Mimarisi, Kalıcı Hafıza ve Canlıya Alma
 
 ## 1. Yönlendirme stratejisi
 

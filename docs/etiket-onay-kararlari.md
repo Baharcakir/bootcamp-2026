@@ -1,7 +1,7 @@
 # Etiket onayı — çelişki kararları (63 soru)
 
 Yöntem: görüntü-etiketi ile metin-ikinci-görüşü çelişen sorular tek tek, T4
-tutarlılık kurallarıyla karara bağlandı (analiz: Claude; nihai onay: Görkem).
+tutarlılık kurallarıyla karara bağlandı; her sorunun nihai etiketi insan onayından geçti.
 
 - **2018 s.1** → Rasyonel Sayılar — kesrin kesri (1/4'ün 1/3'ü); orantı tekniği yok — KORU
 - **2018 s.6** → Rasyonel Sayılar — ondalık gösterimde sıralama = rasyonel sayı konusu — KORU
