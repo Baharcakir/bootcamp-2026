@@ -12,15 +12,17 @@ Takım 76
 
 ## Takım Elemanları
 
-- Emir Arda Tomaç: Product Owner
-- Bahar Çakır: Scrum Master
-- Görkem Çetinkaya: Team Member/Developer
-- Doğa Alışkan: Team Member/Developer
+- Emir Arda Tomaç: Product Owner — [emirardatomac](https://github.com/emirardatomac)
+- Bahar Çakır: Scrum Master — [Baharcakir](https://github.com/Baharcakir)
+- Görkem Çetinkaya: Team Member/Developer — [gorkem-cetinkaya](https://github.com/gorkem-cetinkaya)
+- Doğa Alışkan: Team Member/Developer — [dogalskn](https://github.com/dogalskn)
 - Ece Nur Şahin: Team Member/Developer *(19 Temmuz 2026'da bootcamp'ten ayrıldı)*
 
 ## Ürün İsmi
 
 --Çarpan--
+
+*TYT Matematik netini yükselten yapay zeka koçu — "Önce değer, sonra veri."*
 
 ## Ürün Açıklaması
 
@@ -186,7 +188,7 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 ![Backlog 2](ProjectManagement/Sprint3Documents/backlog2.png)
 ![Backlog 3](ProjectManagement/Sprint3Documents/backlog3.png)
 
-- **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + net gidişatı kestirimi, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 38 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır. Aşağıdaki görüntüler **canlı uygulamadan** alınmıştır:
+- **Ürün Durumu**: Ekran görüntüleri (**canlı uygulamadan** alınmıştır): Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda — soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + net gidişatı kestirimi, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 38 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
   <img src="ProjectManagement/Sprint3Documents/products1.png" alt="Sprint 3 Soru Sor" width="300">
   <img src="ProjectManagement/Sprint3Documents/products2.png" alt="Sprint 3 Deneme Netleri" width="300">
