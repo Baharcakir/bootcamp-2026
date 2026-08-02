@@ -95,10 +95,13 @@ Sprint boyunca tutulan notların derlemesi:
 
 ## Sprint Board
 
-Sprint board ekran görüntüleri (sprint ilerledikçe güncellenir):
+Sprint board ekran görüntüleri — sprint başı, orta ve kapanış:
 
-> 📌 Miro board: https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806  
-> Ekran görüntüleri sprint tamamlandığında bu klasöre eklenir.
+![Backlog 1](backlog1.png)
+![Backlog 2](backlog2.png)
+![Backlog 3](backlog3.png)
+
+> 📌 Miro board: https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806
 
 ---
 
@@ -125,19 +128,18 @@ Canlı uygulamadan alınan ekran görüntüleri:
 
 ## Sprint Review
 
-**Katılımcılar:** Bahar, Görkem, Doğa, Emir Arda  
-**Tarih:** 2 Ağustos 2026
-
-**Gösterilen:**
-- Kendi eğittiğimiz konu sınıflandırıcısının canlı demosu (API key olmadan)
-- Net tahmin modelinin Analiz Panosu'ndaki yıldız işaretçisi
+**Sprint kapanışında gözden geçirilenler:**
+- Kendi eğittiğimiz konu sınıflandırıcısı — API anahtarı olmadan çalışan demo modu
+- Bayesçi ustalık haritası ve deneme geçmişinden hesaplanan net kestirimi
 - Karne fotoğrafından otomatik net okuma akışı
-- Uçtan uca tam demo: fotoğraf → anlatım → quiz → harita → plan → koç
+- Canlı üründe uçtan uca akış: fotoğraf → anlatım → quiz → harita → plan → koç
 
 **Kararlar:**
-- Gemini vs. kendi modelimiz farkı (%83.3 vs %58.3) dürüstçe jüriye sunulacak
-- Fallback mekanizması kritik: API key olmadan demo yine de çalışır
-- Video senaryosu finallendi ve çekim başladı
+- Gemini ile kendi modelimiz arasındaki fark (%83.3 vs %58.3) jüriye dürüstçe sunulacak
+- Anahtarsız demo modu kritik: API anahtarı olmadan da ürün çalışmaya devam eder
+- Net tahmin modeli sentetik ölçekte kaldığından ürüne bağlanmadan araştırma çıktısı
+  olarak raporlanacak (bkz. [net-tahmin.md](../../docs/net-tahmin.md))
+- Video çekildi ve yayınlandı; teslim formu gönderildi
 
 ---
 

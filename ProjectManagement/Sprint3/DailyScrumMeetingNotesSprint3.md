@@ -152,6 +152,17 @@
 
 ---
 
+### 📅 2 Ağustos Pazar
+
+| Kişi | Dün | Bugün | Engel |
+|---|---|---|---|
+| Bahar | Video revizyonu | Video yayınlandı, teslim formu gönderildi | — |
+| Görkem | Ürün görüntüleri | Board görüntüleri, Sprint 3 klasörünün tamamlanması | — |
+| Doğa | Rapor kontrolü | Final teslim kontrolü | — |
+| Emir Arda | Form son hazırlık | Canlı ürün son kontrolü | — |
+
+---
+
 ## Genel Notlar
 
 - **Engeller** proje grubunda paylaşıldı, 24 saat içinde çözüm bulundu

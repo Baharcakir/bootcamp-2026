@@ -157,9 +157,10 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
 
 - **Daily Scrum**: Sprint 3'te daily ritmi her akşam yazılı olarak toplanmıştır (Sprint 2 retrosunda söz verilen iyileştirme). Notların derlemesi: [Sprint 3 Daily Scrum Notları](Sprint3/DailyScrumMeetingNotesSprint3.md)
 
-- **Sprint board update**: Sprint board ekran görüntüleri sprint tamamlandığında eklenecektir:
-
-  > 📌 [Miro Backlog Board](https://miro.com/app/board/uXjVH-ttQY8=/?share_link_id=525660778806)
+- **Sprint board update**: Sprint board screenshotları (sprint başı → orta → kapanış):
+![Backlog 1](Sprint3/backlog1.png)
+![Backlog 2](Sprint3/backlog2.png)
+![Backlog 3](Sprint3/backlog3.png)
 
 - **Ürün Durumu**: Sprint 3 sonu itibarıyla tüm özellikler entegre ve çalışır durumda: soru fotoğrafından anlatım + otomatik etiketleme (Gemini veya yerel model), karne fotoğrafından net okuma, Bayesçi ustalık haritası + net gidişatı kestirimi, kişisel haftalık plan, LangGraph koç agent (kalıcı hafıza). 38 otomatik test + lint her push'ta GitHub Actions üzerinde koşmaktadır.
 
@@ -173,9 +174,8 @@ Alınan kararlar: API key olmadan ürünün demo modunda çalışmaya devam etme
   <img src="Sprint3/products5.png" alt="Sprint 3 Koç Sohbeti" width="300">
 
 - **Sprint Review**:
-  Canlı demo: karne fotoğrafı → net okuma → soru fotoğrafı → anlatım (yerel sınıflandırıcı ile) → quiz → harita → koç → plan. Model kanıtlarının sunumu (T6 %58.3 karşılaştırma, A5 %34 iyileşme, A4 kalibrasyon).
-  Katılımcılar: Bahar, Görkem, Doğa, Emir Arda.
-  Alınan kararlar: Gemini vs. kendi modelimiz farkı (%83.3 vs %58.3) jüriye dürüstçe sunulacak; fallback mekanizması demo için kritik ve çalışır durumda; video senaryosu finallendi.
+  Sprint kapanışında gözden geçirilenler: canlı üründe uçtan uca akış (soru fotoğrafı → anlatım + otomatik konu etiketi → quiz → ustalık haritası → haftalık plan → koç), karne fotoğrafından net okuma ve model kanıtları (T6 karşılaştırma raporu, A4 kalibrasyon, A5 değerlendirme raporu).
+  Alınan kararlar: Gemini ile kendi modelimiz arasındaki fark (%83.3 vs %58.3) jüriye dürüstçe sunulacak; anahtarsız demo modu değerlendirme için kritik görülerek korunacak; net tahmin modeli sentetik ölçekte kaldığından ürüne bağlanmadan araştırma çıktısı olarak raporlanacak.
 
 - **Sprint Retrospective:**
   - Teknik hedeflerin tamamı kapatıldı: kendi modellerimiz eğitildi, karşılaştırıldı ve entegre edildi

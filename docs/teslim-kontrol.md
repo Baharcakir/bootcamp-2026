@@ -8,13 +8,12 @@
 - [x] **GitHub reposu public** ve güncel; tüm geliştirme geçmişi commit'lerde görünür
 - [x] **README eksiksiz:** takım ismi, üyeler ve roller, ürün adı/açıklaması/özellikleri,
       hedef kitle, backlog linki, kurulum, sprint rapor linkleri
-- [ ] **3 sprint klasörü eksiksiz** — her biri için: sprint raporu, puan tahmini + mantığı,
+- [x] **3 sprint klasörü eksiksiz** — her biri için: sprint raporu, puan tahmini + mantığı,
       daily scrum notları/görüntüleri, sprint board görüntüleri, ürün durumu görüntüleri,
       sprint review, sprint retrospective
-      → Sprint 1 ve 2 tamam; **Sprint 3'te yalnızca board görüntüleri kaldı**
-- [ ] **3 dakikalık ürün videosu YouTube'da** (liste dışı/public), linki formda
-- [ ] **Ürün Teslim Formu** eksiksiz dolduruldu ve gönderildi (SM)
-- [ ] Canlı ürün linki README'de ve formda (D4 — opsiyonel ama 10 puan)
+- [x] **3 dakikalık ürün videosu YouTube'da** (liste dışı/public), linki formda
+- [x] **Ürün Teslim Formu** eksiksiz dolduruldu ve gönderildi (SM)
+- [x] Canlı ürün linki README'de ve formda (D4 — opsiyonel ama 10 puan)
 
 ## Ürün Kalitesi Öz-Denetimi (jüri kriterlerine karşı)
 
